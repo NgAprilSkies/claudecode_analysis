@@ -1,0 +1,208 @@
+<svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e3f2fd;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#bbdefb;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff3e0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffe0b2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f3e5f5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e1bee7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- 标题 -->
+  <text x="600" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">Claude Code Agent核心构建架构图</text>
+
+  <!-- Layer 1: Tool层 -->
+  <rect x="50" y="80" width="1100" height="160" fill="url(#grad1)" stroke="#2196f3" stroke-width="2" rx="10"/>
+  <text x="70" y="110" font-size="16" font-weight="bold" fill="#1565c0">Layer 1: Tool层 - 原子能力单元</text>
+
+  <rect x="80" y="130" width="140" height="80" fill="white" stroke="#2196f3" stroke-width="1" rx="5"/>
+  <text x="150" y="155" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Tool Interface</text>
+  <text x="150" y="175" text-anchor="middle" font-size="10" fill="#666">call()</text>
+  <text x="150" y="190" text-anchor="middle" font-size="10" fill="#666">validateInput()</text>
+  <text x="150" y="205" text-anchor="middle" font-size="10" fill="#666">checkPermissions()</text>
+
+  <rect x="240" y="130" width="120" height="80" fill="#e8f5e9" stroke="#4caf50" stroke-width="1" rx="5"/>
+  <text x="300" y="155" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">BashTool</text>
+  <text x="300" y="175" text-anchor="middle" font-size="10" fill="#666">isDestructive: ✓</text>
+  <text x="300" y="190" text-anchor="middle" font-size="10" fill="#666">isConcurrencySafe: ✗</text>
+  <text x="300" y="205" text-anchor="middle" font-size="10" fill="#666">sandboxed: ✓</text>
+
+  <rect x="380" y="130" width="120" height="80" fill="#e8f5e9" stroke="#4caf50" stroke-width="1" rx="5"/>
+  <text x="440" y="155" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">FileReadTool</text>
+  <text x="440" y="175" text-anchor="middle" font-size="10" fill="#666">isReadOnly: ✓</text>
+  <text x="440" y="190" text-anchor="middle" font-size="10" fill="#666">isConcurrencySafe: ✓</text>
+  <text x="440" y="205" text-anchor="middle" font-size="10" fill="#666">maxResultSize: ∞</text>
+
+  <rect x="520" y="130" width="120" height="80" fill="#e8f5e9" stroke="#4caf50" stroke-width="1" rx="5"/>
+  <text x="580" y="155" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">FileEditTool</text>
+  <text x="580" y="175" text-anchor="middle" font-size="10" fill="#666">isDestructive: ✓</text>
+  <text x="580" y="190" text-anchor="middle" font-size="10" fill="#666">backupBeforeEdit: ✓</text>
+  <text x="580" y="205" text-anchor="middle" font-size="10" fill="#666">undoSupport: ✓</text>
+
+  <rect x="660" y="130" width="120" height="80" fill="#e8f5e9" stroke="#4caf50" stroke-width="1" rx="5"/>
+  <text x="720" y="155" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">AgentTool</text>
+  <text x="720" y="175" text-anchor="middle" font-size="10" fill="#666">spawnSubagent: ✓</text>
+  <text x="720" y="190" text-anchor="middle" font-size="10" fill="#666">asyncExecution: ✓</text>
+  <text x="720" y="205" text-anchor="middle" font-size="10" fill="#666">progressStreaming: ✓</text>
+
+  <rect x="800" y="130" width="120" height="80" fill="#e8f5e9" stroke="#4caf50" stroke-width="1" rx="5"/>
+  <text x="860" y="155" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">MCP Tools</text>
+  <text x="860" y="175" text-anchor="middle" font-size="10" fill="#666">externalServers</text>
+  <text x="860" y="190" text-anchor="middle" font-size="10" fill="#666">dynamicLoading</text>
+  <text x="860" y="205" text-anchor="middle" font-size="10" fill="#666">protocolStandard</text>
+
+  <rect x="940" y="130" width="120" height="80" fill="#e3f2fd" stroke="#2196f3" stroke-width="1" rx="5"/>
+  <text x="1000" y="155" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">Tool Registry</text>
+  <text x="1000" y="175" text-anchor="middle" font-size="10" fill="#666">getAllBaseTools()</text>
+  <text x="1000" y="190" text-anchor="middle" font-size="10" fill="#666">filterByDenyRules()</text>
+  <text x="1000" y="205" text-anchor="middle" font-size="10" fill="#666">assembleToolPool()</text>
+
+  <!-- Layer 2: Task层 -->
+  <rect x="50" y="260" width="1100" height="160" fill="url(#grad2)" stroke="#ff9800" stroke-width="2" rx="10"/>
+  <text x="70" y="290" font-size="16" font-weight="bold" fill="#e65100">Layer 2: Task层 - 执行上下文容器</text>
+
+  <rect x="80" y="310" width="140" height="80" fill="white" stroke="#ff9800" stroke-width="1" rx="5"/>
+  <text x="150" y="335" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Task Interface</text>
+  <text x="150" y="355" text-anchor="middle" font-size="10" fill="#666">type: TaskType</text>
+  <text x="150" y="370" text-anchor="middle" font-size="10" fill="#666">kill(taskId)</text>
+  <text x="150" y="385" text-anchor="middle" font-size="10" fill="#666">status: TaskStatus</text>
+
+  <rect x="240" y="310" width="120" height="80" fill="#fff3e0" stroke="#ff9800" stroke-width="1" rx="5"/>
+  <text x="300" y="335" text-anchor="middle" font-size="12" font-weight="bold" fill="#e65100">LocalAgent</text>
+  <text x="300" y="355" text-anchor="middle" font-size="10" fill="#666">type: 'local_agent'</text>
+  <text x="300" y="370" text-anchor="middle" font-size="10" fill="#666">id: axxxxx</text>
+  <text x="300" y="385" text-anchor="middle" font-size="10" fill="#666">progress: AgentProgress</text>
+
+  <rect x="380" y="310" width="120" height="80" fill="#fff3e0" stroke="#ff9800" stroke-width="1" rx="5"/>
+  <text x="440" y="335" text-anchor="middle" font-size="12" font-weight="bold" fill="#e65100">LocalShell</text>
+  <text x="440" y="355" text-anchor="middle" font-size="10" fill="#666">type: 'local_bash'</text>
+  <text x="440" y="370" text-anchor="middle" font-size="10" fill="#666">id: bxxxxx</text>
+  <text x="440" y="385" text-anchor="middle" font-size="10" fill="#666">command: string</text>
+
+  <rect x="520" y="310" width="120" height="80" fill="#fff3e0" stroke="#ff9800" stroke-width="1" rx="5"/>
+  <text x="580" y="335" text-anchor="middle" font-size="12" font-weight="bold" fill="#e65100">RemoteAgent</text>
+  <text x="580" y="355" text-anchor="middle" font-size="10" fill="#666">type: 'remote_agent'</text>
+  <text x="580" y="370" text-anchor="middle" font-size="10" fill="#666">id: rxxxxx</text>
+  <text x="580" y="385" text-anchor="middle" font-size="10" fill="#666">remoteSessionUrl</text>
+
+  <rect x="660" y="310" width="120" height="80" fill="#fff3e0" stroke="#ff9800" stroke-width="1" rx="5"/>
+  <text x="720" y="335" text-anchor="middle" font-size="12" font-weight="bold" fill="#e65100">DreamTask</text>
+  <text x="720" y="355" text-anchor="middle" font-size="10" fill="#666">type: 'dream'</text>
+  <text x="720" y="370" text-anchor="middle" font-size="10" fill="#666">id: dxxxxx</text>
+  <text x="720" y="385" text-anchor="middle" font-size="10" fill="#666">background: ✓</text>
+
+  <rect x="800" y="310" width="120" height="80" fill="#fff3e0" stroke="#ff9800" stroke-width="1" rx="5"/>
+  <text x="860" y="335" text-anchor="middle" font-size="12" font-weight="bold" fill="#e65100">Workflow</text>
+  <text x="860" y="355" text-anchor="middle" font-size="10" fill="#666">type: 'local_workflow'</text>
+  <text x="860" y="370" text-anchor="middle" font-size="10" fill="#666">id: wxxxxx</text>
+  <text x="860" y="385" text-anchor="middle" font-size="10" fill="#666">script: string</text>
+
+  <!-- Task生命周期 -->
+  <rect x="940" y="310" width="180" height="80" fill="#fce4ec" stroke="#e91e63" stroke-width="2" rx="5"/>
+  <text x="1030" y="335" text-anchor="middle" font-size="12" font-weight="bold" fill="#c2185b">Task State Machine</text>
+  <text x="950" y="355" font-size="9" fill="#666">pending → running →</text>
+  <text x="950" y="370" font-size="9" fill="#666">completed/failed/killed</text>
+  <text x="950" y="385" font-size="9" fill="#666">isTerminal(): boolean</text>
+
+  <!-- Layer 3: State层 -->
+  <rect x="50" y="440" width="1100" height="160" fill="url(#grad3)" stroke="#9c27b0" stroke-width="2" rx="10"/>
+  <text x="70" y="470" font-size="16" font-weight="bold" fill="#7b1fa2">Layer 3: State层 - 全局状态管理</text>
+
+  <rect x="80" y="490" width="200" height="80" fill="white" stroke="#9c27b0" stroke-width="1" rx="5"/>
+  <text x="180" y="515" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">AppState (DeepImmutable)</text>
+  <text x="90" y="535" font-size="10" fill="#666">tasks: { [taskId]: TaskState }</text>
+  <text x="90" y="550" font-size="10" fill="#666">toolPermissionContext</text>
+  <text x="90" y="565" font-size="10" fill="#666">agentNameRegistry: Map&lt;name, AgentId&gt;</text>
+
+  <rect x="300" y="490" width="150" height="80" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1" rx="5"/>
+  <text x="375" y="515" text-anchor="middle" font-size="12" font-weight="bold" fill="#7b1fa2">State Update</text>
+  <text x="375" y="535" text-anchor="middle" font-size="10" fill="#666">setAppState(f)</text>
+  <text x="375" y="550" text-anchor="middle" font-size="10" fill="#666">f: (prev) =&gt; next</text>
+  <text x="375" y="565" text-anchor="middle" font-size="10" fill="#666">immutable update</text>
+
+  <rect x="470" y="490" width="150" height="80" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1" rx="5"/>
+  <text x="545" y="515" text-anchor="middle" font-size="12" font-weight="bold" fill="#7b1fa2">ProgressTracker</text>
+  <text x="545" y="535" text-anchor="middle" font-size="10" fill="#666">toolUseCount</text>
+  <text x="545" y="550" text-anchor="middle" font-size="10" fill="#666">latestInputTokens</text>
+  <text x="545" y="565" text-anchor="middle" font-size="10" fill="#666">cumulativeOutputTokens</text>
+
+  <rect x="640" y="490" width="150" height="80" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1" rx="5"/>
+  <text x="715" y="515" text-anchor="middle" font-size="12" font-weight="bold" fill="#7b1fa2">ToolPermissionContext</text>
+  <text x="715" y="535" text-anchor="middle" font-size="10" fill="#666">mode: PermissionMode</text>
+  <text x="715" y="550" text-anchor="middle" font-size="10" fill="#666">alwaysAllowRules[]</text>
+  <text x="715" y="565" text-anchor="middle" font-size="10" fill="#666">alwaysDenyRules[]</text>
+
+  <rect x="810" y="490" width="150" height="80" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1" rx="5"/>
+  <text x="885" y="515" text-anchor="middle" font-size="12" font-weight="bold" fill="#7b1fa2">AgentRegistry</text>
+  <text x="885" y="535" text-anchor="middle" font-size="10" fill="#666">Map&lt;name, AgentId&gt;</text>
+  <text x="885" y="550" text-anchor="middle" font-size="10" fill="#666">sendMessage路由</text>
+  <text x="885" y="565" text-anchor="middle" font-size="10" fill="#666">team coordination</text>
+
+  <rect x="980" y="490" width="150" height="80" fill="#e8f5e9" stroke="#4caf50" stroke-width="1" rx="5"/>
+  <text x="1055" y="515" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">FileStateCache</text>
+  <text x="1055" y="535" text-anchor="middle" font-size="10" fill="#666">LRU Cache</text>
+  <text x="1055" y="550" text-anchor="middle" font-size="10" fill="#666">content hash</text>
+  <text x="1055" y="565" text-anchor="middle" font-size="10" fill="#666">mtime tracking</text>
+
+  <!-- Layer 4: Context层 -->
+  <rect x="50" y="620" width="1100" height="120" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" rx="10"/>
+  <text x="70" y="650" font-size="16" font-weight="bold" fill="#2e7d32">Layer 4: Context层 - 运行时上下文</text>
+
+  <rect x="80" y="660" width="180" height="60" fill="white" stroke="#4caf50" stroke-width="1" rx="5"/>
+  <text x="170" y="680" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">ToolUseContext</text>
+  <text x="170" y="695" text-anchor="middle" font-size="9" fill="#666">messages, abortController</text>
+  <text x="170" y="710" text-anchor="middle" font-size="9" fill="#666">getAppState, setAppState</text>
+
+  <rect x="280" y="660" width="180" height="60" fill="white" stroke="#4caf50" stroke-width="1" rx="5"/>
+  <text x="370" y="680" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">TaskContext</text>
+  <text x="370" y="695" text-anchor="middle" font-size="9" fill="#666">abortController</text>
+  <text x="370" y="710" text-anchor="middle" font-size="9" fill="#666">getAppState, setAppState</text>
+
+  <rect x="480" y="660" width="180" height="60" fill="white" stroke="#4caf50" stroke-width="1" rx="5"/>
+  <text x="570" y="680" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">SystemContext</text>
+  <text x="570" y="695" text-anchor="middle" font-size="9" fill="#666">gitStatus (memoized)</text>
+  <text x="570" y="710" text-anchor="middle" font-size="9" fill="#666">per-session cached</text>
+
+  <rect x="680" y="660" width="180" height="60" fill="white" stroke="#4caf50" stroke-width="1" rx="5"/>
+  <text x="770" y="680" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">UserContext</text>
+  <text x="770" y="695" text-anchor="middle" font-size="9" fill="#666">claudeMd (memoized)</text>
+  <text x="770" y="710" text-anchor="middle" font-size="9" fill="#666">per-session cached</text>
+
+  <rect x="880" y="660" width="250" height="60" fill="#fff3e0" stroke="#ff9800" stroke-width="1" rx="5"/>
+  <text x="1005" y="680" text-anchor="middle" font-size="11" font-weight="bold" fill="#e65100">Agent Lifecycle Flow</text>
+  <text x="1005" y="698" text-anchor="middle" font-size="9" fill="#666">Init → Running → (Complete/Failed/Killed)</text>
+  <text x="1005" y="713" text-anchor="middle" font-size="9" fill="#666">Cleanup registered, abortController for cancel</text>
+
+  <!-- 数据流箭头 -->
+  <defs>
+    <marker id="dataArrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4caf50"/>
+    </marker>
+  </defs>
+
+  <!-- 层间数据流 -->
+  <path d="M 600 240 L 600 260" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+  <path d="M 600 420 L 600 440" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+  <path d="M 600 600 L 600 620" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+
+  <!-- 图例 -->
+  <rect x="50" y="760" width="1100" height="120" fill="#fafafa" stroke="#ddd" stroke-width="1" rx="5"/>
+  <text x="70" y="785" font-size="14" font-weight="bold" fill="#333">Harness Engineering评价</text>
+
+  <text x="70" y="810" font-size="11" fill="#666">可扩展性: ⭐⭐⭐⭐⭐ - Tool/Task接口清晰，支持MCP扩展</text>
+  <text x="70" y="830" font-size="11" fill="#666">安全边界: ⭐⭐⭐⭐⭐ - isDestructive/checkPermissions多层次防护</text>
+  <text x="400" y="810" font-size="11" fill="#666">可观察性: ⭐⭐⭐⭐ - ProgressTracker实时追踪，Task状态完整</text>
+  <text x="400" y="830" font-size="11" fill="#666">性能损耗: ⭐⭐⭐⭐ - Immutable更新有O(n)开销，待优化增量更新</text>
+
+  <text x="70" y="855" font-size="10" fill="#999">注释: 架构采用分层设计，每层通过明确接口解耦。Tool层提供原子能力，Task层管理执行生命周期，</text>
+  <text x="70" y="870" font-size="10" fill="#999">State层维护全局不可变状态，Context层提供运行时环境。Fail-Closed默认策略确保安全。</text>
+</svg>

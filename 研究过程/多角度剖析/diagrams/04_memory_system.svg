@@ -1,0 +1,224 @@
+<svg viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="memArrow" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#00796B"/>
+    </marker>
+    <linearGradient id="gradWorking" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E0F2F1;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#4DB6AC;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="gradSession" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF8E1;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#FFCA28;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="gradProject" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8F5E9;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#81C784;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="gradUser" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E3F2FD;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#64B5F6;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="gradCompact" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FCE4EC;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#F06292;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <text x="700" y="45" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">
+    记忆系统架构与上下文管理流程
+  </text>
+  <text x="700" y="75" text-anchor="middle" font-size="14" fill="#666">
+    Memory Hierarchy &amp; Context Management Flow
+  </text>
+
+  <!-- LAYER 1: Working Memory -->
+  <g transform="translate(30, 100)">
+    <rect x="0" y="0" width="420" height="140" rx="10" fill="url(#gradWorking)" stroke="#00796B" stroke-width="2"/>
+    <text x="210" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#004D40">L1: 工作记忆 (Working Memory)</text>
+
+    <!-- mutableMessages -->
+    <rect x="20" y="50" width="180" height="75" rx="6" fill="white" stroke="#00796B" stroke-width="1.5"/>
+    <text x="110" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#004D40">mutableMessages</text>
+    <text x="110" y="90" text-anchor="middle" font-size="10" fill="#00796B">Message[] 数组</text>
+    <text x="110" y="107" text-anchor="middle" font-size="9" fill="#00897B">• 当前对话状态</text>
+    <text x="110" y="120" text-anchor="middle" font-size="9" fill="#00897B">• 每转更新</text>
+
+    <!-- FileStateCache -->
+    <rect x="220" y="50" width="180" height="75" rx="6" fill="white" stroke="#00796B" stroke-width="1.5"/>
+    <text x="310" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#004D40">FileStateCache</text>
+    <text x="310" y="90" text-anchor="middle" font-size="10" fill="#00796B">LRU Cache</text>
+    <text x="310" y="107" text-anchor="middle" font-size="9" fill="#00897B">• 已读取文件缓存</text>
+    <text x="310" y="120" text-anchor="middle" font-size="9" fill="#00897B">• 子代理共享</text>
+
+    <!-- Arrow to next layer -->
+    <path d="M 210 140 L 210 165" fill="none" stroke="#00796B" stroke-width="2" marker-end="url(#memArrow)"/>
+  </g>
+
+  <!-- LAYER 2: Session Memory -->
+  <g transform="translate(30, 270)">
+    <rect x="0" y="0" width="420" height="140" rx="10" fill="url(#gradSession)" stroke="#FFA000" stroke-width="2"/>
+    <text x="210" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#FF6F00">L2: 会话记忆 (Session Memory)</text>
+
+    <!-- Transcript -->
+    <rect x="20" y="50" width="180" height="75" rx="6" fill="white" stroke="#FFA000" stroke-width="1.5"/>
+    <text x="110" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#FF6F00">transcript.jsonl</text>
+    <text x="110" y="90" text-anchor="middle" font-size="10" fill="#FFA000">会话转录</text>
+    <text x="110" y="107" text-anchor="middle" font-size="9" fill="#FFA000">• --resume 支持</text>
+    <text x="110" y="120" text-anchor="middle" font-size="9" fill="#FFA000">• 异步刷新</text>
+
+    <!-- History -->
+    <rect x="220" y="50" width="180" height="75" rx="6" fill="white" stroke="#FFA000" stroke-width="1.5"/>
+    <text x="310" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#FF6F00">history.jsonl</text>
+    <text x="310" y="90" text-anchor="middle" font-size="10" fill="#FFA000">全局历史</text>
+    <text x="310" y="107" text-anchor="middle" font-size="9" fill="#FFA000">• 跨会话共享</text>
+    <text x="310" y="120" text-anchor="middle" font-size="9" fill="#FFA000">• 项目级过滤</text>
+
+    <!-- Arrow -->
+    <path d="M 210 410 L 210 435" fill="none" stroke="#FFA000" stroke-width="2" marker-end="url(#memArrow)"/>
+  </g>
+
+  <!-- LAYER 3: Project Memory -->
+  <g transform="translate(30, 440)">
+    <rect x="0" y="0" width="420" height="140" rx="10" fill="url(#gradProject)" stroke="#388E3C" stroke-width="2"/>
+    <text x="210" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#1B5E20">L3: 项目记忆 (Project Memory)</text>
+
+    <!-- CLAUDE.md -->
+    <rect x="20" y="50" width="180" height="75" rx="6" fill="white" stroke="#388E3C" stroke-width="1.5"/>
+    <text x="110" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#1B5E20">CLAUDE.md</text>
+    <text x="110" y="90" text-anchor="middle" font-size="10" fill="#388E3C">项目级指令</text>
+    <text x="110" y="107" text-anchor="middle" font-size="9" fill="#388E3C">• 自动发现</text>
+    <text x="110" y="120" text-anchor="middle" font-size="9" fill="#388E3C">• 系统提示注入</text>
+
+    <!-- .claude/ dir -->
+    <rect x="220" y="50" width="180" height="75" rx="6" fill="white" stroke="#388E3C" stroke-width="1.5"/>
+    <text x="310" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#1B5E20">.claude/</text>
+    <text x="310" y="90" text-anchor="middle" font-size="10" fill="#388E3C">配置目录</text>
+    <text x="310" y="107" text-anchor="middle" font-size="9" fill="#388E3C">• 技能文件</text>
+    <text x="310" y="120" text-anchor="middle" font-size="9" fill="#388E3C">• 插件配置</text>
+
+    <!-- Arrow -->
+    <path d="M 210 580 L 210 605" fill="none" stroke="#388E3C" stroke-width="2" marker-end="url(#memArrow)"/>
+  </g>
+
+  <!-- LAYER 4: User Memory -->
+  <g transform="translate(30, 610)">
+    <rect x="0" y="0" width="420" height="140" rx="10" fill="url(#gradUser)" stroke="#1976D2" stroke-width="2"/>
+    <text x="210" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#0D47A1">L4: 用户记忆 (User Memory)</text>
+
+    <!-- MEMORY.md -->
+    <rect x="20" y="50" width="180" height="75" rx="6" fill="white" stroke="#1976D2" stroke-width="1.5"/>
+    <text x="110" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#0D47A1">MEMORY.md</text>
+    <text x="110" y="90" text-anchor="middle" font-size="10" fill="#1976D2">长期记忆</text>
+    <text x="110" y="107" text-anchor="middle" font-size="9" fill="#1976D2">• 用户偏好</text>
+    <text x="110" y="120" text-anchor="middle" font-size="9" fill="#1976D2">• 历史决策</text>
+
+    <!-- settings.json -->
+    <rect x="220" y="50" width="180" height="75" rx="6" fill="white" stroke="#1976D2" stroke-width="1.5"/>
+    <text x="310" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#0D47A1">settings.json</text>
+    <text x="310" y="90" text-anchor="middle" font-size="10" fill="#1976D2">全局配置</text>
+    <text x="310" y="107" text-anchor="middle" font-size="9" fill="#1976D2">• 权限规则</text>
+    <text x="310" y="120" text-anchor="middle" font-size="9" fill="#1976D2">• 主题设置</text>
+  </g>
+
+  <!-- RIGHT SIDE: Context Management -->
+  <g transform="translate(500, 100)">
+    <rect x="0" y="0" width="870" height="650" rx="10" fill="none" stroke="#C2185B" stroke-width="2" stroke-dasharray="10,5"/>
+    <text x="435" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#C2185B">上下文管理系统 (Context Management)</text>
+
+    <!-- Compact flow -->
+    <g transform="translate(30, 50)">
+      <!-- Snip -->
+      <rect x="0" y="0" width="250" height="70" rx="8" fill="url(#gradCompact)" stroke="#D81B60" stroke-width="1.5"/>
+      <text x="125" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#880E4F">Snip Compact</text>
+      <text x="125" y="50" text-anchor="middle" font-size="10" fill="#AD1457">轻量级消息修剪</text>
+      <text x="125" y="65" text-anchor="middle" font-size="9" fill="#C2185B">feature: HISTORY_SNIP</text>
+
+      <!-- Micro -->
+      <rect x="280" y="0" width="250" height="70" rx="8" fill="url(#gradCompact)" stroke="#D81B60" stroke-width="1.5"/>
+      <text x="415" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#880E4F">Micro Compact</text>
+      <text x="415" y="50" text-anchor="middle" font-size="10" fill="#AD1457">删除重复工具对</text>
+      <text x="415" y="65" text-anchor="middle" font-size="9" fill="#C2185B">cache editing</text>
+
+      <!-- Auto -->
+      <rect x="560" y="0" width="250" height="70" rx="8" fill="url(#gradCompact)" stroke="#D81B60" stroke-width="1.5"/>
+      <text x="690" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#880E4F">Auto Compact</text>
+      <text x="690" y="50" text-anchor="middle" font-size="10" fill="#AD1457">主动压缩 (90%)</text>
+      <text x="690" y="65" text-anchor="middle" font-size="9" fill="#C2185B">buffer: 13k tokens</text>
+
+      <!-- Collapse -->
+      <rect x="0" y="90" width="250" height="70" rx="8" fill="#F8BBD0" stroke="#EC407A" stroke-width="1.5"/>
+      <text x="125" y="120" text-anchor="middle" font-size="14" font-weight="bold" fill="#880E4F">Context Collapse</text>
+      <text x="125" y="140" text-anchor="middle" font-size="10" fill="#AD1457">分级折叠 (90%/95%)</text>
+      <text x="125" y="155" text-anchor="middle" font-size="9" fill="#C2185B">feature: CONTEXT_COLLAPSE</text>
+
+      <!-- Reactive -->
+      <rect x="280" y="90" width="250" height="70" rx="8" fill="#FCE4EC" stroke="#F48FB1" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="415" y="120" text-anchor="middle" font-size="14" font-weight="bold" fill="#880E4F">Reactive Compact</text>
+      <text x="415" y="140" text-anchor="middle" font-size="10" fill="#AD1457">413 错误恢复</text>
+      <text x="415" y="155" text-anchor="middle" font-size="9" fill="#C2185B">fallback path</text>
+
+      <!-- Flow arrows -->
+      <path d="M 125 70 L 125 85" fill="none" stroke="#D81B60" stroke-width="1.5" marker-end="url(#memArrow)"/>
+      <path d="M 415 70 L 415 85" fill="none" stroke="#D81B60" stroke-width="1.5" marker-end="url(#memArrow)"/>
+      <path d="M 690 70 L 690 125 L 420 125" fill="none" stroke="#D81B60" stroke-width="1.5" marker-end="url(#memArrow)"/>
+    </g>
+
+    <!-- Token thresholds -->
+    <g transform="translate(30, 250)">
+      <rect x="0" y="0" width="810" height="140" rx="8" fill="#FFF9C4" stroke="#FBC02D" stroke-width="1.5"/>
+      <text x="405" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#F57F17">Token 阈值层次 (Token Thresholds)</text>
+
+      <!-- Threshold bars -->
+      <g transform="translate(30, 45)">
+        <!-- Context Window -->
+        <rect x="0" y="0" width="750" height="25" rx="3" fill="#E0E0E0" stroke="#9E9E9E" stroke-width="1"/>
+        <text x="375" y="17" text-anchor="middle" font-size="10" fill="#424242">Context Window (200k tokens)</text>
+
+        <!-- Blocking Limit -->
+        <rect x="0" y="30" width="712" height="20" rx="2" fill="#EF9A9A" stroke="#C62828" stroke-width="1"/>
+        <text x="356" y="15" text-anchor="middle" font-size="9" fill="#B71C1C">Blocking Limit (95% = 190k)</text>
+
+        <!-- Auto Compact -->
+        <rect x="0" y="55" width="675" height="20" rx="2" fill="#A5D6A7" stroke="#388E3C" stroke-width="1"/>
+        <text x="337" y="15" text-anchor="middle" font-size="9" fill="#1B5E20">Auto Compact (90% = 180k)</text>
+
+        <!-- Warning -->
+        <rect x="0" y="80" width="700" height="20" rx="2" fill="#FFE082" stroke="#F9A825" stroke-width="1"/>
+        <text x="350" y="15" text-anchor="middle" font-size="9" fill="#B71C1C">Warning (buffer: 20k tokens)</text>
+
+        <!-- Scale labels -->
+        <text x="0" y="115" font-size="8" fill="#616161">0</text>
+        <text x="375" y="115" font-size="8" fill="#616161" text-anchor="middle">100k</text>
+        <text x="750" y="115" font-size="8" fill="#616161" text-anchor="end">200k</text>
+      </g>
+    </g>
+
+    <!-- Memory prefetch -->
+    <g transform="translate(30, 410)">
+      <rect x="0" y="0" width="810" height="80" rx="8" fill="#E1F5FE" stroke="#0288D1" stroke-width="1.5"/>
+      <text x="405" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#01579B">记忆预取 (Memory Prefetch)</text>
+
+      <rect x="30" y="40" width="220" height="30" rx="4" fill="white" stroke="#0288D1" stroke-width="1"/>
+      <text x="140" y="60" text-anchor="middle" font-size="10" fill="#01579B">Relevant Memory Prefetch</text>
+
+      <rect x="270" y="40" width="220" height="30" rx="4" fill="white" stroke="#0288D1" stroke-width="1"/>
+      <text x="380" y="60" text-anchor="middle" font-size="10" fill="#01579B">Skill Discovery Prefetch</text>
+
+      <rect x="510" y="40" width="270" height="30" rx="4" fill="white" stroke="#0288D1" stroke-width="1"/>
+      <text x="645" y="60" text-anchor="middle" font-size="10" fill="#01579B">Nested CLAUDE.md Injection</text>
+    </g>
+
+    <!-- Code references -->
+    <text x="30" y="520" font-size="10" fill="#880E4F" font-family="monospace">
+      src/services/compact/autoCompact.ts | src/history.ts | src/utils/sessionStorage.ts
+    </text>
+  </g>
+
+  <!-- Cross-layer arrows -->
+  <path d="M 450 170 L 495 170" fill="none" stroke="#00796B" stroke-width="2" marker-end="url(#memArrow)"/>
+  <path d="M 450 340 L 495 340" fill="none" stroke="#FFA000" stroke-width="2" marker-end="url(#memArrow)"/>
+  <path d="M 450 510 L 495 510" fill="none" stroke="#388E3C" stroke-width="2" marker-end="url(#memArrow)"/>
+  <path d="M 450 680 L 495 680" fill="none" stroke="#1976D2" stroke-width="2" marker-end="url(#memArrow)"/>
+</svg>

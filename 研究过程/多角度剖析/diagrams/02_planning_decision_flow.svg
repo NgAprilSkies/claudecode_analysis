@@ -1,0 +1,227 @@
+<svg viewBox="0 0 1400 1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowB" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#2E5C8A"/>
+    </marker>
+    <linearGradient id="gradInit" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E3F2FD"/>
+      <stop offset="100%" style="stop-color:#90CAF9"/>
+    </linearGradient>
+    <linearGradient id="gradContext" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8F5E9"/>
+      <stop offset="100%" style="stop-color:#A5D6A7"/>
+    </linearGradient>
+    <linearGradient id="gradModel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF3E0"/>
+      <stop offset="100%" style="stop-color:#FFCC80"/>
+    </linearGradient>
+    <linearGradient id="gradTool" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F3E5F5"/>
+      <stop offset="100%" style="stop-color:#CE93D8"/>
+    </linearGradient>
+    <linearGradient id="gradEval" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFEBEE"/>
+      <stop offset="100%" style="stop-color:#EF9A9A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="1000" fill="#fafafa"/>
+
+  <!-- Title -->
+  <text x="700" y="45" text-anchor="middle" font-size="26" font-weight="bold" fill="#1a1a1a">
+    Claude Code 任务规划与决策路径 (Planning &amp; Decision Flow)
+  </text>
+  <text x="700" y="75" text-anchor="middle" font-size="14" fill="#666">
+    基于 query.ts 的 Query Loop 架构分析
+  </text>
+
+  <!-- MAIN LOOP CONTAINER -->
+  <rect x="30" y="100" width="1340" height="850" rx="15" fill="none" stroke="#333" stroke-width="3" stroke-dasharray="10,5"/>
+  <text x="700" y="125" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">queryLoop() - 主循环 (每次迭代 = 一转/Turn)</text>
+
+  <!-- PHASE 1: Context Management -->
+  <g transform="translate(50, 150)">
+    <rect x="0" y="0" width="400" height="200" rx="10" fill="url(#gradContext)" stroke="#4CAF50" stroke-width="2"/>
+    <text x="200" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#2E7D32">阶段 1: 上下文管理</text>
+    <text x="200" y="55" text-anchor="middle" font-size="12" fill="#4CAF50">(Context Management)</text>
+
+    <!-- Sub-steps -->
+    <rect x="20" y="70" width="360" height="35" rx="5" fill="white" stroke="#4CAF50" stroke-width="1.5"/>
+    <text x="190" y="92" text-anchor="middle" font-size="12" fill="#333">1. Tool Result Budget (applyToolResultBudget)</text>
+
+    <rect x="20" y="110" width="360" height="35" rx="5" fill="white" stroke="#4CAF50" stroke-width="1.5"/>
+    <text x="190" y="132" text-anchor="middle" font-size="12" fill="#333">2. Snip Compact (feature: HISTORY_SNIP)</text>
+
+    <rect x="20" y="150" width="360" height="35" rx="5" fill="white" stroke="#4CAF50" stroke-width="1.5"/>
+    <text x="190" y="172" text-anchor="middle" font-size="12" fill="#333">3. Micro/Auto/Collapse Compact</text>
+
+    <!-- Token thresholds -->
+    <text x="200" y="225" text-anchor="middle" font-size="11" fill="#666">
+      阈值：AUTOCOMPACT_BUFFER_TOKENS = 13,000
+    </text>
+  </g>
+
+  <!-- PHASE 2: Model Call -->
+  <g transform="translate(480, 150)">
+    <rect x="0" y="0" width="400" height="200" rx="10" fill="url(#gradModel)" stroke="#FF9800" stroke-width="2"/>
+    <text x="200" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#E65100">阶段 2: LLM API 调用</text>
+    <text x="200" y="55" text-anchor="middle" font-size="12" fill="#F57C00">(deps.callModel - Streaming)</text>
+
+    <!-- Streaming loop -->
+    <rect x="20" y="70" width="360" height="50" rx="5" fill="white" stroke="#FF9800" stroke-width="1.5"/>
+    <text x="200" y="90" text-anchor="middle" font-size="12" fill="#333">流式响应处理:</text>
+    <text x="200" y="108" text-anchor="middle" font-size="11" fill="#666">message_start → content_block → message_delta</text>
+
+    <rect x="20" y="125" width="360" height="35" rx="5" fill="white" stroke="#FF9800" stroke-width="1.5"/>
+    <text x="200" y="147" text-anchor="middle" font-size="12" fill="#333">模型选择 (getRuntimeMainLoopModel)</text>
+
+    <rect x="20" y="165" width="360" height="25" rx="5" fill="#FFF8E1" stroke="#FFB74D" stroke-width="1"/>
+    <text x="200" y="182" text-anchor="middle" font-size="10" fill="#E65100">Thinking Config + Token Budget</text>
+  </g>
+
+  <!-- PHASE 3: Tool Execution -->
+  <g transform="translate(910, 150)">
+    <rect x="0" y="0" width="440" height="200" rx="10" fill="url(#gradTool)" stroke="#9C27B0" stroke-width="2"/>
+    <text x="220" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#6A1B9A">阶段 3: 工具执行</text>
+    <text x="220" y="55" text-anchor="middle" font-size="12" fill="#8E24AA">(StreamingToolExecutor / runTools)</text>
+
+    <!-- Tool execution modes -->
+    <rect x="20" y="70" width="190" height="45" rx="5" fill="white" stroke="#9C27B0" stroke-width="1.5"/>
+    <text x="115" y="90" text-anchor="middle" font-size="12" fill="#333" font-weight="bold">流式模式</text>
+    <text x="115" y="106" text-anchor="middle" font-size="10" fill="#666">(StreamingToolExecutor)</text>
+
+    <rect x="230" y="70" width="190" height="45" rx="5" fill="white" stroke="#9C27B0" stroke-width="1.5"/>
+    <text x="325" y="90" text-anchor="middle" font-size="12" fill="#333" font-weight="bold">传统模式</text>
+    <text x="325" y="106" text-anchor="middle" font-size="10" fill="#666">(runTools serial/concurrent)</text>
+
+    <!-- Concurrency control -->
+    <rect x="20" y="125" width="400" height="35" rx="5" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1"/>
+    <text x="220" y="147" text-anchor="middle" font-size="12" fill="#333">
+      <tspan>分区执行：partitionToolCalls() → 并发安全工具分组</tspan>
+    </text>
+
+    <rect x="20" y="165" width="400" height="25" rx="5" fill="#F3E5F5" stroke="#CE93D8" stroke-width="1"/>
+    <text x="220" y="182" text-anchor="middle" font-size="10" fill="#6A1B9A">权限检查 → 执行 → 结果收集</text>
+  </g>
+
+  <!-- ARROWS between phases -->
+  <line x1="450" y1="250" x2="475" y2="250" stroke="#333" stroke-width="2.5" marker-end="url(#arrowB)"/>
+  <line x1="880" y1="250" x2="905" y2="250" stroke="#333" stroke-width="2.5" marker-end="url(#arrowB)"/>
+
+  <!-- PHASE 4: Post-Evaluation -->
+  <g transform="translate(50, 380)">
+    <rect x="0" y="0" width="1300" height="280" rx="10" fill="url(#gradEval)" stroke="#C62828" stroke-width="2"/>
+    <text x="650" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#B71C1C">阶段 4: 后置评估与决策 (Post-Evaluation &amp; Decision)</text>
+
+    <!-- Decision Tree -->
+    <g transform="translate(50, 50)">
+      <!-- Root: needsFollowUp -->
+      <polygon points="600,0 700,40 600,80 500,40" fill="#FFCDD2" stroke="#C62828" stroke-width="2"/>
+      <text x="600" y="35" text-anchor="middle" font-size="12" fill="#B71C1C" font-weight="bold">needsFollowUp?</text>
+      <text x="600" y="52" text-anchor="middle" font-size="11" fill="#B71C1C">(tool_use blocks?)</text>
+
+      <!-- NO branch -->
+      <line x1="600" y1="80" x2="600" y2="120" stroke="#C62828" stroke-width="2"/>
+      <text x="615" y="105" font-size="11" fill="#C62828" font-weight="bold">NO</text>
+
+      <!-- Stop Hook Check -->
+      <rect x="470" y="120" width="260" height="50" rx="8" fill="white" stroke="#C62828" stroke-width="2"/>
+      <text x="600" y="145" text-anchor="middle" font-size="12" fill="#333" font-weight="bold">handleStopHooks()</text>
+      <text x="600" y="162" text-anchor="middle" font-size="10" fill="#666">评估是否继续</text>
+
+      <!-- Token Budget Check -->
+      <line x1="600" y1="170" x2="600" y2="200" stroke="#C62828" stroke-width="2"/>
+      <rect x="450" y="200" width="300" height="40" rx="5" fill="#FFF8E1" stroke="#FFA000" stroke-width="1.5"/>
+      <text x="600" y="225" text-anchor="middle" font-size="11" fill="#333">Token Budget Check (feature: TOKEN_BUDGET)</text>
+
+      <!-- Exit points -->
+      <line x1="600" y1="240" x2="600" y2="270" stroke="#C62828" stroke-width="2"/>
+      <rect x="500" y="270" width="200" height="35" rx="5" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+      <text x="600" y="293" text-anchor="middle" font-size="12" fill="#2E7D32" font-weight="bold">return { reason: 'completed' }</text>
+
+      <!-- YES branch -->
+      <line x1="700" y1="40" x2="850" y2="40" stroke="#C62828" stroke-width="2"/>
+      <text x="775" y="35" font-size="11" fill="#C62828" font-weight="bold">YES</text>
+      <line x1="850" y1="40" x2="850" y2="200" stroke="#C62828" stroke-width="2"/>
+      <line x1="850" y1="200" x2="1050" y2="200" stroke="#C62828" stroke-width="2"/>
+      <line x1="1050" y1="200" x2="1050" y2="270" stroke="#C62828" stroke-width="2" marker-end="url(#arrowB)"/>
+
+      <rect x="950" y="270" width="200" height="35" rx="5" fill="#BBDEFB" stroke="#1976D2" stroke-width="2"/>
+      <text x="1050" y="293" text-anchor="middle" font-size="12" fill="#1976D2" font-weight="bold">执行工具 → 下一转</text>
+    </g>
+
+    <!-- Recovery paths side box -->
+    <g transform="translate(1050, 50)">
+      <rect x="0" y="0" width="230" height="220" rx="8" fill="#FFFDE7" stroke="#FBC02D" stroke-width="2"/>
+      <text x="115" y="28" text-anchor="middle" font-size="13" fill="#F57F17" font-weight="bold">恢复路径 (Recovery)</text>
+
+      <rect x="10" y="40" width="210" height="32" rx="4" fill="white" stroke="#FBC02D" stroke-width="1"/>
+      <text x="115" y="61" text-anchor="middle" font-size="10" fill="#333">1. Collapse Drain (90%/95%)</text>
+
+      <rect x="10" y="77" width="210" height="32" rx="4" fill="white" stroke="#FBC02D" stroke-width="1"/>
+      <text x="115" y="98" text-anchor="middle" font-size="10" fill="#333">2. Reactive Compact (413 恢复)</text>
+
+      <rect x="10" y="114" width="210" height="32" rx="4" fill="white" stroke="#FBC02D" stroke-width="1"/>
+      <text x="115" y="135" text-anchor="middle" font-size="10" fill="#333">3. Max Output Tokens 恢复 (3 次)</text>
+
+      <rect x="10" y="151" width="210" height="32" rx="4" fill="white" stroke="#FBC02D" stroke-width="1"/>
+      <text x="115" y="172" text-anchor="middle" font-size="10" fill="#333">4. Token Budget Continuation</text>
+
+      <rect x="10" y="188" width="210" height="25" rx="4" fill="#FFF59D" stroke="#F9A825" stroke-width="1"/>
+      <text x="115" y="205" text-anchor="middle" font-size="9" fill="#B71C1C">单一路径：每转只触发一种恢复</text>
+    </g>
+  </g>
+
+  <!-- State transition box -->
+  <g transform="translate(50, 690)">
+    <rect x="0" y="0" width="1300" height="240" rx="10" fill="#ECEFF1" stroke="#546E7A" stroke-width="2"/>
+    <text x="650" y="35" text-anchor="middle" font-size="16" font-weight="bold" fill="#37474F">状态转换 (State Transition at Continue Site)</text>
+
+    <!-- Continue sites explanation -->
+    <text x="50" y="65" font-size="12" fill="#546E7A">
+      <tspan x="50" dy="0">query.ts 有 7 个 continue 站点，每个站点通过更新 state 对象跳转到下一次迭代：</tspan>
+    </text>
+
+    <!-- State update example -->
+    <rect x="50" y="80" width="1200" height="140" rx="8" fill="#263238" stroke="#546E7A" stroke-width="1.5"/>
+    <text x="70" y="105" font-size="11" fill="#80CBC4" font-family="monospace">
+      <tspan x="70" dy="0">// query.ts:1171-1182 - Collapse Drain 恢复后的 continue</tspan>
+      <tspan x="70" dy="18">const next: State = {</tspan>
+      <tspan x="90" dy="18">messages: drained.messages,</tspan>
+      <tspan x="90" dy="18">toolUseContext,</tspan>
+      <tspan x="90" dy="18">autoCompactTracking: tracking,</tspan>
+      <tspan x="90" dy="18">maxOutputTokensRecoveryCount,</tspan>
+      <tspan x="90" dy="18">hasAttemptedReactiveCompact,</tspan>
+      <tspan x="90" dy="18">maxOutputTokensOverride: undefined,</tspan>
+      <tspan x="90" dy="18">pendingToolUseSummary: undefined,</tspan>
+      <tspan x="90" dy="18">stopHookActive: undefined,</tspan>
+      <tspan x="90" dy="18">turnCount,</tspan>
+      <tspan x="90" dy="18">transition: { reason: 'collapse_drain_retry', committed: drained.committed },</tspan>
+      <tspan x="70" dy="18">}</tspan>
+      <tspan x="70" dy="18">state = next</tspan>
+      <tspan x="70" dy="18">continue  // → 跳转到 while(true) 开头</tspan>
+    </text>
+
+    <!-- Transition reasons -->
+    <g transform="translate(50, 240)">
+      <text x="0" y="15" font-size="11" fill="#546E7A" font-weight="bold">transition.reason 可能值:</text>
+      <rect x="150" y="3" width="140" height="22" rx="3" fill="#B3E5FC" stroke="#0288D1" stroke-width="1"/>
+      <text x="220" y="18" font-size="10" fill="#01579B">collapse_drain_retry</text>
+      <rect x="300" y="3" width="140" height="22" rx="3" fill="#B3E5FC" stroke="#0288D1" stroke-width="1"/>
+      <text x="370" y="18" font-size="10" fill="#01579B">reactive_compact_retry</text>
+      <rect x="450" y="3" width="140" height="22" rx="3" fill="#B3E5FC" stroke="#0288D1" stroke-width="1"/>
+      <text x="520" y="18" font-size="10" fill="#01579B">max_output_tokens_recovery</text>
+      <rect x="600" y="3" width="140" height="22" rx="3" fill="#B3E5FC" stroke="#0288D1" stroke-width="1"/>
+      <text x="670" y="18" font-size="10" fill="#01579B">stop_hook_blocking</text>
+      <rect x="750" y="3" width="140" height="22" rx="3" fill="#B3E5FC" stroke="#0288D1" stroke-width="1"/>
+      <text x="820" y="18" font-size="10" fill="#01579B">token_budget_continuation</text>
+      <rect x="900" y="3" width="80" height="22" rx="3" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1"/>
+      <text x="940" y="18" font-size="10" fill="#2E7D32">next_turn</text>
+    </g>
+  </g>
+
+  <!-- Loop back arrow -->
+  <path d="M 1350 520 L 1380 520 L 1380 400 L 1350 400" fill="none" stroke="#4CAF50" stroke-width="3" marker-end="url(#arrowB)" stroke-dasharray="8,4"/>
+  <text x="1365" y="460" font-size="11" fill="#2E7D32" font-weight="bold">循环继续</text>
+</svg>

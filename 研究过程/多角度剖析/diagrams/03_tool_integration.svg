@@ -1,0 +1,198 @@
+<svg viewBox="0 0 1400 750" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="toolArrow" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#5C6BC0"/>
+    </marker>
+    <linearGradient id="gradBuiltin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8EAF6;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#7986CB;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="gradMCP" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF8E1;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#FFCA28;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="gradFilter" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8F5E9;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#81C784;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="gradExec" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F3E5F5;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#BA68C8;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <text x="700" y="45" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">
+    工具集成架构 (Tool Integration Architecture)
+  </text>
+  <text x="700" y="75" text-anchor="middle" font-size="14" fill="#666">
+    发现 → 绑定 → 执行 → 安全边界
+  </text>
+
+  <!-- LAYER 1: Tool Discovery -->
+  <g transform="translate(30, 100)">
+    <rect x="0" y="0" width="1340" height="140" rx="12" fill="none" stroke="#5C6BC0" stroke-width="2" stroke-dasharray="10,5"/>
+    <text x="670" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#5C6BC0">层 1: 工具发现 (Tool Discovery)</text>
+
+    <!-- Built-in Tools -->
+    <g transform="translate(50, 50)">
+      <rect x="0" y="0" width="400" height="80" rx="8" fill="url(#gradBuiltin)" stroke="#3F51B5" stroke-width="2"/>
+      <text x="200" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#283593">Built-in Tools</text>
+      <text x="200" y="52" text-anchor="middle" font-size="11" fill="#3949AB">src/tools.ts - getAllBaseTools()</text>
+      <text x="200" y="70" text-anchor="middle" font-size="10" fill="#5C6BC0">Agent, Bash, Read, Edit, Glob, Grep...</text>
+
+      <!-- Tool badges -->
+      <rect x="20" y="55" width="50" height="18" rx="3" fill="#3F51B5" stroke="#283593" stroke-width="1"/>
+      <text x="45" y="68" text-anchor="middle" font-size="9" fill="white">Agent</text>
+      <rect x="75" y="55" width="40" height="18" rx="3" fill="#3F51B5" stroke="#283593" stroke-width="1"/>
+      <text x="95" y="68" text-anchor="middle" font-size="9" fill="white">Bash</text>
+      <rect x="120" y="55" width="40" height="18" rx="3" fill="#3F51B5" stroke="#283593" stroke-width="1"/>
+      <text x="140" y="68" text-anchor="middle" font-size="9" fill="white">Read</text>
+      <rect x="165" y="55" width="35" height="18" rx="3" fill="#3F51B5" stroke="#283593" stroke-width="1"/>
+      <text x="182" y="68" text-anchor="middle" font-size="9" fill="white">Edit</text>
+      <rect x="205" y="55" width="40" height="18" rx="3" fill="#3F51B5" stroke="#283593" stroke-width="1"/>
+      <text x="225" y="68" text-anchor="middle" font-size="9" fill="white">Glob</text>
+      <rect x="250" y="55" width="40" height="18" rx="3" fill="#3F51B5" stroke="#283593" stroke-width="1"/>
+      <text x="270" y="68" text-anchor="middle" font-size="9" fill="white">Grep</text>
+      <rect x="295" y="55" width="70" height="18" rx="3" fill="#3F51B5" stroke="#283593" stroke-width="1"/>
+      <text x="330" y="68" text-anchor="middle" font-size="9" fill="white">WebSearch</text>
+    </g>
+
+    <!-- MCP Tools -->
+    <g transform="translate(500, 50)">
+      <rect x="0" y="0" width="400" height="80" rx="8" fill="url(#gradMCP)" stroke="#FFA000" stroke-width="2"/>
+      <text x="200" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#FF6F00">MCP Tools</text>
+      <text x="200" y="52" text-anchor="middle" font-size="11" fill="#FFA000">src/services/mcp/client.ts</text>
+      <text x="200" y="70" text-anchor="middle" font-size="10" fill="#FFCA28">动态发现 • 服务器连接 • 协议适配</text>
+    </g>
+
+    <!-- Feature-Gated Tools -->
+    <g transform="translate(950, 50)">
+      <rect x="0" y="0" width="340" height="80" rx="8" fill="#ECEFF1" stroke="#90A4AE" stroke-width="2"/>
+      <text x="170" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#546E7A">Feature-Gated</text>
+      <text x="170" y="52" text-anchor="middle" font-size="11" fill="#78909C">条件加载的工具:</text>
+      <text x="170" y="68" text-anchor="middle" font-size="10" fill="#90A4AE">REPL, Monitor, Cron, Workflow...</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M 450 100 L 495 100" fill="none" stroke="#5C6BC0" stroke-width="2.5" marker-end="url(#toolArrow)"/>
+  </g>
+
+  <!-- LAYER 2: Permission Filtering -->
+  <g transform="translate(30, 270)">
+    <rect x="0" y="0" width="1340" height="130" rx="12" fill="none" stroke="#66BB6A" stroke-width="2" stroke-dasharray="10,5"/>
+    <text x="670" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#43A047">层 2: 权限过滤 (Permission Filtering)</text>
+
+    <!-- Permission Context -->
+    <g transform="translate(50, 50)">
+      <rect x="0" y="0" width="300" height="70" rx="8" fill="url(#gradFilter)" stroke="#4CAF50" stroke-width="2"/>
+      <text x="150" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#2E7D32">ToolPermissionContext</text>
+      <text x="150" y="48" text-anchor="middle" font-size="11" fill="#388E3C">mode: default | auto | bypass | plan</text>
+      <text x="150" y="64" text-anchor="middle" font-size="10" fill="#4CAF50">alwaysAllow / alwaysDeny / alwaysAsk</text>
+    </g>
+
+    <!-- Filter Logic -->
+    <g transform="translate(400, 50)">
+      <rect x="0" y="0" width="450" height="70" rx="8" fill="white" stroke="#4CAF50" stroke-width="2"/>
+      <text x="225" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#2E7D32">filterToolsByDenyRules()</text>
+      <text x="225" y="48" text-anchor="middle" font-size="11" fill="#388E3C">步骤 1: 移除 blanket-denied 工具</text>
+      <text x="225" y="64" text-anchor="middle" font-size="10" fill="#4CAF50">步骤 2: MCP server-prefix 规则过滤</text>
+    </g>
+
+    <!-- Permission Rules -->
+    <g transform="translate(900, 50)">
+      <rect x="0" y="0" width="390" height="70" rx="8" fill="#FFFDE7" stroke="#FBC02D" stroke-width="2"/>
+      <text x="195" y="28" text-anchor="middle" font-size="12" font-weight="bold" fill="#F57F17">权限规则示例:</text>
+      <text x="20" y="48" font-size="10" fill="#F9A825">• alwaysAllow: {"Bash": ["git *"]}</text>
+      <text x="20" y="62" font-size="10" fill="#F9A825">• alwaysDeny: {"Bash": ["rm -rf *"]}</text>
+    </g>
+
+    <!-- Arrow -->
+    <path d="M 1200 180 L 1200 205 L 670 205 L 670 265" fill="none" stroke="#4CAF50" stroke-width="2.5" marker-end="url(#toolArrow)"/>
+  </g>
+
+  <!-- LAYER 3: Tool Assembly -->
+  <g transform="translate(30, 430)">
+    <rect x="0" y="0" width="1340" height="100" rx="12" fill="none" stroke="#AB47BC" stroke-width="2" stroke-dasharray="10,5"/>
+    <text x="670" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#8E24AA">层 3: 工具池组装 (Tool Pool Assembly)</text>
+
+    <!-- Assemble Function -->
+    <g transform="translate(50, 50)">
+      <rect x="0" y="0" width="500" height="40" rx="6" fill="#F3E5F5" stroke="#AB47BC" stroke-width="2"/>
+      <text x="250" y="26" text-anchor="middle" font-size="12" font-family="monospace" fill="#6A1B9A">
+        assembleToolPool(permissionContext, mcpTools): Tools
+      </text>
+    </g>
+
+    <!-- Assembly Steps -->
+    <g transform="translate(600, 50)">
+      <rect x="0" y="0" width="300" height="40" rx="6" fill="white" stroke="#AB47BC" stroke-width="1.5"/>
+      <text x="150" y="26" text-anchor="middle" font-size="11" fill="#333">1. Built-in → 按名称排序</text>
+
+      <rect x="320" y="0" width="300" height="40" rx="6" fill="white" stroke="#AB47BC" stroke-width="1.5"/>
+      <text x="470" y="26" text-anchor="middle" font-size="11" fill="#333">2. MCP → 按名称排序</text>
+
+      <rect x="640" y="0" width="300" height="40" rx="6" fill="white" stroke="#AB47BC" stroke-width="1.5"/>
+      <text x="790" y="26" text-anchor="middle" font-size="11" fill="#333">3. uniqBy → Built-in 优先</text>
+    </g>
+
+    <!-- Code reference -->
+    <text x="50" y="120" font-size="10" fill="#7B1FA2" font-family="monospace">
+      src/tools.ts:345-367 - assembleToolPool()
+    </text>
+  </g>
+
+  <!-- LAYER 4: Tool Execution -->
+  <g transform="translate(30, 560)">
+    <rect x="0" y="0" width="1340" height="160" rx="12" fill="none" stroke="#EC407A" stroke-width="2" stroke-dasharray="10,5"/>
+    <text x="670" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#D81B60">层 4: 工具执行 (Tool Execution)</text>
+
+    <!-- Execution Modes -->
+    <g transform="translate(50, 50)">
+      <!-- Streaming Mode -->
+      <rect x="0" y="0" width="380" height="100" rx="8" fill="url(#gradExec)" stroke="#EC407A" stroke-width="2"/>
+      <text x="190" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#880E4F">流式执行模式</text>
+      <text x="190" y="50" text-anchor="middle" font-size="11" fill="#AD1457">(StreamingToolExecutor)</text>
+
+      <rect x="20" y="60" width="340" height="30" rx="4" fill="#F8BBD0" stroke="#EC407A" stroke-width="1"/>
+      <text x="190" y="80" text-anchor="middle" font-size="10" fill="#880E4F">• 并行执行并发安全工具</text>
+
+      <rect x="20" y="92" width="340" height="25" rx="4" fill="#F8BBD0" stroke="#EC407A" stroke-width="1"/>
+      <text x="190" y="110" text-anchor="middle" font-size="10" fill="#880E4F">• 实时进度反馈</text>
+    </g>
+
+    <!-- Concurrency Control -->
+    <g transform="translate(480, 50)">
+      <rect x="0" y="0" width="400" height="100" rx="8" fill="white" stroke="#EC407A" stroke-width="2"/>
+      <text x="200" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#880E4F">并发控制</text>
+
+      <rect x="20" y="40" width="360" height="25" rx="4" fill="#FCE4EC" stroke="#F48FB1" stroke-width="1"/>
+      <text x="200" y="58" text-anchor="middle" font-size="10" fill="#880E4F">partitionToolCalls() → 并发安全分组</text>
+
+      <rect x="20" y="70" width="360" height="25" rx="4" fill="#FCE4EC" stroke="#F48FB1" stroke-width="1"/>
+      <text x="200" y="88" text-anchor="middle" font-size="10" fill="#880E4F">runToolsSerially() / runToolsConcurrently()</text>
+    </g>
+
+    <!-- Permission Check -->
+    <g transform="translate(930, 50)">
+      <rect x="0" y="0" width="360" height="100" rx="8" fill="#FFF3E0" stroke="#FF9800" stroke-width="2"/>
+      <text x="180" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#E65100">权限检查流程</text>
+
+      <rect x="15" y="45" width="330" height="20" rx="3" fill="white" stroke="#FFB74D" stroke-width="1"/>
+      <text x="180" y="60" text-anchor="middle" font-size="9" fill="#333">1. canUseTool() → PermissionResult</text>
+
+      <rect x="15" y="70" width="330" height="20" rx="3" fill="white" stroke="#FFB74D" stroke-width="1"/>
+      <text x="180" y="85" text-anchor="middle" font-size="9" fill="#333">2. behavior: allow / ask / deny</text>
+    </g>
+
+    <!-- Code references -->
+    <text x="50" y="180" font-size="10" fill="#C2185B" font-family="monospace">
+      src/services/tools/toolOrchestration.ts | StreamingToolExecutor.ts
+    </text>
+  </g>
+
+  <!-- Connecting Arrows -->
+  <path d="M 670 240 L 670 265" fill="none" stroke="#5C6BC0" stroke-width="2.5" marker-end="url(#toolArrow)"/>
+  <path d="M 670 400 L 670 425" fill="none" stroke="#4CAF50" stroke-width="2.5" marker-end="url(#toolArrow)"/>
+  <path d="M 670 530 L 670 555" fill="none" stroke="#AB47BC" stroke-width="2.5" marker-end="url(#toolArrow)"/>
+</svg>

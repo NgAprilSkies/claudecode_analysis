@@ -1,0 +1,237 @@
+<svg viewBox="0 0 1200 950" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+    </marker>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e3f2fd;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#bbdefb;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff3e0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffe0b2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fce4ec;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8bbd9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f3e5f5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e1bee7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f5e9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8e6c9;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- 标题 -->
+  <text x="600" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">Claude Code 工具集成与安全架构图</text>
+
+  <!-- 工具注册与发现 -->
+  <rect x="50" y="70" width="1100" height="180" fill="url(#grad1)" stroke="#2196f3" stroke-width="2" rx="10"/>
+  <text x="70" y="95" font-size="16" font-weight="bold" fill="#1565c0">工具注册与发现 (tools.ts)</text>
+
+  <rect x="80" y="110" width="180" height="120" fill="white" stroke="#2196f3" stroke-width="1" rx="5"/>
+  <text x="170" y="135" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">getAllBaseTools()</text>
+  <text x="90" y="160" font-size="10" fill="#666">• 30+ built-in tools</text>
+  <text x="90" y="175" font-size="10" fill="#666">• Feature flag控制</text>
+  <text x="90" y="190" font-size="10" fill="#666">• Lazy require</text>
+  <text x="90" y="205" font-size="10" fill="#666">• Dead code elimination</text>
+
+  <rect x="280" y="110" width="180" height="120" fill="#e3f2fd" stroke="#2196f3" stroke-width="1" rx="5"/>
+  <text x="370" y="135" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">MCP Tools</text>
+  <text x="290" y="160" font-size="10" fill="#666">• External servers</text>
+  <text x="290" y="175" font-size="10" fill="#666">• Dynamic loading</text>
+  <text x="290" y="190" font-size="10" fill="#666">• Protocol standard</text>
+  <text x="290" y="205" font-size="10" fill="#666">• assembleToolPool()</text>
+
+  <rect x="480" y="110" width="180" height="120" fill="#e3f2fd" stroke="#2196f3" stroke-width="1" rx="5"/>
+  <text x="570" y="135" text-anchor="middle" font-size="12" font-weight="bold" fill="#1565c0">工具过滤</text>
+  <text x="490" y="160" font-size="10" fill="#666">• filterByDenyRules()</text>
+  <text x="490" y="175" font-size="10" fill="#666">• isEnabled() check</text>
+  <text x="490" y="190" font-size="10" fill="#666">• REPL mode filter</text>
+  <text x="490" y="205" font-size="10" fill="#666">• Simple mode filter</text>
+
+  <rect x="680" y="110" width="180" height="120" fill="#fff3e0" stroke="#ff9800" stroke-width="1" rx="5"/>
+  <text x="770" y="135" text-anchor="middle" font-size="12" font-weight="bold" fill="#e65100">工具去重</text>
+  <text x="690" y="160" font-size="10" fill="#666">• uniqBy('name')</text>
+  <text x="690" y="175" font-size="10" fill="#666">• built-in优先</text>
+  <text x="690" y="190" font-size="10" fill="#666">• sort by name</text>
+  <text x="690" y="205" font-size="10" fill="#666">• Cache stability</text>
+
+  <rect x="880" y="110" width="250" height="120" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" rx="5"/>
+  <text x="1005" y="135" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">Tool Pool Ready</text>
+  <text x="890" y="160" font-size="10" fill="#666">• Built-in + MCP合并</text>
+  <text x="890" y="175" font-size="10" fill="#666">• 权限规则已应用</text>
+  <text x="890" y="190" font-size="10" fill="#666">• Prompt cache优化</text>
+  <text x="890" y="205" font-size="10" fill="#666">• 模型可用工具列表</text>
+
+  <!-- 权限控制系统 -->
+  <rect x="50" y="270" width="700" height="280" fill="url(#grad3)" stroke="#e91e63" stroke-width="2" rx="10"/>
+  <text x="70" y="295" font-size="16" font-weight="bold" fill="#c2185b">6层权限控制系统 (permissions.ts)</text>
+
+  <!-- 权限检查流程 -->
+  <rect x="80" y="310" width="100" height="220" fill="white" stroke="#ddd" stroke-width="1" rx="5"/>
+  <text x="130" y="330" text-anchor="middle" font-size="10" font-weight="bold" fill="#333">L1</text>
+  <text x="130" y="350" text-anchor="middle" font-size="9" fill="#666">输入验证</text>
+  <text x="90" y="375" font-size="8" fill="#999">validateInput()</text>
+  <text x="90" y="395" font-size="8" fill="#999">Schema check</text>
+  <text x="90" y="415" font-size="8" fill="#999">Type safety</text>
+
+  <rect x="195" y="310" width="100" height="220" fill="#fce4ec" stroke="#e91e63" stroke-width="1" rx="5"/>
+  <text x="245" y="330" text-anchor="middle" font-size="10" font-weight="bold" fill="#c2185b">L2</text>
+  <text x="245" y="350" text-anchor="middle" font-size="9" fill="#666">规则匹配</text>
+  <text x="205" y="375" font-size="8" fill="#999">alwaysAllow</text>
+  <text x="205" y="390" font-size="8" fill="#999">alwaysDeny</text>
+  <text x="205" y="405" font-size="8" fill="#999">alwaysAsk</text>
+  <text x="205" y="420" font-size="8" fill="#999">Pattern: "Bash(git *)"</text>
+  <text x="205" y="440" font-size="8" fill="#c2185b">getDenyRuleForTool()</text>
+
+  <rect x="310" y="310" width="100" height="220" fill="#fce4ec" stroke="#e91e63" stroke-width="1" rx="5"/>
+  <text x="360" y="330" text-anchor="middle" font-size="10" font-weight="bold" fill="#c2185b">L3</text>
+  <text x="360" y="350" text-anchor="middle" font-size="9" fill="#666">工具权限</text>
+  <text x="320" y="375" font-size="8" fill="#999">tool.checkPermissions()</text>
+  <text x="320" y="395" font-size="8" fill="#999">Tool-specific logic</text>
+  <text x="320" y="415" font-size="8" fill="#999">Path validation</text>
+  <text x="320" y="440" font-size="8" fill="#c2185b">Bash: sandbox check</text>
+
+  <rect x="425" y="310" width="100" height="220" fill="#fff3e0" stroke="#ff9800" stroke-width="1" rx="5"/>
+  <text x="475" y="330" text-anchor="middle" font-size="10" font-weight="bold" fill="#e65100">L4</text>
+  <text x="475" y="350" text-anchor="middle" font-size="9" fill="#666">分类器</text>
+  <text x="435" y="375" font-size="8" fill="#999">TRANSCRIPT_CLASSIFIER</text>
+  <text x="435" y="395" font-size="8" fill="#999">classifyYoloAction()</text>
+  <text x="435" y="415" font-size="8" fill="#999">Auto mode approval</text>
+  <text x="435" y="440" font-size="8" fill="#e65100">yoloClassifier.ts</text>
+
+  <rect x="540" y="310" width="100" height="220" fill="#e3f2fd" stroke="#2196f3" stroke-width="1" rx="5"/>
+  <text x="590" y="330" text-anchor="middle" font-size="10" font-weight="bold" fill="#1565c0">L5</text>
+  <text x="590" y="350" text-anchor="middle" font-size="9" fill="#666">Hooks</text>
+  <text x="550" y="375" font-size="8" fill="#999">PreToolUse hooks</text>
+  <text x="550" y="390" font-size="8" fill="#999">Permission hooks</text>
+  <text x="550" y="410" font-size="8" fill="#999">Custom rules</text>
+  <text x="550" y="440" font-size="8" fill="#1565c0">executePermissionRequestHooks()</text>
+
+  <rect x="655" y="310" width="80" height="220" fill="#f3e5f5" stroke="#9c27b0" stroke-width="2" rx="5"/>
+  <text x="695" y="330" text-anchor="middle" font-size="10" font-weight="bold" fill="#7b1fa2">L6</text>
+  <text x="695" y="350" text-anchor="middle" font-size="9" fill="#666">用户确认</text>
+  <text x="665" y="375" font-size="8" fill="#999">Interactive</text>
+  <text x="665" y="390" font-size="8" fill="#999">Prompt dialog</text>
+  <text x="665" y="410" font-size="8" fill="#999">Allow/Deny</text>
+  <text x="665" y="430" font-size="8" fill="#999">+ Remember</text>
+  <text x="665" y="455" font-size="8" fill="#7b1fa2">Denial tracking</text>
+  <text x="665" y="470" font-size="8" fill="#7b1fa2">Fallback to prompting</text>
+
+  <!-- 安全属性 -->
+  <rect x="770" y="270" width="380" height="280" fill="url(#grad2)" stroke="#ff9800" stroke-width="2" rx="10"/>
+  <text x="790" y="295" font-size="16" font-weight="bold" fill="#e65100">Tool安全属性 (Tool.ts)</text>
+
+  <rect x="800" y="310" width="160" height="110" fill="white" stroke="#ff9800" stroke-width="1" rx="5"/>
+  <text x="880" y="335" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Fail-Closed默认</text>
+  <text x="810" y="360" font-size="9" fill="#666">isEnabled() → true</text>
+  <text x="810" y="375" font-size="9" fill="#666">isConcurrencySafe → false</text>
+  <text x="810" y="390" font-size="9" fill="#666">isReadOnly → false</text>
+  <text x="810" y="405" font-size="9" fill="#666">isDestructive → false</text>
+  <text x="810" y="425" font-size="9" fill="#999">必须显式声明安全</text>
+
+  <rect x="980" y="310" width="160" height="110" fill="#fff8e1" stroke="#ffc107" stroke-width="1" rx="5"/>
+  <text x="1060" y="335" text-anchor="middle" font-size="11" font-weight="bold" fill="#f57f17">破坏性标记</text>
+  <text x="990" y="360" font-size="9" fill="#666">isDestructive():</text>
+  <text x="990" y="380" font-size="9" fill="#c2185b">• FileEdit: overwrite</text>
+  <text x="990" y="395" font-size="9" fill="#c2185b">• Bash: rm, >file</text>
+  <text x="990" y="410" font-size="9" fill="#c2185b">• SendMessage</text>
+  <text x="990" y="430" font-size="9" fill="#999">Triggers extra warning</text>
+
+  <rect x="800" y="430" width="160" height="110" fill="#e8f5e9" stroke="#4caf50" stroke-width="1" rx="5"/>
+  <text x="880" y="455" text-anchor="middle" font-size="11" font-weight="bold" fill="#2e7d32">并发控制</text>
+  <text x="810" y="480" font-size="9" fill="#666">isConcurrencySafe():</text>
+  <text x="810" y="500" font-size="9" fill="#4caf50">✓ Read: concurrent</text>
+  <text x="810" y="515" font-size="9" fill="#e91e63">✗ Edit: sequential</text>
+  <text x="810" y="530" font-size="9" fill="#4caf50">✗ Bash: sequential</text>
+
+  <rect x="980" y="430" width="160" height="110" fill="#fce4ec" stroke="#e91e63" stroke-width="1" rx="5"/>
+  <text x="1060" y="455" text-anchor="middle" font-size="11" font-weight="bold" fill="#c2185b">中断行为</text>
+  <text x="990" y="480" font-size="9" fill="#666">interruptBehavior():</text>
+  <text x="990" y="500" font-size="9" fill="#666">• 'cancel' - 停止工具</text>
+  <text x="990" y="515" font-size="9" fill="#666">• 'block' - 继续执行</text>
+  <text x="990" y="535" font-size="9" fill="#999">Default: 'block'</text>
+
+  <!-- 工具执行与结果 -->
+  <rect x="50" y="570" width="700" height="200" fill="url(#grad5)" stroke="#4caf50" stroke-width="2" rx="10"/>
+  <text x="70" y="595" font-size="16" font-weight="bold" fill="#2e7d32">工具执行与结果管理</text>
+
+  <rect x="80" y="610" width="180" height="140" fill="white" stroke="#4caf50" stroke-width="1" rx="5"/>
+  <text x="170" y="635" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">工具调用</text>
+  <text x="90" y="660" font-size="9" fill="#666">tool.call(input, context)</text>
+  <text x="90" y="680" font-size="9" fill="#999">• canUseTool check</text>
+  <text x="90" y="695" font-size="9" fill="#999">• AbortController</text>
+  <text x="90" y="710" font-size="9" fill="#999">• onProgress callback</text>
+  <text x="90" y="730" font-size="9" fill="#999">• Sandbox wrap</text>
+
+  <rect x="280" y="610" width="180" height="140" fill="#e8f5e9" stroke="#4caf50" stroke-width="1" rx="5"/>
+  <text x="370" y="635" text-anchor="middle" font-size="11" font-weight="bold" fill="#2e7d32">结果持久化</text>
+  <text x="290" y="660" font-size="9" fill="#666">persistToolResult()</text>
+  <text x="290" y="680" font-size="9" fill="#999">Threshold: 50k chars</text>
+  <text x="290" y="695" font-size="9" fill="#999">Write to disk</text>
+  <text x="290" y="710" font-size="9" fill="#999">Return preview</text>
+  <text x="290" y="730" font-size="9" fill="#999">&lt;persisted-output&gt;</text>
+
+  <rect x="480" y="610" width="140" height="140" fill="#fff3e0" stroke="#ff9800" stroke-width="1" rx="5"/>
+  <text x="550" y="635" text-anchor="middle" font-size="11" font-weight="bold" fill="#e65100">结果预算</text>
+  <text x="490" y="660" font-size="9" fill="#666">MAX_TOOL_RESULTS</text>
+  <text x="490" y="675" font-size="9" fill="#666">PER_MESSAGE: 50k</text>
+  <text x="490" y="695" font-size="9" fill="#999">applyToolResultBudget()</text>
+  <text x="490" y="715" font-size="9" fill="#999">防止上下文爆炸</text>
+
+  <rect x="640" y="610" width="90" height="140" fill="#e3f2fd" stroke="#2196f3" stroke-width="1" rx="5"/>
+  <text x="685" y="635" text-anchor="middle" font-size="11" font-weight="bold" fill="#1565c0">渲染</text>
+  <text x="650" y="660" font-size="9" fill="#666">ToolResultBlock</text>
+  <text x="650" y="680" font-size="9" fill="#999">renderToolUse</text>
+  <text x="650" y="695" font-size="9" fill="#999">renderToolResult</text>
+  <text x="650" y="715" font-size="9" fill="#999">Progress UI</text>
+
+  <!-- 异常处理 -->
+  <rect x="770" y="570" width="380" height="200" fill="url(#grad4)" stroke="#9c27b0" stroke-width="2" rx="10"/>
+  <text x="790" y="595" font-size="16" font-weight="bold" fill="#7b1fa2">异常处理与可观察性</text>
+
+  <rect x="800" y="610" width="160" height="140" fill="white" stroke="#9c27b0" stroke-width="1" rx="5"/>
+  <text x="880" y="635" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">异常类型</text>
+  <text x="810" y="660" font-size="9" fill="#666">ToolValidationError</text>
+  <text x="810" y="675" font-size="9" fill="#666">ToolPermissionDenied</text>
+  <text x="810" y="690" font-size="9" fill="#666">ToolExecutionError</text>
+  <text x="810" y="705" font-size="9" fill="#666">AbortError</text>
+  <text x="810" y="720" font-size="9" fill="#666">FallbackTriggered</text>
+  <text x="810" y="740" font-size="9" fill="#999">try/catch in runTools</text>
+
+  <rect x="980" y="610" width="160" height="140" fill="#f3e5f5" stroke="#9c27b0" stroke-width="1" rx="5"/>
+  <text x="1060" y="635" text-anchor="middle" font-size="11" font-weight="bold" fill="#7b1fa2">可观察性</text>
+  <text x="990" y="660" font-size="9" fill="#666">Progress callback</text>
+  <text x="990" y="675" font-size="9" fill="#666">Tool decisions log</text>
+  <text x="990" y="690" font-size="9" fill="#666">Permission audit</text>
+  <text x="990" y="705" font-size="9" fill="#666">Analytics events</text>
+  <text x="990" y="725" font-size="9" fill="#999">Full traceability</text>
+
+  <!-- 底部评价 -->
+  <rect x="50" y="790" width="1100" height="140" fill="#fafafa" stroke="#ddd" stroke-width="1" rx="5"/>
+  <text x="70" y="815" font-size="16" font-weight="bold" fill="#333">Harness Engineering评价</text>
+
+  <rect x="80" y="830" width="240" height="90" fill="#e8f5e9" stroke="#4caf50" stroke-width="1" rx="5"/>
+  <text x="90" y="850" font-size="12" font-weight="bold" fill="#2e7d32">可扩展性 ⭐⭐⭐⭐</text>
+  <text x="90" y="870" font-size="10" fill="#666">Tool接口清晰，MCP支持外部生态</text>
+  <text x="90" y="885" font-size="10" fill="#666">待改进: 中央注册表</text>
+
+  <rect x="340" y="830" width="240" height="90" fill="#e3f2fd" stroke="#2196f3" stroke-width="1" rx="5"/>
+  <text x="350" y="850" font-size="12" font-weight="bold" fill="#1565c0">安全边界 ⭐⭐⭐⭐⭐</text>
+  <text x="350" y="870" font-size="10" fill="#666">6层权限检查，Fail-Closed默认</text>
+  <text x="350" y="885" font-size="10" fill="#666">Destructive标记，Sandbox支持</text>
+
+  <rect x="600" y="830" width="240" height="90" fill="#fff3e0" stroke="#ff9800" stroke-width="1" rx="5"/>
+  <text x="610" y="850" font-size="12" font-weight="bold" fill="#e65100">可观察性 ⭐⭐⭐⭐⭐</text>
+  <text x="610" y="870" font-size="10" fill="#666">Progress实时反馈，权限审计</text>
+  <text x="610" y="885" font-size="10" fill="#666">结果持久化完整</text>
+
+  <rect x="860" y="830" width="270" height="90" fill="#fce4ec" stroke="#e91e63" stroke-width="1" rx="5"/>
+  <text x="870" y="850" font-size="12" font-weight="bold" fill="#c2185b">性能损耗 ⭐⭐⭐⭐</text>
+  <text x="870" y="870" font-size="10" fill="#666">并发安全工具并行执行</text>
+  <text x="870" y="885" font-size="10" fill="#666">待改进: 权限检查多次遍历</text>
+</svg>

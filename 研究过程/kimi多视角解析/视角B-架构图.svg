@@ -1,0 +1,239 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
+  <defs>
+    <!-- 渐变定义 -->
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="boxGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e2e8f0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="activeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#dbeafe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#bfdbfe;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="securityGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fef3c7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fde68a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="recoveryGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fecaca;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fca5a5;stop-opacity:1" />
+    </linearGradient>
+    <!-- 阴影 -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1400" height="900" fill="#f1f5f9"/>
+
+  <!-- 标题 -->
+  <rect x="20" y="20" width="1360" height="50" rx="8" fill="url(#headerGrad)" filter="url(#shadow)"/>
+  <text x="700" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="bold" fill="white">Claude Code Agent 任务规划架构 - 视角B</text>
+
+  <!-- 左侧：状态机核心 -->
+  <rect x="30" y="85" width="400" height="790" rx="12" fill="white" stroke="#94a3b8" stroke-width="2" filter="url(#shadow)"/>
+  <text x="230" y="115" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#1e293b">1. 查询循环状态机</text>
+
+  <!-- State Box -->
+  <rect x="50" y="130" width="360" height="180" rx="8" fill="url(#boxGrad)" stroke="#64748b" stroke-width="1"/>
+  <text x="230" y="155" text-anchor="middle" font-family="monospace" font-size="12" font-weight="bold" fill="#334155">State (Mutable)</text>
+  <text x="70" y="180" font-family="monospace" font-size="10" fill="#475569">• messages: Message[]</text>
+  <text x="70" y="200" font-family="monospace" font-size="10" fill="#475569">• turnCount: number</text>
+  <text x="70" y="220" font-family="monospace" font-size="10" fill="#475569">• transition: Continue | undefined</text>
+  <text x="70" y="240" font-family="monospace" font-size="10" fill="#475569">• autoCompactTracking: {...}</text>
+  <text x="70" y="260" font-family="monospace" font-size="10" fill="#475569">• stopHookActive: boolean</text>
+  <text x="70" y="280" font-family="monospace" font-size="10" fill="#475569">• maxOutputTokensRecoveryCount</text>
+  <text x="70" y="300" font-family="monospace" font-size="10" fill="#64748b">// query.ts:203-217</text>
+
+  <!-- QueryConfig -->
+  <rect x="50" y="320" width="360" height="100" rx="8" fill="url(#boxGrad)" stroke="#64748b" stroke-width="1"/>
+  <text x="230" y="345" text-anchor="middle" font-family="monospace" font-size="12" font-weight="bold" fill="#334155">QueryConfig (Immutable)</text>
+  <text x="70" y="370" font-family="monospace" font-size="10" fill="#475569">• sessionId: string</text>
+  <text x="70" y="390" font-family="monospace" font-size="10" fill="#475569">• gates: {streamingToolExec, ...}</text>
+  <text x="70" y="410" font-family="monospace" font-size="10" fill="#64748b">// query/config.ts:15-27</text>
+
+  <!-- Query Loop Phases -->
+  <rect x="50" y="430" width="360" height="430" rx="8" fill="url(#activeGrad)" stroke="#3b82f6" stroke-width="2"/>
+  <text x="230" y="455" text-anchor="middle" font-family="monospace" font-size="12" font-weight="bold" fill="#1e40af">while(true) Loop Phases</text>
+
+  <!-- Phase boxes -->
+  <rect x="70" y="470" width="320" height="50" rx="6" fill="white" stroke="#60a5fa" stroke-width="1"/>
+  <text x="230" y="490" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e40af">Phase 1: Context Compression</text>
+  <text x="230" y="508" text-anchor="middle" font-family="monospace" font-size="9" fill="#64748b">snip → microcompact → autocompact</text>
+
+  <rect x="70" y="530" width="320" height="50" rx="6" fill="white" stroke="#60a5fa" stroke-width="1"/>
+  <text x="230" y="550" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e40af">Phase 2: Safety Checks</text>
+  <text x="230" y="568" text-anchor="middle" font-family="monospace" font-size="9" fill="#64748b">maxTurns → circuitBreaker → tokenBudget</text>
+
+  <rect x="70" y="590" width="320" height="50" rx="6" fill="white" stroke="#60a5fa" stroke-width="1"/>
+  <text x="230" y="610" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e40af">Phase 3: LLM API Call</text>
+  <text x="230" y="628" text-anchor="middle" font-family="monospace" font-size="9" fill="#64748b">streaming → fallback handling → yield</text>
+
+  <rect x="70" y="650" width="320" height="50" rx="6" fill="white" stroke="#60a5fa" stroke-width="1"/>
+  <text x="230" y="670" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e40af">Phase 4: Tool Execution</text>
+  <text x="230" y="688" text-anchor="middle" font-family="monospace" font-size="9" fill="#64748b">StreamingToolExecutor → runTools</text>
+
+  <rect x="70" y="710" width="320" height="50" rx="6" fill="white" stroke="#60a5fa" stroke-width="1"/>
+  <text x="230" y="730" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e40af">Phase 5: Stop Hooks</text>
+  <text x="230" y="748" text-anchor="middle" font-family="monospace" font-size="9" fill="#64748b">executeStopHooks → blocking check</text>
+
+  <rect x="70" y="770" width="320" height="50" rx="6" fill="white" stroke="#60a5fa" stroke-width="1"/>
+  <text x="230" y="790" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e40af">Phase 6: State Update</text>
+  <text x="230" y="808" text-anchor="middle" font-family="monospace" font-size="9" fill="#64748b">state = {...} → continue / return</text>
+
+  <!-- Arrow to center -->
+  <path d="M 410 600 L 460 600" stroke="#3b82f6" stroke-width="3" marker-end="url(#arrowBlue)" fill="none"/>
+
+  <!-- 中间：决策流程 -->
+  <rect x="460" y="85" width="480" height="790" rx="12" fill="white" stroke="#94a3b8" stroke-width="2" filter="url(#shadow)"/>
+  <text x="700" y="115" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#1e293b">2. 决策路径与恢复机制</text>
+
+  <!-- Decision Flowchart -->
+  <!-- API Response -->
+  <rect x="520" y="135" width="360" height="45" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="700" y="163" text-anchor="middle" font-family="monospace" font-size="12" fill="#1e40af">LLM API Response Received</text>
+
+  <!-- 413 Check -->
+  <polygon points="700,200 780,235 700,270 620,235" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="700" y="230" text-anchor="middle" font-family="monospace" font-size="10" fill="#92400e">Prompt Too Long?</text>
+  <text x="700" y="245" text-anchor="middle" font-family="monospace" font-size="9" fill="#92400e">(413)</text>
+
+  <!-- Recovery Path -->
+  <rect x="520" y="290" width="160" height="50" rx="6" fill="#fecaca" stroke="#ef4444" stroke-width="1"/>
+  <text x="600" y="310" text-anchor="middle" font-family="monospace" font-size="9" fill="#991b1b">1. Context Collapse</text>
+  <text x="600" y="328" text-anchor="middle" font-family="monospace" font-size="9" fill="#991b1b">Drain</text>
+
+  <rect x="520" y="350" width="160" height="50" rx="6" fill="#fecaca" stroke="#ef4444" stroke-width="1"/>
+  <text x="600" y="370" text-anchor="middle" font-family="monospace" font-size="9" fill="#991b1b">2. Reactive Compact</text>
+  <text x="600" y="388" text-anchor="middle" font-family="monospace" font-size="9" fill="#991b1b">Retry</text>
+
+  <rect x="520" y="410" width="160" height="40" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="1"/>
+  <text x="600" y="435" text-anchor="middle" font-family="monospace" font-size="10" fill="#991b1b">3. Surface Error</text>
+
+  <!-- Max Output Tokens -->
+  <rect x="720" y="290" width="160" height="50" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+  <text x="800" y="310" text-anchor="middle" font-family="monospace" font-size="9" fill="#92400e">Max Output</text>
+  <text x="800" y="328" text-anchor="middle" font-family="monospace" font-size="9" fill="#92400e">Tokens Hit?</text>
+
+  <rect x="720" y="350" width="160" height="50" rx="6" fill="#fecaca" stroke="#ef4444" stroke-width="1"/>
+  <text x="800" y="375" text-anchor="middle" font-family="monospace" font-size="9" fill="#991b1b">Escalate to 64k</text>
+
+  <rect x="720" y="410" width="160" height="50" rx="6" fill="#fecaca" stroke="#ef4444" stroke-width="1"/>
+  <text x="800" y="428" text-anchor="middle" font-family="monospace" font-size="9" fill="#991b1b">Recovery Loop</text>
+  <text x="800" y="443" text-anchor="middle" font-family="monospace" font-size="8" fill="#991b1b">(max 3 retries)</text>
+
+  <!-- Tool Use Check -->
+  <polygon points="700,480 780,515 700,550 620,515" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+  <text x="700" y="510" text-anchor="middle" font-family="monospace" font-size="10" fill="#166534">Has Tool Use?</text>
+  <text x="700" y="525" text-anchor="middle" font-family="monospace" font-size="9" fill="#166534">(stop_reason)</text>
+
+  <!-- Tool Execution -->
+  <rect x="520" y="570" width="160" height="50" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+  <text x="600" y="590" text-anchor="middle" font-family="monospace" font-size="10" fill="#166534">Execute Tools</text>
+  <text x="600" y="608" text-anchor="middle" font-family="monospace" font-size="8" fill="#166534">StreamingToolExecutor</text>
+
+  <!-- Stop Hooks -->
+  <rect x="720" y="570" width="160" height="50" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+  <text x="800" y="590" text-anchor="middle" font-family="monospace" font-size="10" fill="#1e40af">Stop Hooks</text>
+  <text x="800" y="608" text-anchor="middle" font-family="monospace" font-size="8" fill="#1e40af">Evaluation</text>
+
+  <!-- Terminal States -->
+  <rect x="520" y="640" width="360" height="100" rx="8" fill="url(#recoveryGrad)" stroke="#dc2626" stroke-width="2"/>
+  <text x="700" y="665" text-anchor="middle" font-family="monospace" font-size="12" font-weight="bold" fill="#991b1b">Terminal States</text>
+  <text x="540" y="690" font-family="monospace" font-size="9" fill="#7f1d1d">• completed - 正常完成</text>
+  <text x="540" y="708" font-family="monospace" font-size="9" fill="#7f1d1d">• max_turns - 轮次超限</text>
+  <text x="540" y="726" font-family="monospace" font-size="9" fill="#7f1d1d">• token_budget_exceeded</text>
+  <text x="720" y="690" font-family="monospace" font-size="9" fill="#7f1d1d">• circuit_breaker</text>
+  <text x="720" y="708" font-family="monospace" font-size="9" fill="#7f1d1d">• prompt_too_long</text>
+
+  <!-- Continue Arrow -->
+  <path d="M 600 620 C 500 620, 450 750, 600 820" stroke="#22c55e" stroke-width="2" stroke-dasharray="5,3" fill="none" marker-end="url(#arrowGreen)"/>
+  <text x="480" y="750" font-family="monospace" font-size="9" fill="#166534">continue loop</text>
+
+  <!-- 右侧：安全边界 -->
+  <rect x="960" y="85" width="420" height="790" rx="12" fill="white" stroke="#94a3b8" stroke-width="2" filter="url(#shadow)"/>
+  <text x="1170" y="115" text-anchor="middle" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#1e293b">3. 安全边界与可观察性</text>
+
+  <!-- Token Budget -->
+  <rect x="980" y="135" width="380" height="120" rx="8" fill="url(#securityGrad)" stroke="#f59e0b" stroke-width="2"/>
+  <text x="1170" y="160" text-anchor="middle" font-family="monospace" font-size="12" font-weight="bold" fill="#92400e">Token Budget (tokenBudget.ts)</text>
+  <text x="1000" y="185" font-family="monospace" font-size="9" fill="#78350f">• COMPLETION_THRESHOLD = 0.9</text>
+  <text x="1000" y="203" font-family="monospace" font-size="9" fill="#78350f">• DIMINISHING_THRESHOLD = 500</text>
+  <text x="1000" y="221" font-family="monospace" font-size="9" fill="#78350f">• 检测连续低增量 → stop</text>
+  <text x="1000" y="239" font-family="monospace" font-size="9" fill="#78350f">• 收益递减保护</text>
+
+  <!-- Circuit Breaker -->
+  <rect x="980" y="265" width="380" height="100" rx="8" fill="url(#securityGrad)" stroke="#f59e0b" stroke-width="2"/>
+  <text x="1170" y="290" text-anchor="middle" font-family="monospace" font-size="12" font-weight="bold" fill="#92400e">Circuit Breaker (autoCompact.ts)</text>
+  <text x="1000" y="315" font-family="monospace" font-size="9" fill="#78350f">• MAX_CONSECUTIVE_FAILURES = 3</text>
+  <text x="1000" y="333" font-family="monospace" font-size="9" fill="#78350f">• 防止重复失败的compact</text>
+  <text x="1000" y="351" font-family="monospace" font-size="9" fill="#78350f">• 节省 ~250K API calls/day</text>
+
+  <!-- Max Turns -->
+  <rect x="980" y="375" width="380" height="80" rx="8" fill="url(#securityGrad)" stroke="#f59e0b" stroke-width="2"/>
+  <text x="1170" y="400" text-anchor="middle" font-family="monospace" font-size="12" font-weight="bold" fill="#92400e">Max Turns Limit</text>
+  <text x="1000" y="425" font-family="monospace" font-size="9" fill="#78350f">• QueryParams.maxTurns?: number</text>
+  <text x="1000" y="443" font-family="monospace" font-size="9" fill="#78350f">• 硬循环终止条件</text>
+
+  <!-- Observability -->
+  <rect x="980" y="465" width="380" height="190" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="1170" y="490" text-anchor="middle" font-family="monospace" font-size="12" font-weight="bold" fill="#166534">Observability</text>
+
+  <text x="1000" y="515" font-family="monospace" font-size="10" font-weight="bold" fill="#166534">Checkpoints:</text>
+  <text x="1000" y="535" font-family="monospace" font-size="9" fill="#15803d">• query_fn_entry</text>
+  <text x="1000" y="553" font-family="monospace" font-size="9" fill="#15803d">• query_autocompact_start</text>
+  <text x="1000" y="571" font-family="monospace" font-size="9" fill="#15803d">• query_api_loop_start</text>
+  <text x="1000" y="589" font-family="monospace" font-size="9" fill="#15803d">• query_tool_execution_start</text>
+
+  <text x="1150" y="515" font-family="monospace" font-size="10" font-weight="bold" fill="#166534">Events:</text>
+  <text x="1150" y="535" font-family="monospace" font-size="9" fill="#15803d">• tengu_query_error</text>
+  <text x="1150" y="553" font-family="monospace" font-size="9" fill="#15803d">• tengu_auto_compact_succeeded</text>
+  <text x="1150" y="571" font-family="monospace" font-size="9" fill="#15803d">• tengu_token_budget_completed</text>
+  <text x="1150" y="589" font-family="monospace" font-size="9" fill="#15803d">• queryChainId + queryDepth</text>
+
+  <!-- Feature Gates -->
+  <rect x="980" y="665" width="380" height="90" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="1170" y="690" text-anchor="middle" font-family="monospace" font-size="12" font-weight="bold" fill="#1e40af">Feature Gates</text>
+  <text x="1000" y="715" font-family="monospace" font-size="9" fill="#1e40af">• feature('REACTIVE_COMPACT')</text>
+  <text x="1000" y="733" font-family="monospace" font-size="9" fill="#1e40af">• feature('CONTEXT_COLLAPSE')</text>
+  <text x="1000" y="751" font-family="font-family: monospace; font-size: 9px; fill: #1e40af">• feature('TOKEN_BUDGET')</text>
+
+  <!-- Dependency Injection -->
+  <rect x="980" y="765" width="380" height="100" rx="8" fill="#faf5ff" stroke="#a855f7" stroke-width="2"/>
+  <text x="1170" y="790" text-anchor="middle" font-family="monospace" font-size="12" font-weight="bold" fill="#6b21a8">Dependency Injection (deps.ts)</text>
+  <text x="1000" y="815" font-family="monospace" font-size="9" fill="#7e22ce">• callModel: LLMClient</text>
+  <text x="1000" y="833" font-family="monospace" font-size="9" fill="#7e22ce">• autocompact: AutoCompactFn</text>
+  <text x="1000" y="851" font-family="monospace" font-size="9" fill="#7e22ce">• uuid: () => string</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#22c55e"/>
+    </marker>
+  </defs>
+
+  <!-- Legend -->
+  <rect x="30" y="820" width="1360" height="60" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="50" y="845" font-family="system-ui, sans-serif" font-size="12" font-weight="bold" fill="#334155">Legend:</text>
+
+  <rect x="130" y="830" width="20" height="20" rx="4" fill="#dbeafe" stroke="#3b82f6"/>
+  <text x="160" y="845" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Active Phase</text>
+
+  <rect x="250" y="830" width="20" height="20" rx="4" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="280" y="845" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Safety Check</text>
+
+  <rect x="370" y="830" width="20" height="20" rx="4" fill="#fecaca" stroke="#ef4444"/>
+  <text x="400" y="845" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Recovery Path</text>
+
+  <rect x="500" y="830" width="20" height="20" rx="4" fill="#dcfce7" stroke="#22c55e"/>
+  <text x="530" y="845" font-family="system-ui, sans-serif" font-size="10" fill="#475569">Success Path</text>
+
+  <text x="700" y="860" font-family="monospace" font-size="9" fill="#64748b">Note: query.ts ~1700 lines | State machine with 6 phases | Multiple circuit breakers</text>
+</svg>
