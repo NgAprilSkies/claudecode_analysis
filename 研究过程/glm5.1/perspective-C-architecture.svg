@@ -1,0 +1,256 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+    <linearGradient id="toolGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1f6feb"/>
+      <stop offset="100%" style="stop-color:#1158c7"/>
+    </linearGradient>
+    <linearGradient id="permGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#da3633"/>
+      <stop offset="100%" style="stop-color:#b62324"/>
+    </linearGradient>
+    <linearGradient id="safeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#238636"/>
+      <stop offset="100%" style="stop-color:#1a7f37"/>
+    </linearGradient>
+    <linearGradient id="mcpGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="execGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0883e"/>
+      <stop offset="100%" style="stop-color:#d68031"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto-start-reverse">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#8b949e"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto-start-reverse">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#238636"/>
+    </marker>
+    <marker id="arrowRed" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="7" orient="auto-start-reverse">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#da3633"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="900" fill="url(#bgGrad)"/>
+
+  <!-- Title -->
+  <text x="600" y="40" text-anchor="middle" fill="#f0f6fc" font-size="22" font-weight="bold">Claude Code 工具集成架构 (Tool Integration)</text>
+  <text x="600" y="60" text-anchor="middle" fill="#8b949e" font-size="12">多层防御安全执行框架 — Harness Engineering 视角</text>
+
+  <!-- ===== Layer 1: Tool Definition ===== -->
+  <rect x="30" y="80" width="340" height="310" rx="8" fill="#21262d" stroke="#30363d" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="30" y="80" width="340" height="30" rx="8" fill="url(#toolGrad)"/>
+  <rect x="30" y="100" width="340" height="10" fill="url(#toolGrad)"/>
+  <text x="200" y="100" text-anchor="middle" fill="white" font-size="13" font-weight="bold">① Tool 定义层</text>
+
+  <!-- Tool Interface -->
+  <rect x="50" y="125" width="140" height="100" rx="6" fill="#1c2128" stroke="#1f6feb" stroke-width="1.5"/>
+  <text x="120" y="145" text-anchor="middle" fill="#58a6ff" font-size="11" font-weight="bold">«interface»</text>
+  <text x="120" y="162" text-anchor="middle" fill="#f0f6fc" font-size="12" font-weight="bold">Tool&lt;I,O,P&gt;</text>
+  <line x1="55" y1="170" x2="185" y2="170" stroke="#30363d" stroke-width="0.5"/>
+  <text x="60" y="185" fill="#8b949e" font-size="9">+ call()</text>
+  <text x="60" y="197" fill="#8b949e" font-size="9">+ checkPermissions()</text>
+  <text x="60" y="209" fill="#8b949e" font-size="9">+ validateInput()</text>
+  <text x="60" y="221" fill="#8b949e" font-size="9">+ isReadOnly() / isDestructive()</text>
+
+  <!-- buildTool factory -->
+  <rect x="210" y="125" width="140" height="80" rx="6" fill="#1c2128" stroke="#f0883e" stroke-width="1.5"/>
+  <text x="280" y="148" text-anchor="middle" fill="#f0883e" font-size="11" font-weight="bold">buildTool()</text>
+  <line x1="215" y1="155" x2="345" y2="155" stroke="#30363d" stroke-width="0.5"/>
+  <text x="220" y="170" fill="#8b949e" font-size="9">• isEnabled → true</text>
+  <text x="220" y="182" fill="#8b949e" font-size="9">• isConcurrencySafe → false</text>
+  <text x="220" y="194" fill="#8b949e" font-size="9">• isReadOnly → false</text>
+
+  <!-- Tool instances -->
+  <rect x="50" y="240" width="65" height="35" rx="4" fill="#1c2128" stroke="#238636" stroke-width="1"/>
+  <text x="82" y="262" text-anchor="middle" fill="#3fb950" font-size="9">Bash</text>
+  <rect x="120" y="240" width="65" height="35" rx="4" fill="#1c2128" stroke="#238636" stroke-width="1"/>
+  <text x="152" y="262" text-anchor="middle" fill="#3fb950" font-size="9">Edit</text>
+  <rect x="190" y="240" width="65" height="35" rx="4" fill="#1c2128" stroke="#238636" stroke-width="1"/>
+  <text x="222" y="262" text-anchor="middle" fill="#3fb950" font-size="9">Write</text>
+  <rect x="260" y="240" width="65" height="35" rx="4" fill="#1c2128" stroke="#238636" stroke-width="1"/>
+  <text x="292" y="262" text-anchor="middle" fill="#3fb950" font-size="9">Read</text>
+
+  <rect x="50" y="285" width="65" height="35" rx="4" fill="#1c2128" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="82" y="307" text-anchor="middle" fill="#a78bfa" font-size="9">Agent</text>
+  <rect x="120" y="285" width="65" height="35" rx="4" fill="#1c2128" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="152" y="307" text-anchor="middle" fill="#a78bfa" font-size="9">MCP</text>
+  <rect x="190" y="285" width="65" height="35" rx="4" fill="#1c2128" stroke="#238636" stroke-width="1"/>
+  <text x="222" y="307" text-anchor="middle" fill="#3fb950" font-size="9">Glob</text>
+  <rect x="260" y="285" width="65" height="35" rx="4" fill="#1c2128" stroke="#238636" stroke-width="1"/>
+  <text x="292" y="307" text-anchor="middle" fill="#3fb950" font-size="9">Grep</text>
+
+  <text x="200" y="355" text-anchor="middle" fill="#484f58" font-size="9">30+ 内置工具 + MCP 动态工具</text>
+  <text x="200" y="370" text-anchor="middle" fill="#484f58" font-size="9">Feature flags 条件注册</text>
+
+  <!-- ===== Layer 2: Registration & Filtering ===== -->
+  <rect x="400" y="80" width="380" height="310" rx="8" fill="#21262d" stroke="#30363d" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="400" y="80" width="380" height="30" rx="8" fill="url(#execGrad)"/>
+  <rect x="400" y="100" width="380" height="10" fill="url(#execGrad)"/>
+  <text x="590" y="100" text-anchor="middle" fill="white" font-size="13" font-weight="bold">② 注册 &amp; 过滤层</text>
+
+  <!-- assembleToolPool -->
+  <rect x="420" y="125" width="170" height="70" rx="6" fill="#1c2128" stroke="#f0883e" stroke-width="1.5"/>
+  <text x="505" y="145" text-anchor="middle" fill="#f0883e" font-size="10" font-weight="bold">assembleToolPool()</text>
+  <text x="430" y="163" fill="#8b949e" font-size="9">1. getAllBaseTools()</text>
+  <text x="430" y="175" fill="#8b949e" font-size="9">2. filterToolsByDenyRules()</text>
+  <text x="430" y="187" fill="#8b949e" font-size="9">3. sort + dedup by name</text>
+
+  <!-- Filter flow -->
+  <rect x="610" y="125" width="150" height="70" rx="6" fill="#1c2128" stroke="#da3633" stroke-width="1.5"/>
+  <text x="685" y="145" text-anchor="middle" fill="#f85149" font-size="10" font-weight="bold">权限过滤</text>
+  <text x="620" y="163" fill="#8b949e" font-size="9">• alwaysAllowRules</text>
+  <text x="620" y="175" fill="#8b949e" font-size="9">• alwaysDenyRules</text>
+  <text x="620" y="187" fill="#8b949e" font-size="9">• alwaysAskRules</text>
+
+  <!-- Tool Permission Context -->
+  <rect x="420" y="210" width="340" height="80" rx="6" fill="#1c2128" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="590" y="230" text-anchor="middle" fill="#a78bfa" font-size="10" font-weight="bold">ToolPermissionContext</text>
+  <text x="430" y="248" fill="#8b949e" font-size="9">mode: default | acceptEdits | bypassPermissions | auto</text>
+  <text x="430" y="263" fill="#8b949e" font-size="9">additionalWorkingDirectories: Map&lt;string, AdditionalWD&gt;</text>
+  <text x="430" y="278" fill="#8b949e" font-size="9">strippedDangerousRules | shouldAvoidPermissionPrompts</text>
+
+  <!-- Prompt Cache note -->
+  <rect x="420" y="305" width="340" height="55" rx="6" fill="#1c2128" stroke="#1f6feb" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="590" y="325" text-anchor="middle" fill="#58a6ff" font-size="10">Prompt Cache 策略</text>
+  <text x="430" y="345" fill="#8b949e" font-size="9">工具按名称排序 → 内置工具连续前缀 → 缓存键稳定</text>
+
+  <!-- ===== Layer 3: Permission System ===== -->
+  <rect x="30" y="410" width="540" height="470" rx="8" fill="#21262d" stroke="#30363d" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="30" y="410" width="540" height="30" rx="8" fill="url(#permGrad)"/>
+  <rect x="30" y="430" width="540" height="10" fill="url(#permGrad)"/>
+  <text x="300" y="430" text-anchor="middle" fill="white" font-size="13" font-weight="bold">③ 权限控制系统 — 5 层纵深防御</text>
+
+  <!-- Layer 3a: AST Parse -->
+  <rect x="50" y="455" width="240" height="70" rx="6" fill="#1c2128" stroke="#da3633" stroke-width="1.5"/>
+  <text x="170" y="475" text-anchor="middle" fill="#f85149" font-size="11" font-weight="bold">Level 1: AST 解析</text>
+  <text x="60" y="493" fill="#8b949e" font-size="9">tree-sitter parseCommandRaw()</text>
+  <text x="60" y="505" fill="#8b949e" font-size="9">→ simple | too-complex | parse-unavailable</text>
+  <text x="60" y="517" fill="#da3633" font-size="8">↑ 替代 regex，消除解析差异</text>
+
+  <!-- Layer 3b: 23 Validators -->
+  <rect x="310" y="455" width="240" height="70" rx="6" fill="#1c2128" stroke="#da3633" stroke-width="1.5"/>
+  <text x="430" y="475" text-anchor="middle" fill="#f85149" font-size="11" font-weight="bold">Level 2: 23 安全验证器</text>
+  <text x="320" y="493" fill="#8b949e" font-size="9">validateObfuscatedFlags()</text>
+  <text x="320" y="505" fill="#8b949e" font-size="9">validateDangerousPatterns()</text>
+  <text x="320" y="517" fill="#8b949e" font-size="9">validateBraceExpansion() ...</text>
+
+  <!-- Layer 3c: Rule Matching -->
+  <rect x="50" y="540" width="240" height="70" rx="6" fill="#1c2128" stroke="#f0883e" stroke-width="1.5"/>
+  <text x="170" y="560" text-anchor="middle" fill="#f0883e" font-size="11" font-weight="bold">Level 3: 规则匹配</text>
+  <text x="60" y="578" fill="#8b949e" font-size="9">1. Exact Match → deny/ask/allow</text>
+  <text x="60" y="590" fill="#8b949e" font-size="9">2. Prefix: Bash(git:*) → "git commit"</text>
+  <text x="60" y="602" fill="#8b949e" font-size="9">3. Wildcard: Bash(cd *) → "cd /path"</text>
+
+  <!-- Layer 3d: Path Constraints -->
+  <rect x="310" y="540" width="240" height="70" rx="6" fill="#1c2128" stroke="#f0883e" stroke-width="1.5"/>
+  <text x="430" y="560" text-anchor="middle" fill="#f0883e" font-size="11" font-weight="bold">Level 4: 路径约束</text>
+  <text x="320" y="578" fill="#8b949e" font-size="9">checkPathConstraints()</text>
+  <text x="320" y="590" fill="#8b949e" font-size="9">工作目录边界检查</text>
+  <text x="320" y="602" fill="#8b949e" font-size="9">输出重定向目标验证</text>
+
+  <!-- Layer 3e: Mode Check -->
+  <rect x="180" y="625" width="240" height="60" rx="6" fill="#1c2128" stroke="#238636" stroke-width="1.5"/>
+  <text x="300" y="645" text-anchor="middle" fill="#3fb950" font-size="11" font-weight="bold">Level 5: 模式 &amp; 沙箱</text>
+  <text x="190" y="663" fill="#8b949e" font-size="9">PermissionMode → auto | acceptEdits | ...</text>
+  <text x="190" y="675" fill="#8b949e" font-size="9">SandboxManager.isAutoAllowBashIfSandboxed()</text>
+
+  <!-- Async Classifier -->
+  <rect x="50" y="700" width="500" height="75" rx="6" fill="#1c2128" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="300" y="720" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="bold">异步分类器 (LLM-based)</text>
+  <text x="60" y="738" fill="#8b949e" font-size="9">与权限对话框并行运行 → 高置信度匹配时自动批准</text>
+  <text x="60" y="753" fill="#8b949e" font-size="9">speculativeChecks: Map&lt;command, Promise&lt;ClassifierResult&gt;&gt;</text>
+  <text x="60" y="768" fill="#8b949e" font-size="9">classifyBashCommand() → { matches, confidence: 'high'|'low', matchedDescription }</text>
+
+  <!-- Decision flow -->
+  <rect x="180" y="790" width="240" height="40" rx="6" fill="url(#safeGrad)"/>
+  <text x="300" y="815" text-anchor="middle" fill="white" font-size="12" font-weight="bold">✓ 执行工具</text>
+
+  <!-- ===== Layer 4: Execution ===== -->
+  <rect x="600" y="410" width="570" height="470" rx="8" fill="#21262d" stroke="#30363d" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="600" y="410" width="570" height="30" rx="8" fill="url(#mcpGrad)"/>
+  <rect x="600" y="430" width="570" height="10" fill="url(#mcpGrad)"/>
+  <text x="885" y="430" text-anchor="middle" fill="white" font-size="13" font-weight="bold">④ 执行 &amp; MCP 集成</text>
+
+  <!-- Tool Execution -->
+  <rect x="620" y="455" width="250" height="100" rx="6" fill="#1c2128" stroke="#238636" stroke-width="1.5"/>
+  <text x="745" y="475" text-anchor="middle" fill="#3fb950" font-size="11" font-weight="bold">工具执行</text>
+  <text x="630" y="498" fill="#8b949e" font-size="9">tool.call(args, context, canUseTool)</text>
+  <text x="630" y="513" fill="#8b949e" font-size="9">→ ToolResult&lt;Output&gt;</text>
+  <text x="630" y="528" fill="#8b949e" font-size="9">→ newMessages[] → 注入对话流</text>
+  <text x="630" y="543" fill="#8b949e" font-size="9">→ mcpMeta (structuredContent)</text>
+
+  <!-- Result Processing -->
+  <rect x="890" y="455" width="260" height="100" rx="6" fill="#1c2128" stroke="#f0883e" stroke-width="1.5"/>
+  <text x="1020" y="475" text-anchor="middle" fill="#f0883e" font-size="11" font-weight="bold">结果处理</text>
+  <text x="900" y="498" fill="#8b949e" font-size="9">• maxResultSizeChars → 磁盘持久化</text>
+  <text x="900" y="513" fill="#8b949e" font-size="9">• mapToolResultToToolResultBlockParam()</text>
+  <text x="900" y="528" fill="#8b949e" font-size="9">• isSearchOrReadCommand → UI 折叠</text>
+  <text x="900" y="543" fill="#8b949e" font-size="9">• contentReplacementState → 预算控制</text>
+
+  <!-- MCP Integration -->
+  <rect x="620" y="575" width="530" height="90" rx="6" fill="#1c2128" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="885" y="595" text-anchor="middle" fill="#a78bfa" font-size="11" font-weight="bold">MCP (Model Context Protocol) 集成</text>
+  <line x1="625" y1="603" x2="1145" y2="603" stroke="#30363d" stroke-width="0.5"/>
+  <text x="630" y="620" fill="#8b949e" font-size="9">MCPServerConnection → 工具发现 → 动态 Tool 实例</text>
+  <text x="630" y="635" fill="#8b949e" font-size="9">mcpInfo: { serverName, toolName } → 权限规则前缀 mcp__server__tool</text>
+  <text x="630" y="650" fill="#8b949e" font-size="9">_meta['anthropic/alwaysLoad'] → 强制全量加载 | shouldDefer → 延迟加载</text>
+
+  <!-- Sandbox -->
+  <rect x="620" y="680" width="250" height="80" rx="6" fill="#1c2128" stroke="#da3633" stroke-width="1.5"/>
+  <text x="745" y="700" text-anchor="middle" fill="#f85149" font-size="11" font-weight="bold">沙箱执行</text>
+  <text x="630" y="718" fill="#8b949e" font-size="9">SandboxManager</text>
+  <text x="630" y="733" fill="#8b949e" font-size="9">文件系统隔离</text>
+  <text x="630" y="748" fill="#8b949e" font-size="9">路径重写 → 沙箱边界</text>
+
+  <!-- Hook System -->
+  <rect x="890" y="680" width="260" height="80" rx="6" fill="#1c2128" stroke="#f0883e" stroke-width="1.5"/>
+  <text x="1020" y="700" text-anchor="middle" fill="#f0883e" font-size="11" font-weight="bold">Hook 系统</text>
+  <text x="900" y="718" fill="#8b949e" font-size="9">PreToolUse → 拦截/修改/批准</text>
+  <text x="900" y="733" fill="#8b949e" font-size="9">PostToolUse → 后处理/通知</text>
+  <text x="900" y="748" fill="#8b949e" font-size="9">settings.json hooks 配置</text>
+
+  <!-- Hooks arrows -->
+  <rect x="620" y="780" width="530" height="40" rx="6" fill="#1c2128" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="885" y="805" text-anchor="middle" fill="#a78bfa" font-size="10">ToolUseContext → abortController | readFileState | messages | getAppState()</text>
+
+  <!-- ===== Arrows ===== -->
+  <!-- Definition → Registration -->
+  <line x1="370" y1="235" x2="400" y2="235" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Registration → Permission -->
+  <line x1="590" y1="390" x2="300" y2="410" stroke="#8b949e" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Permission → Execution -->
+  <path d="M 570 680 Q 600 680 620 510" stroke="#238636" stroke-width="2" fill="none" marker-end="url(#arrowGreen)"/>
+  <text x="600" y="670" fill="#3fb950" font-size="9" transform="rotate(-70, 600, 670)">allow</text>
+
+  <!-- Deny arrow -->
+  <path d="M 50 680 Q 30 720 30 740 Q 30 810 180 810" stroke="#da3633" stroke-width="1.5" fill="none" stroke-dasharray="4,3"/>
+  <text x="35" y="760" fill="#f85149" font-size="9" transform="rotate(90, 35, 760)">deny / ask</text>
+
+  <!-- Legend -->
+  <rect x="810" y="85" width="350" height="95" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="985" y="105" text-anchor="middle" fill="#8b949e" font-size="11" font-weight="bold">图例</text>
+  <rect x="825" y="115" width="12" height="12" rx="2" fill="#1f6feb"/>
+  <text x="845" y="125" fill="#8b949e" font-size="9">核心工具接口</text>
+  <rect x="925" y="115" width="12" height="12" rx="2" fill="#da3633"/>
+  <text x="945" y="125" fill="#8b949e" font-size="9">安全/权限</text>
+  <rect x="1025" y="115" width="12" height="12" rx="2" fill="#238636"/>
+  <text x="1045" y="125" fill="#8b949e" font-size="9">允许/执行</text>
+  <rect x="825" y="140" width="12" height="12" rx="2" fill="#8b5cf6"/>
+  <text x="845" y="150" fill="#8b949e" font-size="9">MCP/分类器</text>
+  <rect x="925" y="140" width="12" height="12" rx="2" fill="#f0883e"/>
+  <text x="945" y="150" fill="#8b949e" font-size="9">中间处理</text>
+  <rect x="1025" y="140" width="12" height="12" rx="2" fill="none" stroke="#8b949e" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="1045" y="150" fill="#8b949e" font-size="9">可选/异步</text>
+  <text x="985" y="172" text-anchor="middle" fill="#484f58" font-size="8">数据流: LLM → Tool → Permission → Execute</text>
+</svg>

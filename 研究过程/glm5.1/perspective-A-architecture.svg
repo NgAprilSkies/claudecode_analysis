@@ -1,0 +1,210 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333" />
+    </marker>
+    <style>
+      .task-box { fill: #e8f5e9; stroke: #2e7d32; stroke-width: 2; }
+      .state-box { fill: #fff3e0; stroke: #ef6c00; stroke-width: 2; }
+      .agent-box { fill: #e3f2fd; stroke: #1565c0; stroke-width: 2; }
+      .coordinator-box { fill: #f3e5f5; stroke: #7b1fa2; stroke-width: 2; }
+      .teammate-box { fill: #e1f5fe; stroke: #0277bd; stroke-width: 2; }
+      .text-title { font-size: 14px; font-weight: bold; font-family: monospace; }
+      .text-desc { font-size: 11px; font-family: monospace; }
+      .flow-line { stroke: #333; stroke-width: 1.5; fill: none; marker-end: url(#arrow); }
+      .data-flow { stroke: #1976d2; stroke-width: 2; fill: none; stroke-dasharray: 5,5; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text x="600" y="30" text-anchor="middle" font-size="24" font-weight="bold" font-family="sans-serif">
+    Claude Code Core Build Architecture
+  </text>
+
+  <!-- 1. Core Task Hierarchy -->
+  <g transform="translate(50, 80)">
+    <rect x="0" y="0" width="200" height="280" class="task-box" rx="5" />
+    <text x="100" y="25" text-anchor="middle" class="text-title">Task Interface</text>
+
+    <!-- Task Type children -->
+    <rect x="20" y="50" width="160" height="30" class="agent-box" rx="3" />
+    <text x="100" y="70" text-anchor="middle" class="text-desc">LocalShellTask</text>
+
+    <rect x="20" y="90" width="160" height="30" class="agent-box" rx="3" />
+    <text x="100" y="110" text-anchor="middle" class="text-desc">LocalAgentTask</text>
+
+    <rect x="20" y="130" width="160" height="30" class="agent-box" rx="3" />
+    <text x="100" y="150" text-anchor="middle" class="text-desc">RemoteAgentTask</text>
+
+    <rect x="20" y="170" width="160" height="30" class="agent-box" rx="3" />
+    <text x="100" y="190" text-anchor="middle" class="text-desc">InProcessTeammateTask</text>
+
+    <rect x="20" y="210" width="160" height="30" class="agent-box" rx="3" />
+    <text x="100" y="230" text-anchor="middle" class="text-desc">LocalWorkflowTask</text>
+
+    <rect x="20" y="250" width="160" height="30" class="agent-box" rx="3" />
+    <text x="100" y="270" text-anchor="middle" class="text-desc">DreamTask</text>
+  </g>
+
+  <!-- 2. State Machine -->
+  <g transform="translate(350, 80)">
+    <rect x="0" y="0" width="300" height="200" class="state-box" rx="5" />
+    <text x="150" y="25" text-anchor="middle" class="text-title">Task Lifecycle</text>
+
+    <!-- States -->
+    <circle cx="60" cy="80" r="25" fill="#fff9c4" stroke="#f57f17" stroke-width="2" />
+    <text x="60" y="85" text-anchor="middle" class="text-desc">pending</text>
+
+    <circle cx="150" cy="80" r="25" fill="#c8e6c9" stroke="#388e3c" stroke-width="2" />
+    <text x="150" y="85" text-anchor="middle" class="text-desc">running</text>
+
+    <circle cx="240" cy="80" r="25" fill="#ffccbc" stroke="#d32f2f" stroke-width="2" />
+    <text x="240" y="85" text-anchor="middle" class="text-desc" font-size="9">term</text>
+
+    <text x="70" y="150" class="text-desc">completed</text>
+    <text x="70" y="170" class="text-desc">failed</text>
+    <text x="70" y="190" class="text-desc">killed</text>
+
+    <!-- Transitions -->
+    <path d="M85,80 L125,80" class="flow-line" />
+    <path d="M175,80 L215,80" class="flow-line" />
+    <path d="M240,105 L240,125 L240,105 L240,125" class="flow-line" />
+  </g>
+
+  <!-- 3. AppState Management -->
+  <g transform="translate(700, 80)">
+    <rect x="0" y="0" width="250" height="280" class="state-box" rx="5" />
+    <text x="125" y="25" text-anchor="middle" class="text-title">State Management</text>
+
+    <rect x="20" y="50" width="210" height="50" fill="#fce4ec" stroke="#c2185b" stroke-width="1" />
+    <text x="125" y="70" text-anchor="middle" class="text-desc">Global STATE (bootstrap)</text>
+    <text x="125" y="90" text-anchor="middle" class="text-desc" font-size="9">sessionId, cost, cwd, ...</text>
+
+    <rect x="20" y="120" width="210" height="50" fill="#e8eaf6" stroke="#512da8" stroke-width="1" />
+    <text x="125" y="140" text-anchor="middle" class="text-desc">AppStateStore</text>
+    <text x="125" y="160" text-anchor="middle" class="text-desc" font-size="9">createStore + listeners</text>
+
+    <rect x="20" y="190" width="210" height="50" fill="#fff3e0" stroke="#ff9800" stroke-width="1" />
+    <text x="125" y="210" text-anchor="middle" class="text-desc">TaskState Records</text>
+    <text x="125" y="230" text-anchor="middle" class="text-desc" font-size="9">tasks[taskId]: TaskState</text>
+
+    <path d="M125,100 L125,120" class="flow-line" />
+    <path d="M125,170 L125,190" class="flow-line" />
+  </g>
+
+  <!-- 4. Coordinator Mode -->
+  <g transform="translate(50, 400)">
+    <rect x="0" y="0" width="400" height="200" class="coordinator-box" rx="5" />
+    <text x="200" y="25" text-anchor="middle" class="text-title">Coordinator Mode</text>
+
+    <rect x="30" y="50" width="150" height="40" fill="#e1bee7" stroke="#8e24aa" stroke-width="1" />
+    <text x="105" y="75" text-anchor="middle" class="text-desc">COORDINATOR</text>
+
+    <rect x="220" y="50" width="150" height="40" fill="#b3e5fc" stroke="#1976d2" stroke-width="1" />
+    <text x="295" y="75" text-anchor="middle" class="text-desc">Worker Pool</text>
+
+    <rect x="30" y="120" width="340" height="60" fill="#f1f8e9" stroke="#4caf50" stroke-width="1" />
+    <text x="200" y="140" text-anchor="middle" class="text-desc">System Prompt Injection</text>
+    <text x="200" y="155" text-anchor="middle" class="text-desc" font-size="9">orchestrate, synthesize, parallel</text>
+    <text x="200" y="170" text-anchor="middle" class="text-desc" font-size="9">tool restrictions + scratchpad</text>
+
+    <path d="M105,90 L105,120" class="flow-line" />
+    <path d="M295,90 L200,120" class="flow-line" />
+  </g>
+
+  <!-- 5. Swarm Orchestration -->
+  <g transform="translate(500, 400)">
+    <rect x="0" y="0" width="650" height="250" class="teammate-box" rx="5" />
+    <text x="325" y="25" text-anchor="middle" class="text-title">Swarm Orchestration</text>
+
+    <!-- Leader -->
+    <rect x="30" y="50" width="120" height="50" fill="#1565c0" stroke="#0d47a1" stroke-width="2" />
+    <text x="90" y="80" text-anchor="middle" class="text-desc" fill="white">Leader</text>
+
+    <!-- Teammates -->
+    <rect x="200" y="50" width="100" height="50" fill="#0277bd" stroke="#01579b" stroke-width="1" />
+    <text x="250" y="75" text-anchor="middle" class="text-desc" fill="white">Researcher</text>
+
+    <rect x="320" y="50" width="100" height="50" fill="#0277bd" stroke="#01579b" stroke-width="1" />
+    <text x="370" y="75" text-anchor="middle" class="text-desc" fill="white">Implementer</text>
+
+    <rect x="440" y="50" width="100" height="50" fill="#0277bd" stroke="#01579b" stroke-width="1" />
+    <text x="490" y="75" text="middle" class="text-desc" fill="white">Verifier</text>
+
+    <rect x="200" y="130" width="340" height="80" fill="#e1f5fe" stroke="#0288d1" stroke-width="1" />
+    <text x="370" y="155" text-anchor="middle" class="text-desc">Mailbox Communication</text>
+    <text x="370" y="175" text-align="middle" class="text-desc" font-size="9">teammateMailbox.ts</text>
+    <text x="370" y="190" text-align="middle" class="text-desc" font-size="9">writeToMailbox / readMailbox</text>
+
+    <!-- Task List -->
+    <rect x="30" y="130" width="150" height="80" fill="#fff9c4" stroke="#fbc02d" stroke-width="1" />
+    <text x="105" y="155" text-anchor="middle" class="text-desc">Task List</text>
+    <text x="105" y="175" text-anchor="middle" class="text-desc" font-size="9">tryClaimNextTask</text>
+    <text x="105" y="190" text-anchor="middle" class="text-desc" font-size="9">findAvailableTask</text>
+
+    <!-- Data flows -->
+    <path d="M150,75 L200,75" class="data-flow" />
+    <path d="M150,75 L320,75" class="data-flow" />
+    <path d="M150,75 L440,75" class="data-flow" />
+    <path d="M250,100 L250,130" class="flow-line" />
+    <path d="M370,100 L370,130" class="flow-line" />
+    <path d="M490,100 L490,130" class="flow-line" />
+  </g>
+
+  <!-- 6. InProcessTeammate Lifecycle -->
+  <g transform="translate(50, 680)">
+    <rect x="0" y="0" width="1100" height="200" class="agent-box" rx="5" />
+    <text x="550" y="25" text-anchor="middle" class="text-title">InProcessTeammate Lifecycle (inProcessRunner.ts)</text>
+
+    <!-- Lifecycle phases -->
+    <rect x="30" y="50" width="150" height="120" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1" />
+    <text x="105" y="70" text-anchor="middle" class="text-desc">1. Initialize</text>
+    <text x="105" y="90" text-anchor="middle" class="text-desc" font-size="9">agentContext</text>
+    <text x="105" y="105" text-anchor="middle" class="text-desc" font-size="9">systemPrompt</text>
+    <text x="105" y="120" text-anchor="middle" class="text-desc" font-size="9">identity</text>
+    <text x="105" y="135" text="align="middle" class="text-desc" font-size="9">AsyncLocalStorage</text>
+    <text x="105" y="150" text-align="middle" class="text-desc" font-size="9">abortController</text>
+
+    <rect x="220" y="50" width="150" height="120" fill="#fff3e0" stroke="#ef6c00" stroke-width="1" />
+    <text x="295" y="70" text-anchor="middle" class="text-desc">2. Main Loop</text>
+    <text x="295" y="90" text-anchor="middle" class="text-desc" font-size="9">compact?</text>
+    <text x="295" y="105" text-anchor="middle" class="text-desc" font-size="9">runAgent()</text>
+    <text x="295" y="120" text="middle" class="text-desc" font-size="9">progressTrack</text>
+    <text x="295" y="135" text-align="middle" class="text-desc" font-size="9">updateAppState</text>
+    <text x="295" y="150" text-align="middle" class="text-desc" font-size="9">appendMessages</text>
+
+    <rect x="410" y="50" width="150" height="120" fill="#e3f2fd" stroke="#1976d2" stroke-width="1" />
+    <text x="485" y="70" text-anchor="middle" class="text-desc">3. Idle State</text>
+    <text x="485" y="90" text-anchor="middle" class="text-desc" font-size="9">isIdle=true</text>
+    <text x="485" y="105" text-anchor="middle" class="text-desc" font-size="9">sendIdleNotify</text>
+    <text x="485" y="120" text-anchor="middle" class="text-desc" font-size="9">clearCallbacks</text>
+    <text x="485" y="135" text-anchor="middle" class="text-desc" font-size="9">markRead</text>
+
+    <rect x="600" y="50" width="150" height="120" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="1" />
+    <text x="675" y="70" text-anchor="middle" class="text-desc">4. Wait/Poll</text>
+    <text x="675" y="90" text-anchor="middle" class="text-desc" font-size="9">waitForPrompt</text>
+    <text x="675" y="105" text-anchor="middle" class="text-desc" font-size="9">readMailbox</text>
+    <text x="675" y="120" text="middle" class="text-desc" font-size="9">claimTask</text>
+    <text x="675" y="135" text-anchor="middle" class="text-desc" font-size="9">checkShutdown</text>
+
+    <rect x="810" y="50" width="150" height="120" fill="#ffebee" stroke="#c62828" stroke-width="1" />
+    <text x="885" y="70" text-anchor="middle" class="text-desc">5. Cleanup</text>
+    <text x="885" y="90" text-anchor="middle" class="text-desc" font-size="9">status=completed</text>
+    <text x="885" y="105" text-anchor="middle" class="text-desc" font-size="9">notified=true</text>
+    <text x="885" y="120" text="middle" class="text-desc" font-size="9">evictTaskOutput</text>
+    <text x="885" y="135" text-anchor="middle" class="text-desc" font-size="9">unregisterAgent</text>
+
+    <!-- Flow arrows -->
+    <path d="M180,110 L220,110" class="flow-line" />
+    <path d="M370,110 L410,110" class="flow-line" />
+    <path d="M560,110 L600,110" class="flow-line" />
+    <path d="M750,110 L810,110" class="flow-line" />
+    <path d="M485,170 L485,190 L295,190 L295,170" class="flow-line" stroke-dasharray="3,3" />
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(50, 870)">
+    <rect x="0" y="0" width="600" height="30" fill="#f5f5f5" stroke="#333" stroke-width="1" />
+    <text x="20" y="20" class="text-desc">Legend: ── State flow ── Data flow ── Feedback loop</text>
+  </g>
+</svg>

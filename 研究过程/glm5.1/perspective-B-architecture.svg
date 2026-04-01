@@ -1,0 +1,225 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap');
+      text { font-family: 'JetBrains Mono', monospace; }
+      .title { font-size: 28px; font-weight: 500; fill: #2563eb; }
+      .subtitle { font-size: 18px; font-weight: 400; fill: #64748b; }
+      .box { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 2; }
+      .box-dark { fill: #1e293b; stroke: #334155; }
+      .box-blue { fill: #dbeafe; stroke: #0ea5e9; }
+      .box-green { fill: #dcfce7; stroke: #22c55e; }
+      .box-orange { fill: #ffedd5; stroke: #f97316; }
+      .box-purple { fill: #f3e8ff; stroke: #a855f7; }
+      .box-red { fill: #fee2e2; stroke: #ef4444; }
+      .arrow { stroke: #64748b; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .arrow-blue { stroke: #0ea5e9; marker-end: url(#arrowhead-blue); }
+      .arrow-green { stroke: #22c55e; marker-end: url(#arrowhead-green); }
+      .arrow-red { stroke: #ef4444; marker-end: url(#arrowhead-red); }
+      .text { font-size: 14px; fill: #334155; }
+      .text-small { font-size: 12px; fill: #64748b; }
+      .text-white { fill: #f8fafc; }
+      .label { font-size: 11px; fill: #64748b; }
+      .code { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0,10 5,0 0 10" fill="#64748b" />
+    </marker>
+    <marker id="arrowhead-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0,10 5,0 0 10" fill="#0ea5e9" />
+    </marker>
+    <marker id="arrowhead-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0,10 5,0 0 10" fill="#22c55e" />
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0,10 5,0 0 10" fill="#ef4444" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="800" y="40" text-anchor="middle" class="title">Claude Code 任务规划与推理架构</text>
+
+  <!-- Main Container: User Input to LLM Flow -->
+  <rect x="50" y="80" width="500" height="1050" class="box" rx="8" />
+  <text x="300" y="105" text-anchor="middle" class="subtitle">用户输入 → LLM 调用流程</text>
+
+  <!-- User Input -->
+  <rect x="100" y="140" width="400" height="60" class="box-blue" rx="6" />
+  <text x="300" y="175" text-anchor="middle" class="text">用户输入</text>
+
+  <!-- Keyword Detection -->
+  <rect x="100" y="230" width="400" height="60" class="box-purple" rx="6" />
+  <text x="300" y="255" text-anchor="middle" class="text">关键词检测 (ultraplan/brief/advisor)</text>
+  <text x="300" y="275" text-anchor="middle" class="text-small">• ultraplan → /ultraplan 路由</text>
+
+  <!-- Process User Input -->
+  <rect x="100" y="320" width="400" height="60" class="box" rx="6" />
+  <text x="300" y="355" text-anchor="middle" class="text">processUserInput()</text>
+  <text x="300" y="375" text-anchor="middle" class="text-small">• 斜杠命令处理</text>
+
+  <!-- Query Engine -->
+  <rect x="80" y="410" width="440" height="80" class="box-dark" rx="6" />
+  <text x="300" y="440" text-anchor="middle" class="text-white">QueryEngine.submitMessage()</text>
+  <text x="300" y="460" text-anchor="middle" class="label">→ 构建 ProcessUserInputContext</text>
+  <text x="300" y="475" text-anchor="middle" class="label">→ 获取 SystemPromptParts</text>
+
+  <!-- Query Loop -->
+  <rect x="80" y="510" width="440" height="200" class="box-dark" rx="6" />
+  <text x="300" y="540" text-anchor="middle" class="text-white">Query Loop (query.ts)</text>
+
+  <!-- Context Building -->
+  <rect x="100" y="560" width="120" height="40" class="box" rx="4" />
+  <text x="160" y="585" text-anchor="middle" class="text">上下文构建</text>
+
+  <!-- API Call -->
+  <rect x="240" y="560" width="120" height="40" class="box-blue" rx="4" />
+  <text x="300" y="585" text-anchor="middle" class="text">API 调用</text>
+
+  <!-- Tool Exec -->
+  <rect x="380" y="560" width="120" height="40" class="box-green" rx="4" />
+  <text x="440" y="585" text-anchor="middle" class="text">工具执行</text>
+
+  <!-- Continue Check -->
+  <rect x="240" y="615" width="120" height="30" class="box-orange" rx="4" />
+  <text x="300" y="635" text-anchor="middle" class="text">继续检查</text>
+
+  <!-- Recovery Paths -->
+  <rect x="100" y="660" width="400" height="40" class="box-red" rx="4" />
+  <text x="300" y="685" text-anchor="middle" class="text">恢复路径 (max_tokens/超长)</text>
+
+  <!-- Query Loop State -->
+  <rect x="100" y="720" width="400" height="80" class="box" rx="6" />
+  <text x="300" y="745" text-anchor="middle" class="text">Loop State</text>
+  <text x="300" y="765" text-anchor="middle" class="text-small">messages, toolUseContext, transition</text>
+  <text x="300" y="780" text-anchor="middle" class="text-small">autoCompactTracking, recoveryCount</text>
+
+  <!-- State Transition Diagram -->
+  <rect x="50" y="820" width="500" height="280" class="box" rx="8" />
+  <text x="300" y="845" text-anchor="middle" class="subtitle">状态转换决策树</text>
+
+  <!-- Decision Nodes -->
+  <circle cx="150" cy="890" r="25" class="box-purple" />
+  <text x="150" y="895" text-anchor="middle" class="text-white">?</text>
+
+  <circle cx="300" cy="940" r="25" class="box-blue" />
+  <text x="300" y="945" text-anchor="middle" class="text-white">API</text>
+
+  <circle cx="450" cy="990" r="25" class="box-green" />
+  <text x="450" y="995" text-anchor="middle" class="text-white">OK</text>
+
+  <!-- Transition Arrows -->
+  <path d="M150 915 L150 940 L150 940" class="arrow" />
+  <text x="160" y="920" class="label">queryModel()</text>
+
+  <path d="M150 915 L300 915 L300 915" class="arrow" />
+  <text x="210" y="910" class="label">needsFollowUp</text>
+
+  <path d="M300 965 L450 965 L450 965" class="arrow-green" />
+  <text x="360" y="960" class="label">completed</text>
+
+  <path d="M150 915 L150 1050 L300 1050 L300 1050" class="arrow-red" />
+  <text x="180" y="1020" class="label">error → recovery</text>
+
+  <!-- Plan Mode Section -->
+  <rect x="600" y="80" width="950" height="350" class="box" rx="8" />
+  <text x="1075" y="105" text-anchor="middle" class="subtitle">Plan Mode &amp; Ultra Planning</text>
+
+  <!-- Plan Mode Flow -->
+  <rect x="630" y="130" width="400" height="270" class="box" rx="6" />
+  <text x="830" y="155" text-anchor="middle" class="text">Plan Mode 激活流程</text>
+
+  <rect x="660" y="180" width="340" height="35" class="box-blue" rx="4" />
+  <text x="830" y="202" text-anchor="middle" class="text">/plan 命令</text>
+
+  <rect x="660" y="225" width="340" height="35" class="box" rx="4" />
+  <text x="830" y="247" text-anchor="middle" class="text">检查当前模式</text>
+
+  <rect x="660" y="270" width="340" height="35" class="box-green" rx="4" />
+  <text x="830" y="292" text-anchor="text" class="text">handlePlanModeTransition()</text>
+
+  <rect x="660" y="315" width="340" height="35" class="box-purple" rx="4" />
+  <text x="830" y="337" text-anchor="middle" class="text">prepareContextForPlanMode()</text>
+
+  <rect x="660" y="360" width="340" height="35" class="box" rx="4" />
+  <text x="830" y="382" text-anchor="middle" class="text">持久化到 session</text>
+
+  <!-- Ultra Planning Flow -->
+  <rect x="1070" y="130" width="440" height="270" class="box" rx="6" />
+  <text x="1290" y="155" text-anchor="middle" class="text">Ultra Planning 流程</text>
+
+  <rect x="1100" y="180" width="380" height="35" class="box-blue" rx="4" />
+  <text x="1290" y="202" text-anchor="middle" class="text">1. 关键词检测</text>
+
+  <rect x="1100" y="225" width="380" height="35" class="box" rx="4" />
+  <text x="1290" y="247" text-anchor="middle" class="text">2. teleportToRemote() (CCR)</text>
+
+  <rect x="1100" y="270" width="380" height="35" class="box-green" rx="4" />
+  <text x="1290" y="292" text-anchor="middle" class="text">3. pollForApprovedExitPlanMode()</text>
+
+  <rect x="1100" y="315" width="380" height="35" class="box-purple" rx="4" />
+  <text x="1290" y="337" text-anchor="middle" class="text">4. ExitPlanModeScanner (状态机)</text>
+
+  <rect x="1100" y="360" width="380" height="35" class="box" rx="4" />
+  <text x="1290" y="382" text-anchor="middle" class="text">5. 用户决策 (approved/teleport)</text>
+
+  <!-- Decision Tree: Ultra Planning States -->
+  <rect x="600" y="450" width="950" height="400" class="box" rx="8" />
+  <text x="1075" y="475" text-anchor="middle" class="subtitle">Ultra Planning 状态转换</text>
+
+  <!-- States -->
+  <rect x="650" y="510" width="120" height="40" class="box-blue" rx="4" />
+  <text x="710" y="535" text-anchor="middle" class="text">running</text>
+
+  <rect x="800" y="510" width="120" height="40" class="box-orange" rx="4" />
+  <text x="860" y="535" text-anchor="middle" class="text">needs_input</text>
+
+  <rect x="950" y="510" width="120" height="40" class="box-green" rx="4" />
+  <text x="1010" y="535" text-anchor="middle" class="text">plan_ready</text>
+
+  <rect x="1100" y="510" width="120" height="40" class="box-purple" rx="4" />
+  <text x="1160" y="535" text-anchor="middle" class="text">approved</text>
+
+  <rect x="1250" y="510" width="120" height="40" class="box-red" rx="4" />
+  <text x="1310" y="535" text-anchor="middle" class="text">teleport</text>
+
+  <!-- Transitions -->
+  <path d="M770 530 L800 530" class="arrow" />
+  <text x="785" y="520" class="label">空闲</text>
+
+  <path d="M920 530 L950 530" class="arrow" />
+  <text x="935" y="520" class="label">计划完成</text>
+
+  <path d="M1070 530 L1100 530" class="arrow-green" />
+  <text x="1055" y="520" class="label">用户批准</text>
+
+  <path d="M1220 530 L1250 530" class="arrow-purple" />
+  <text x="1205" y="520" class="label">本地执行</text>
+
+  <path d="M1310 550 L1310 620 L1160 620 L1010 620" class="arrow-red" stroke-dasharray="4" />
+  <text x="1160" y="600" class="label">rejected → 重试</text>
+
+  <!-- Scanner Logic -->
+  <rect x="650" y="620" width="720" height="200" class="box-dark" rx="6" />
+  <text x="1010" y="645" text-anchor="middle" class="text-white">ExitPlanModeScanner 内部逻辑</text>
+
+  <text x="680" y="675" class="label" fill="#94a3b8">exitPlanCalls: string[]</text>
+  <text x="680" y="695" class="label" fill="#94a3b8">results: Map&lt;string, ToolResultBlock&gt;</text>
+  <text x="680" y="715" class="label" fill="#94a3b8">rejectedIds: Set&lt;string&gt;</text>
+  <text x="680" y="735" class="label" fill="#94a3b8">terminated: { subtype: string }</text>
+
+  <text x="1010" y="770" text-anchor="middle" class="text-white">扫描策略</text>
+  <text x="680" y="795" class="label" fill="#94a3b8">→ 从后往前查找最新的非拒绝 ExitPlanMode</text>
+  <text x="680" y="815" class="label" fill="#94a3b8">→ 优先级: approved > terminated > rejected > pending</text>
+
+  <!-- Recovery Mechanisms -->
+  <rect x="50" y="1140" width="700" height="50" class="box-red" rx="6" />
+  <text x="400" y="1170" text-anchor="middle" class="text">恢复机制: Max Tokens → Escalate(64k) → Recovery Message → Continue</text>
+
+  <!-- Brief & Advisor -->
+  <rect x="800" y="1140" width="750" height="50" class="box-green" rx="6" />
+  <text x="1175" y="1170" text="text-anchor="middle" class="text">Brief Mode (简洁输出) + Advisor (顾问模型)</text>
+
+  <!-- Legend -->
+  <rect x="50" y="50" width="2000" height="25" class="box" />
+  <text x="60" y="68" class="label">图例: 蓝色=输入, 绿色=处理, 橙色=状态, 紫色=特殊功能, 红色=错误/恢复</text>
+</svg>
