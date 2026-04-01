@@ -33,10 +33,25 @@ Claude Code 是 Anthropic 官方推出的命令行工具，允许开发者直接
 │   ├── 04-完整复现路线图.md      # 复现路线图
 │   └── 05-核心功能深度分析总结.md # 功能总结
 │
+├── 参考资料/                   # 参考资料与外部文献
+│
 └── 研究过程/                   # 研究过程笔记
     ├── kimi 多视角解析/
     ├── qwen3.5-多视角解析/
-    └── 多角度剖析/
+    ├── 多角度剖析/
+    └── glm5.1/                 # GLM-5.1 四视角深度分析
+        ├── perspective-A-core-build.md
+        ├── perspective-A-architecture.svg
+        ├── perspective-A-mre.py
+        ├── perspective-B-planning.md
+        ├── perspective-B-architecture.svg
+        ├── perspective-B-mre.py
+        ├── perspective-C-tool-integration.md
+        ├── perspective-C-architecture.svg
+        ├── perspective-C-mre.py
+        ├── perspective-D-memory.md
+        ├── perspective-D-architecture.svg
+        └── perspective-D-mre.py
 ```
 
 ---
@@ -110,6 +125,44 @@ Claude Code 实现了约 40 个工具，每个工具都是独立的模块：
 ### 5. 权限系统 (`src/hooks/toolPermission/`)
 
 每个工具调用都经过权限检查，支持多种模式：`default`、`plan`、`bypassPermissions`、`auto` 等。
+
+---
+
+## GLM-5.1 深度分析（四视角）
+
+基于 Harness Engineering 方法论，使用 GLM-5.1 模型从四个工程化视角对 Claude Code 进行深度源码分析。每个视角产出分析文档、SVG 架构图和 Python 最小化可运行实现（MRE）。
+
+### 视角 A: 核心构建（The Core Build）
+
+分析 Agent 的基本结构、核心类设计、状态管理及完整生命周期（初始化 → 运行 → 销毁）。
+
+- `perspective-A-core-build.md` — Task 基类继承体系、LocalAgentTask/InProcessTeammateTask 生命周期、Swarm 编排、Coordinator 协调机制
+- `perspective-A-architecture.svg` — 核心类层次结构与状态机架构图
+- `perspective-A-mre.py` — Agent 基类、生命周期管理、状态机的最小化复现
+
+### 视角 B: 任务规划（Planning & Reasoning）
+
+分析 Agent 接收输入后如何利用 LLM 进行任务拆解，决策路径的选择和动态调整。
+
+- `perspective-B-planning.md` — QueryEngine 查询处理、LLM 调用链、Plan mode 实现、上下文构建流程
+- `perspective-B-architecture.svg` — 用户输入到 LLM 调用的完整数据流与决策树
+- `perspective-B-mre.py` — 简化查询引擎、LLM 调用模拟、Plan mode 状态机
+
+### 视角 C: 工具集成（Tool Integration）
+
+分析 Agent 如何发现、绑定、安全地执行外部工具和 API，重点关注 5 层纵深防御权限系统。
+
+- `perspective-C-tool-integration.md` — Tool 接口设计、buildTool 工厂、BashTool 23 个安全验证器、MCP 协议集成、沙箱执行
+- `perspective-C-architecture.svg` — 工具继承层次与 5 层权限控制流程图
+- `perspective-C-mre.py` — Tool 注册、权限规则引擎、安全验证器链的最小化复现
+
+### 视角 D: 记忆系统（Memory Systems）
+
+分析 Agent 如何处理长期/短期记忆，上下文的构建和修剪策略。
+
+- `perspective-D-memory.md` — Session Memory、Context 压缩、记忆提取与持久化、团队记忆同步
+- `perspective-D-architecture.svg` — 记忆层次架构与上下文修剪流程
+- `perspective-D-mre.py` — 分层记忆存储、Context 修剪、记忆持久化的最小化复现
 
 ---
 
