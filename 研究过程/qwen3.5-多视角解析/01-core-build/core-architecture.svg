@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666"/>
+    </marker>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="processGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f5f7fa;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#c3cfe2;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="stateGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a8edea;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#fed6e3;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="1400" height="60" fill="url(#headerGrad)"/>
+  <text x="700" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="white">
+    视角 A：核心构建 (The Core Build) - Agent 架构与生命周期
+  </text>
+
+  <!-- Left Side: Agent Structure -->
+  <g transform="translate(20, 80)">
+    <rect x="0" y="0" width="420" height="380" rx="10" fill="#fff" stroke="#667eea" stroke-width="2"/>
+    <rect x="0" y="0" width="420" height="40" rx="10" fill="#667eea"/>
+    <rect x="0" y="30" width="420" height="10" fill="#667eea"/>
+    <text x="210" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="white">Agent 核心结构</text>
+
+    <!-- Main Component -->
+    <rect x="20" y="60" width="380" height="70" rx="5" fill="url(#processGrad)" stroke="#667eea" stroke-width="1.5"/>
+    <text x="210" y="85" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">main.tsx - 应用入口</text>
+    <text x="210" y="105" text-anchor="middle" font-size="11" fill="#555">getSystemContext() | getUserContext()</text>
+    <text x="210" y="120" text-anchor="middle" font-size="11" fill="#555">memoize 缓存策略 | Git 状态注入</text>
+
+    <!-- Arrow down -->
+    <line x1="210" y1="130" x2="210" y2="155" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <!-- Context Layer -->
+    <rect x="20" y="155" width="380" height="80" rx="5" fill="url(#stateGrad)" stroke="#764ba2" stroke-width="1.5"/>
+    <text x="210" y="180" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">ToolUseContext - 状态容器</text>
+    <text x="210" y="200" text-anchor="middle" font-size="11" fill="#555">options: tools | commands | mcpClients</text>
+    <text x="210" y="217" text-anchor="middle" font-size="11" fill="#555">getAppState() | setAppState() | abortController</text>
+
+    <!-- Arrow down -->
+    <line x1="210" y1="235" x2="210" y2="260" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <!-- State Management -->
+    <rect x="20" y="260" width="380" height="70" rx="5" fill="#fff3cd" stroke="#ffc107" stroke-width="1.5"/>
+    <text x="210" y="285" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">AppState - 全局状态</text>
+    <text x="210" y="305" text-anchor="middle" font-size="11" fill="#555">messages | tools | metadata</text>
+    <text x="210" y="320" text-anchor="middle" font-size="11" fill="#555">不可变更新模式：setAppState(f =&gt; prev)</text>
+
+    <!-- Key Features -->
+    <rect x="20" y="340" width="180" height="35" rx="5" fill="#d4edda" stroke="#28a745" stroke-width="1"/>
+    <text x="110" y="362" text-anchor="middle" font-size="11" font-weight="bold" fill="#155724">✓ 上下文传递</text>
+
+    <rect x="220" y="340" width="180" height="35" rx="5" fill="#d4edda" stroke="#28a745" stroke-width="1"/>
+    <text x="310" y="362" text-anchor="middle" font-size="11" font-weight="bold" fill="#155724">✓ 状态缓存 (memoize)</text>
+  </g>
+
+  <!-- Center: Lifecycle -->
+  <g transform="translate(470, 80)">
+    <rect x="0" y="0" width="460" height="500" rx="10" fill="#fff" stroke="#28a745" stroke-width="2"/>
+    <rect x="0" y="0" width="460" height="40" rx="10" fill="#28a745"/>
+    <rect x="0" y="30" width="460" height="10" fill="#28a745"/>
+    <text x="230" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="white">Agent 生命周期流程</text>
+
+    <!-- Lifecycle Flow -->
+    <g transform="translate(30, 60)">
+      <!-- Init -->
+      <rect x="0" y="0" width="400" height="60" rx="5" fill="#e8f5e9" stroke="#28a745" stroke-width="2"/>
+      <text x="200" y="25" text-anchor="middle" font-size="13" font-weight="bold" fill="#155724">1. 初始化阶段</text>
+      <text x="200" y="45" text-anchor="middle" font-size="11" fill="#555">加载配置 | 构建上下文 | 注册工具 | 设置状态</text>
+
+      <line x1="200" y1="60" x2="200" y2="75" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+
+      <!-- Run -->
+      <rect x="0" y="75" width="400" height="100" rx="5" fill="#fff3cd" stroke="#ffc107" stroke-width="2"/>
+      <text x="200" y="100" text-anchor="middle" font-size="13" font-weight="bold" fill="#856404">2. 运行阶段 (queryLoop)</text>
+      <text x="200" y="125" text-anchor="middle" font-size="11" fill="#555">① 内存预取 | ② 技能发现 | ③ 工具预算</text>
+      <text x="200" y="145" text-anchor="middle" font-size="11" fill="#555">④ Snip 压缩 | ⑤ Micro 压缩 | ⑥ Auto 压缩</text>
+      <text x="200" y="165" text-anchor="middle" font-size="11" fill="#555">⑦ LLM 调用 | ⑧ 工具执行 | ⑨ 状态更新</text>
+
+      <line x1="200" y1="175" x2="200" y2="190" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+
+      <!-- Complete/Fail -->
+      <rect x="0" y="190" width="190" height="60" rx="5" fill="#d4edda" stroke="#28a745" stroke-width="2"/>
+      <text x="95" y="215" text-anchor="middle" font-size="12" font-weight="bold" fill="#155724">3a. 完成</text>
+      <text x="95" y="235" text-anchor="middle" font-size="10" fill="#555">成功返回 | 结果输出</text>
+
+      <rect x="210" y="190" width="190" height="60" rx="5" fill="#f8d7da" stroke="#dc3545" stroke-width="2"/>
+      <text x="305" y="215" text-anchor="middle" font-size="12" font-weight="bold" fill="#721c24">3b. 失败/终止</text>
+      <text x="305" y="235" text-anchor="middle" font-size="10" fill="#555">错误处理 | 用户中断 |超时</text>
+
+      <line x1="95" y1="250" x2="95" y2="270" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+      <line x1="305" y1="250" x2="305" y2="270" stroke="#666" stroke-width="2" marker-end="url(#arrow)"/>
+
+      <!-- Cleanup -->
+      <rect x="100" y="270" width="200" height="60" rx="5" fill="#e2e3e5" stroke="#6c757d" stroke-width="2"/>
+      <text x="200" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="#383d41">4. 清理阶段</text>
+      <text x="200" y="315" text-anchor="middle" font-size="10" fill="#555">释放资源 | 持久化状态 | 通知监听器</text>
+    </g>
+
+    <!-- Continue Sites -->
+    <g transform="translate(30, 380)">
+      <text x="0" y="0" font-size="12" font-weight="bold" fill="#333">9 个 Continue 站点（决策路径）:</text>
+      <rect x="10" y="10" width="205" height="25" rx="3" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="115" y="27" text-anchor="middle" font-size="9" fill="#555">1.工具成功→继续</text>
+      <rect x="235" y="10" width="205" height="25" rx="3" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="340" y="27" text-anchor="middle" font-size="9" fill="#555">2.工具失败→错误处理</text>
+      <rect x="10" y="40" width="205" height="25" rx="3" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="115" y="57" text-anchor="middle" font-size="9" fill="#555">3.token 超限→压缩</text>
+      <rect x="235" y="40" width="205" height="25" rx="3" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="340" y="57" text-anchor="middle" font-size="9" fill="#555">4.用户中断→清理终止</text>
+      <rect x="10" y="70" width="205" height="25" rx="3" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="115" y="87" text-anchor="middle" font-size="9" fill="#555">5.max_output→恢复</text>
+      <rect x="235" y="70" width="205" height="25" rx="3" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="340" y="87" text-anchor="middle" font-size="9" fill="#555">6.Hook 激活→暂停</text>
+      <rect x="10" y="100" width="205" height="25" rx="3" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="115" y="117" text-anchor="middle" font-size="9" fill="#555">7.缓存中断→重查</text>
+      <rect x="235" y="100" width="205" height="25" rx="3" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="340" y="117" text-anchor="middle" font-size="9" fill="#555">8.反应式压缩</text>
+      <rect x="10" y="130" width="205" height="25" rx="3" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="115" y="147" text-anchor="middle" font-size="9" fill="#555">9.正常完成→返回</text>
+    </g>
+  </g>
+
+  <!-- Right Side: Harness Engineering Evaluation -->
+  <g transform="translate(960, 80)">
+    <rect x="0" y="0" width="420" height="300" rx="10" fill="#fff" stroke="#dc3545" stroke-width="2"/>
+    <rect x="0" y="0" width="420" height="40" rx="10" fill="#dc3545"/>
+    <rect x="0" y="30" width="420" height="10" fill="#dc3545"/>
+    <text x="210" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="white">Harness Engineering 评价</text>
+
+    <!-- Extensibility -->
+    <rect x="20" y="60" width="380" height="50" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+    <text x="210" y="80" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">可扩展性 ⭐⭐⭐⭐⭐</text>
+    <text x="210" y="100" text-anchor="middle" font-size="10" fill="#555">上下文对象扩展 | 状态不可变更新 | 模块化设计</text>
+
+    <!-- Safety -->
+    <rect x="20" y="120" width="380" height="50" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+    <text x="210" y="140" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">安全边界 ⭐⭐⭐⭐</text>
+    <text x="210" y="160" text-anchor="middle" font-size="10" fill="#555">abortController 取消 | 资源清理注册 | 错误边界</text>
+
+    <!-- Observability -->
+    <rect x="20" y="180" width="380" height="50" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+    <text x="210" y="200" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">可观察性 ⭐⭐⭐⭐</text>
+    <text x="210" y="220" text-anchor="middle" font-size="10" fill="#555">getAppState 调试入口 | 日志追踪 | 状态快照</text>
+
+    <!-- Performance -->
+    <rect x="20" y="240" width="380" height="50" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+    <text x="210" y="260" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">性能损耗 ⭐⭐⭐</text>
+    <text x="210" y="280" text-anchor="middle" font-size="10" fill="#555">对象展开复制开销 | memoize 缓存优化 | 深层嵌套问题</text>
+  </g>
+
+  <!-- Bottom: Python MRE -->
+  <g transform="translate(960, 400)">
+    <rect x="0" y="0" width="420" height="280" rx="10" fill="#2d2d2d" stroke="#555" stroke-width="2"/>
+    <rect x="0" y="0" width="420" height="30" rx="10" fill="#404040"/>
+    <text x="210" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#f8f8f2">Python MRE - 核心构建</text>
+
+    <text x="20" y="55" font-size="10" fill="#7ec699">class AgentState:</text>
+    <text x="40" y="70" font-size="10" fill="#f8f8f2">"""Agent 状态存储"""</text>
+    <text x="40" y="85" font-size="10" fill="#f8f8f2">messages: list</text>
+    <text x="40" y="100" font-size="10" fill="#f8f8f2">tools: dict</text>
+    <text x="40" y="115" font-size="10" fill="#f8f8f2">def update(self, updater):</text>
+    <text x="60" y="130" font-size="10" fill="#f8f8f2">return updater(self)</text>
+
+    <text x="20" y="160" font-size="10" fill="#7ec699">class ToolUseContext:</text>
+    <text x="40" y="175" font-size="10" fill="#f8f8f2">state: AgentState</text>
+    <text x="40" y="190" font-size="10" fill="#f8f8f2">options: dict</text>
+    <text x="40" y="205" font-size="10" fill="#f8f8f2">def clone(self, **overrides):</text>
+    <text x="60" y="220" font-size="10" fill="#f8f8f2">return ToolUseContext(...)</text>
+
+    <text x="20" y="255" font-size="10" fill="#7ec699">class Agent:</text>
+    <text x="40" y="270" font-size="10" fill="#f8f8f2">async def run(self, messages): ...</text>
+  </g>
+
+  <!-- Bottom: Challenge Question -->
+  <g transform="translate(960, 700)">
+    <rect x="0" y="0" width="420" height="180" rx="10" fill="#fff3cd" stroke="#ffc107" stroke-width="2"/>
+    <rect x="0" y="0" width="420" height="35" rx="10" fill="#ffc107"/>
+    <text x="210" y="23" text-anchor="middle" font-size="14" font-weight="bold" fill="#856404">🤔 挑战性工程问题</text>
+
+    <text x="210" y="60" text-anchor="middle" font-size="11" fill="#856404" font-weight="bold">问题：深层嵌套时的状态管理优化</text>
+
+    <text x="210" y="85" text-anchor="middle" font-size="10" fill="#555">当前 ToolUseContext 通过展开复制创建新上下文，</text>
+    <text x="210" y="100" text-anchor="middle" font-size="10" fill="#555">当 Agent 嵌套层级很深时会导致：</text>
+    <text x="210" y="120" text-anchor="middle" font-size="10" fill="#856404">1. 性能问题  2. 状态一致性难保证  3. 调试困难</text>
+
+    <text x="210" y="145" text-anchor="middle" font-size="10" fill="#856404" font-weight="bold">思考：你会选择哪种方案？</text>
+    <text x="210" y="160" text-anchor="middle" font-size="9" fill="#555">A) Immer 不可变数据  B) 事件溯源  C) 响应式  D) 原型继承链</text>
+  </g>
+
+  <!-- Data Flow Lines -->
+  <line x1="440" y1="270" x2="470" y2="270" stroke="#667eea" stroke-width="2" stroke-dasharray="5,5"/>
+  <line x1="440" y1="320" x2="470" y2="400" stroke="#667eea" stroke-width="2" stroke-dasharray="5,5"/>
+</svg>

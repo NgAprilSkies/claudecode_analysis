@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4A90D9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#357ABD;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#5CB85C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#449D44;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#F0AD4E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EC971F;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#D9534F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C9302C;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <text x="600" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">
+    Claude Code Agent 架构总览
+  </text>
+
+  <!-- Layer 1: User Interface -->
+  <rect x="50" y="70" width="1100" height="80" rx="10" fill="url(#grad1)" stroke="#2E6DA4" stroke-width="2"/>
+  <text x="600" y="95" text-anchor="middle" font-size="16" font-weight="bold" fill="white">用户接口层 (User Interface)</text>
+  <text x="600" y="120" text-anchor="middle" font-size="12" fill="white">REPL CLI | SDK API | 远程桥接 | 插件系统</text>
+
+  <!-- Arrow -->
+  <line x1="600" y1="150" x2="600" y2="180" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Layer 2: Core Orchestration -->
+  <rect x="50" y="180" width="1100" height="120" rx="10" fill="url(#grad2)" stroke="#398439" stroke-width="2"/>
+  <text x="600" y="205" text-anchor="middle" font-size="16" font-weight="bold" fill="white">核心编排层 (Core Orchestration)</text>
+
+  <!-- Query Loop Box -->
+  <rect x="100" y="220" width="300" height="60" rx="5" fill="white" fill-opacity="0.3" stroke="white" stroke-width="1"/>
+  <text x="250" y="245" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Query Loop (query.ts)</text>
+  <text x="250" y="265" text-anchor="middle" font-size="10" fill="white">主循环 | Token 预算 | 9 个 Continue 站点</text>
+
+  <!-- Context Manager Box -->
+  <rect x="450" y="220" width="300" height="60" rx="5" fill="white" fill-opacity="0.3" stroke="white" stroke-width="1"/>
+  <text x="600" y="245" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Context Manager</text>
+  <text x="600" y="265" text-anchor="middle" font-size="10" fill="white">ToolUseContext | AppState | 状态传递</text>
+
+  <!-- Command System Box -->
+  <rect x="800" y="220" width="300" height="60" rx="5" fill="white" fill-opacity="0.3" stroke="white" stroke-width="1"/>
+  <text x="950" y="245" text-anchor="middle" font-size="12" font-weight="bold" fill="white">Command System</text>
+  <text x="950" y="265" text-anchor="middle" font-size="10" fill="white">命令注册 | 技能发现 | 插件加载</text>
+
+  <!-- Arrow -->
+  <line x1="600" y1="300" x2="600" y2="330" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Layer 3: Service Layer -->
+  <rect x="50" y="330" width="1100" height="120" rx="10" fill="url(#grad3)" stroke="#D58512" stroke-width="2"/>
+  <text x="600" y="355" text-anchor="middle" font-size="16" font-weight="bold" fill="white">服务层 (Services)</text>
+
+  <!-- Tool Orchestration -->
+  <rect x="80" y="370" width="200" height="60" rx="5" fill="white" fill-opacity="0.3" stroke="white" stroke-width="1"/>
+  <text x="180" y="395" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Tool Orchestration</text>
+  <text x="180" y="415" text-anchor="middle" font-size="9" fill="white">并发安全 | 串行执行</text>
+
+  <!-- Permission System -->
+  <rect x="300" y="370" width="200" height="60" rx="5" fill="white" fill-opacity="0.3" stroke="white" stroke-width="1"/>
+  <text x="400" y="395" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Permission System</text>
+  <text x="400" y="415" text-anchor="middle" font-size="9" fill="white">规则匹配 | 分类器 | Hook</text>
+
+  <!-- Memory System -->
+  <rect x="520" y="370" width="200" height="60" rx="5" fill="white" fill-opacity="0.3" stroke="white" stroke-width="1"/>
+  <text x="620" y="395" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Memory System</text>
+  <text x="620" y="415" text-anchor="middle" font-size="9" fill="white">历史压缩 | 上下文管理</text>
+
+  <!-- API Client -->
+  <rect x="740" y="370" width="200" height="60" rx="5" fill="white" fill-opacity="0.3" stroke="white" stroke-width="1"/>
+  <text x="840" y="395" text-anchor="middle" font-size="11" font-weight="bold" fill="white">API Client</text>
+  <text x="840" y="415" text-anchor="middle" font-size="9" fill="white">LLM 调用 | 流式响应 | 重试</text>
+
+  <!-- Compact Service -->
+  <rect x="960" y="370" width="170" height="60" rx="5" fill="white" fill-opacity="0.3" stroke="white" stroke-width="1"/>
+  <text x="1045" y="395" text-anchor="middle" font-size="11" font-weight="bold" fill="white">Compact Service</text>
+  <text x="1045" y="415" text-anchor="middle" font-size="9" fill="white">Snip | Micro | Auto</text>
+
+  <!-- Arrow -->
+  <line x1="600" y1="450" x2="600" y2="480" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Layer 4: Tool Layer -->
+  <rect x="50" y="480" width="1100" height="100" rx="10" fill="url(#grad4)" stroke="#AC2925" stroke-width="2"/>
+  <text x="600" y="505" text-anchor="middle" font-size="16" font-weight="bold" fill="white">工具层 (Tools - 50+)</text>
+
+  <!-- Built-in Tools -->
+  <rect x="80" y="520" width="220" height="50" rx="5" fill="white" fill-opacity="0.3" stroke="white" stroke-width="1"/>
+  <text x="190" y="540" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Bash | Read | Edit</text>
+  <text x="190" y="555" text-anchor="middle" font-size="9" fill="white">Glob | Grep | WebFetch</text>
+
+  <!-- Agent Tools -->
+  <rect x="320" y="520" width="180" height="50" rx="5" fill="white" fill-opacity="0.3" stroke="white" stroke-width="1"/>
+  <text x="410" y="540" text-anchor="middle" font-size="10" font-weight="bold" fill="white">AgentTool | SkillTool</text>
+  <text x="410" y="555" text-anchor="middle" font-size="9" fill="white">Task* | Team*</text>
+
+  <!-- MCP Tools -->
+  <rect x="520" y="520" width="180" height="50" rx="5" fill="white" fill-opacity="0.3" stroke="white" stroke-width="1"/>
+  <text x="610" y="540" text-anchor="middle" font-size="10" font-weight="bold" fill="white">MCP Tools</text>
+  <text x="610" y="555" text-anchor="middle" font-size="9" fill="white">ListResources | ReadResource</text>
+
+  <!-- Advanced Tools -->
+  <rect x="720" y="520" width="220" height="50" rx="5" fill="white" fill-opacity="0.3" stroke="white" stroke-width="1"/>
+  <text x="830" y="540" text-anchor="middle" font-size="10" font-weight="bold" fill="white">LSP | Chrome | Tungsten</text>
+  <text x="830" y="555" text-anchor="middle" font-size="9" fill="white">Workflow | Cron | Monitor</text>
+
+  <!-- Plugin Tools -->
+  <rect x="960" y="520" width="170" height="50" rx="5" fill="white" fill-opacity="0.3" stroke="white" stroke-width="1"/>
+  <text x="1045" y="540" text-anchor="middle" font-size="10" font-weight="bold" fill="white">Plugin Tools</text>
+  <text x="1045" y="555" text-anchor="middle" font-size="9" fill="white">动态加载 | 市场</text>
+
+  <!-- Arrow -->
+  <line x1="600" y1="580" x2="600" y2="610" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Layer 5: Infrastructure -->
+  <rect x="50" y="610" width="1100" height="100" rx="10" fill="#555" stroke="#333" stroke-width="2"/>
+  <text x="600" y="635" text-anchor="middle" font-size="16" font-weight="bold" fill="white">基础设施层 (Infrastructure)</text>
+
+  <!-- File System -->
+  <rect x="80" y="650" width="150" height="50" rx="5" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1"/>
+  <text x="155" y="675" text-anchor="middle" font-size="10" fill="white">File System</text>
+
+  <!-- Network -->
+  <rect x="250" y="650" width="150" height="50" rx="5" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1"/>
+  <text x="325" y="675" text-anchor="middle" font-size="10" fill="white">Network</text>
+
+  <!-- Process -->
+  <rect x="420" y="650" width="150" height="50" rx="5" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1"/>
+  <text x="495" y="675" text-anchor="middle" font-size="10" fill="white">Process Mgmt</text>
+
+  <!-- Analytics -->
+  <rect x="590" y="650" width="150" height="50" rx="5" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1"/>
+  <text x="665" y="675" text-anchor="middle" font-size="10" fill="white">Analytics</text>
+
+  <!-- Config -->
+  <rect x="760" y="650" width="150" height="50" rx="5" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1"/>
+  <text x="835" y="675" text-anchor="middle" font-size="10" fill="white">Config</text>
+
+  <!-- Security -->
+  <rect x="930" y="650" width="150" height="50" rx="5" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1"/>
+  <text x="1005" y="675" text-anchor="middle" font-size="10" fill="white">Security</text>
+
+  <!-- Side Panels -->
+  <!-- Four Perspectives -->
+  <rect x="-10" y="180" width="50" height="400" rx="5" fill="#E8F4FD" stroke="#4A90D9" stroke-width="2"/>
+  <text x="15" y="220" text-anchor="middle" font-size="10" font-weight="bold" fill="#2E6DA4" transform="rotate(-90, 15, 220)">视角 A: 核心构建</text>
+
+  <rect x="1160" y="180" width="50" height="400" rx="5" fill="#E8F5E9" stroke="#5CB85C" stroke-width="2"/>
+  <text x="1185" y="220" text-anchor="middle" font-size="10" font-weight="bold" fill="#398439" transform="rotate(90, 1185, 220)">视角 B: 任务规划</text>
+
+  <rect x="-10" y="590" width="50" height="120" rx="5" fill="#FEF5E7" stroke="#F0AD4E" stroke-width="2"/>
+  <text x="15" y="650" text-anchor="middle" font-size="10" font-weight="bold" fill="#D58512" transform="rotate(-90, 15, 650)">视角 C: 工具</text>
+
+  <rect x="1160" y="590" width="50" height="120" rx="5" fill="#FDE8E8" stroke="#D9534F" stroke-width="2"/>
+  <text x="1185" y="650" text-anchor="middle" font-size="10" font-weight="bold" fill="#C9302C" transform="rotate(90, 1185, 650)">视角 D: 记忆</text>
+
+  <!-- Legend -->
+  <rect x="50" y="720" width="300" height="70" rx="5" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1"/>
+  <text x="200" y="740" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">图例说明</text>
+  <rect x="70" y="750" width="20" height="15" fill="url(#grad1)"/>
+  <text x="100" y="762" font-size="10" fill="#333">用户接口层</text>
+  <rect x="70" y="770" width="20" height="15" fill="url(#grad2)"/>
+  <text x="100" y="782" font-size="10" fill="#333">核心编排层</text>
+  <rect x="170" y="750" width="20" height="15" fill="url(#grad3)"/>
+  <text x="200" y="762" font-size="10" fill="#333">服务层</text>
+  <rect x="170" y="770" width="20" height="15" fill="url(#grad4)"/>
+  <text x="200" y="782" font-size="10" fill="#333">工具层</text>
+  <rect x="270" y="750" width="20" height="15" fill="#555"/>
+  <text x="300" y="762" font-size="10" fill="#333">基础设施</text>
+</svg>

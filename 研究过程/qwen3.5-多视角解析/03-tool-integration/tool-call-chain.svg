@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900">
+  <defs>
+    <marker id="arrowC" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666"/>
+    </marker>
+    <linearGradient id="titleGradC" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="1400" height="60" fill="url(#titleGradC)"/>
+  <text x="700" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="white">
+    视角 C：工具集成 (Tool Integration) - 工具调用链路与权限模型
+  </text>
+
+  <!-- Top: Tool Type System -->
+  <g transform="translate(20, 80)">
+    <rect x="0" y="0" width="650" height="280" rx="10" fill="#fff" stroke="#f5576c" stroke-width="2"/>
+    <rect x="0" y="0" width="650" height="35" rx="10" fill="#f5576c"/>
+    <text x="325" y="23" text-anchor="middle" font-size="14" font-weight="bold" fill="white">工具类型系统 (Tool Type System)</text>
+
+    <!-- Tool Interface -->
+    <g transform="translate(20, 50)">
+      <rect x="0" y="0" width="610" height="210" rx="5" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1.5"/>
+
+      <text x="305" y="25" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Tool&lt;Input, Output, Progress&gt; 接口定义</text>
+
+      <!-- Core Methods -->
+      <rect x="15" y="35" width="180" height="55" rx="3" fill="#e8f4fd" stroke="#4A90D9"/>
+      <text x="105" y="55" text-anchor="middle" font-size="10" font-weight="bold" fill="#2E6DA4">核心执行</text>
+      <text x="105" y="72" text-anchor="middle" font-size="9" fill="#555">call(args, context,</text>
+      <text x="105" y="85" text-anchor="middle" font-size="9" fill="#555">canUseTool, onProgress)</text>
+
+      <!-- Validation -->
+      <rect x="215" y="35" width="180" height="55" rx="3" fill="#e8f5e9" stroke="#5CB85C"/>
+      <text x="305" y="55" text-anchor="middle" font-size="10" font-weight="bold" fill="#398439">验证与权限</text>
+      <text x="305" y="72" text-anchor="middle" font-size="9" fill="#555">validateInput?</text>
+      <text x="305" y="85" text-anchor="middle" font-size="9" fill="#555">checkPermissions()</text>
+
+      <!-- Behavior -->
+      <rect x="415" y="35" width="180" height="55" rx="3" fill="#fef5e7" stroke="#F0AD4E"/>
+      <text x="505" y="55" text-anchor="middle" font-size="10" font-weight="bold" fill="#D58512">行为特征</text>
+      <text x="505" y="72" text-anchor="middle" font-size="9" fill="#555">isConcurrencySafe</text>
+      <text x="505" y="85" text-anchor="middle" font-size="9" fill="#555">isReadOnly | isDestructive</text>
+
+      <!-- UI Rendering -->
+      <rect x="15" y="100" width="280" height="55" rx="3" fill="#fde8e8" stroke="#D9534F"/>
+      <text x="155" y="120" text-anchor="middle" font-size="10" font-weight="bold" fill="#C9302C">UI 渲染 (生命周期方法)</text>
+      <text x="155" y="137" text-anchor="middle" font-size="9" fill="#555">renderToolUseMessage | renderToolResultMessage</text>
+      <text x="155" y="150" text-anchor="middle" font-size="9" fill="#555">renderToolUseProgressMessage | renderToolUseRejectedMessage</text>
+
+      <!-- Metadata -->
+      <rect x="315" y="100" width="280" height="55" rx="3" fill="#d1ecf1" stroke="#17a2b8"/>
+      <text x="455" y="120" text-anchor="middle" font-size="10" font-weight="bold" fill="#0c5460">元数据</text>
+      <text x="455" y="137" text-anchor="middle" font-size="9" fill="#555">name | aliases | searchHint</text>
+      <text x="455" y="150" text-anchor="middle" font-size="9" fill="#555">maxResultSizeChars | shouldDefer</text>
+
+      <!-- Build Tool -->
+      <rect x="15" y="165" width="580" height="35" rx="3" fill="#d4edda" stroke="#28a745"/>
+      <text x="305" y="187" text-anchor="middle" font-size="10" font-weight="bold" fill="#155724">buildTool(def): 工具构建器 - 自动填充默认方法 (isEnabled, isConcurrencySafe, isReadOnly, etc.)</text>
+    </g>
+  </g>
+
+  <!-- Right: Tool Registration -->
+  <g transform="translate(690, 80)">
+    <rect x="0" y="0" width="690" height="280" rx="10" fill="#fff" stroke="#28a745" stroke-width="2"/>
+    <rect x="0" y="0" width="690" height="35" rx="10" fill="#28a745"/>
+    <text x="345" y="23" text-anchor="middle" font-size="14" font-weight="bold" fill="white">工具注册与过滤 (Tool Registration)</text>
+
+    <!-- Tool Categories -->
+    <g transform="translate(15, 50)">
+      <rect x="0" y="0" width="320" height="105" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="160" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">内置工具 (50+)</text>
+
+      <rect x="15" y="30" width="140" height="30" rx="3" fill="#e8f4fd" stroke="#4A90D9"/>
+      <text x="85" y="50" text-anchor="middle" font-size="9" fill="#2E6DA4">Bash | Read | Edit</text>
+      <rect x="165" y="30" width="140" height="30" rx="3" fill="#e8f4fd" stroke="#4A90D9"/>
+      <text x="235" y="50" text-anchor="middle" font-size="9" fill="#2E6DA4">Glob | Grep | WebFetch</text>
+
+      <rect x="15" y="65" width="140" height="30" rx="3" fill="#e8f5e9" stroke="#5CB85C"/>
+      <text x="85" y="85" text-anchor="middle" font-size="9" fill="#398439">AgentTool | SkillTool</text>
+      <rect x="165" y="65" width="140" height="30" rx="3" fill="#e8f5e9" stroke="#5CB85C"/>
+      <text x="235" y="85" text-anchor="middle" font-size="9" fill="#398439">Task* | Team* | Todo*</text>
+
+      <rect x="15" y="100" width="290" height="30" rx="3" fill="#fef5e7" stroke="#F0AD4E"/>
+      <text x="160" y="120" text-anchor="middle" font-size="9" fill="#D58512">MCP | LSP | Chrome | Tungsten | Workflow | Cron</text>
+
+      <!-- Conditional Tools -->
+      <rect x="340" y="0" width="335" height="105" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="507" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">条件加载工具</text>
+      <text x="507" y="40" text-anchor="middle" font-size="9" fill="#555">• feature('WORKFLOW_SCRIPTS') → WorkflowTool</text>
+      <text x="507" y="55" text-anchor="middle" font-size="9" fill="#555">• feature('MONITOR_TOOL') → MonitorTool</text>
+      <text x="507" y="70" text-anchor="middle" font-size="9" fill="#555">• feature('WEB_BROWSER_TOOL') → WebBrowserTool</text>
+      <text x="507" y="85" text-anchor="middle" font-size="9" fill="#555">• isEnvTruthy(ENABLE_LSP_TOOL) → LSPTool</text>
+      <text x="507" y="100" text-anchor="middle" font-size="9" fill="#555">• isWorktreeModeEnabled() → Enter/ExitWorktreeTool</text>
+
+      <!-- Filter Logic -->
+      <rect x="0" y="120" width="675" height="75" rx="5" fill="#fff3cd" stroke="#ffc107" stroke-width="1.5"/>
+      <text x="337" y="140" text-anchor="middle" font-size="11" font-weight="bold" fill="#856404">工具过滤逻辑 (filterToolsByDenyRules)</text>
+      <text x="337" y="160" text-anchor="middle" font-size="9" fill="#555">1. CLAUDE_CODE_SIMPLE → 仅 Bash/Read/Edit</text>
+      <text x="337" y="177" text-anchor="middle" font-size="9" fill="#555">2. 权限规则匹配 → getDenyRuleForTool()</text>
+      <text x="337" y="194" text-anchor="middle" font-size="9" fill="#555">3. MCP 服务器前缀规则 → mcp__server__* 匹配</text>
+    </g>
+  </g>
+
+  <!-- Middle: Permission Flow -->
+  <g transform="translate(20, 380)">
+    <rect x="0" y="0" width="800" height="300" rx="10" fill="#fff" stroke="#ffc107" stroke-width="2"/>
+    <rect x="0" y="0" width="800" height="35" rx="10" fill="#ffc107"/>
+    <text x="400" y="23" text-anchor="middle" font-size="14" font-weight="bold" fill="#856404">权限验证流程 (Permission Validation Flow)</text>
+
+    <!-- Flow -->
+    <g transform="translate(20, 50)">
+      <!-- Step 1 -->
+      <rect x="0" y="0" width="140" height="60" rx="5" fill="#e8f4fd" stroke="#4A90D9" stroke-width="2"/>
+      <text x="70" y="25" text-anchor="middle" font-size="10" font-weight="bold" fill="#2E6DA4">1. validateInput</text>
+      <text x="70" y="42" text-anchor="middle" font-size="9" fill="#555">Zod schema 验证</text>
+      <text x="70" y="55" text-anchor="middle" font-size="9" fill="#555">自定义验证逻辑</text>
+
+      <line x1="140" y1="30" x2="160" y2="30" stroke="#666" stroke-width="2" marker-end="url(#arrowC)"/>
+
+      <!-- Step 2 -->
+      <rect x="170" y="0" width="140" height="60" rx="5" fill="#e8f5e9" stroke="#5CB85C" stroke-width="2"/>
+      <text x="240" y="25" text-anchor="middle" font-size="10" font-weight="bold" fill="#398439">2. checkPermissions</text>
+      <text x="240" y="42" text-anchor="middle" font-size="9" fill="#555">工具级权限检查</text>
+      <text x="240" y="55" text-anchor="middle" font-size="9" fill="#555">PermissionResult</text>
+
+      <line x1="310" y1="30" x2="330" y2="30" stroke="#666" stroke-width="2" marker-end="url(#arrowC)"/>
+
+      <!-- Step 3 -->
+      <rect x="340" y="0" width="140" height="60" rx="5" fill="#fef5e7" stroke="#F0AD4E" stroke-width="2"/>
+      <text x="410" y="25" text-anchor="middle" font-size="10" font-weight="bold" fill="#D58512">3. canUseTool</text>
+      <text x="410" y="42" text-anchor="middle" font-size="9" fill="#555">通用权限检查入口</text>
+      <text x="410" y="55" text-anchor="middle" font-size="9" fill="#555">规则匹配引擎</text>
+
+      <line x1="480" y1="30" x2="500" y2="30" stroke="#666" stroke-width="2" marker-end="url(#arrowC)"/>
+
+      <!-- Step 4 -->
+      <rect x="510" y="0" width="140" height="60" rx="5" fill="#fde8e8" stroke="#D9534F" stroke-width="2"/>
+      <text x="580" y="25" text-anchor="middle" font-size="10" font-weight="bold" fill="#C9302C">4. 权限请求对话框</text>
+      <text x="580" y="42" text-anchor="middle" font-size="9" fill="#555">Always allow/deny</text>
+      <text x="580" y="55" text-anchor="middle" font-size="9" fill="#555">This time only</text>
+
+      <line x1="580" y1="60" x2="580" y2="80" stroke="#666" stroke-width="2" marker-end="url(#arrowC)"/>
+
+      <!-- Step 5 -->
+      <rect x="510" y="80" width="140" height="60" rx="5" fill="#d1ecf1" stroke="#17a2b8" stroke-width="2"/>
+      <text x="580" y="105" text-anchor="middle" font-size="10" font-weight="bold" fill="#0c5460">5. Hook 执行</text>
+      <text x="580" y="122" text-anchor="middle" font-size="9" fill="#555">PreToolUse hooks</text>
+      <text x="580" y="135" text-anchor="middle" font-size="9" fill="#555">PostToolUse hooks</text>
+
+      <line x1="510" y1="110" x2="490" y2="110" stroke="#666" stroke-width="2" marker-end="url(#arrowC)"/>
+
+      <!-- Step 6 -->
+      <rect x="340" y="80" width="140" height="60" rx="5" fill="#d4edda" stroke="#28a745" stroke-width="2"/>
+      <text x="410" y="105" text-anchor="middle" font-size="10" font-weight="bold" fill="#155724">6. 实际执行</text>
+      <text x="410" y="122" text-anchor="middle" font-size="9" fill="#555">tool.call()</text>
+      <text x="410" y="135" text-anchor="middle" font-size="9" fill="#555">结果返回</text>
+
+      <!-- Rule Types -->
+      <g transform="translate(0, 160)">
+        <rect x="0" y="0" width="780" height="120" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+        <text x="390" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">权限规则类型 (Permission Rules)</text>
+
+        <!-- Allow Rules -->
+        <rect x="15" y="30" width="240" height="80" rx="3" fill="#d4edda" stroke="#28a745"/>
+        <text x="135" y="50" text-anchor="middle" font-size="10" font-weight="bold" fill="#155724">Always Allow Rules</text>
+        <text x="135" y="67" text-anchor="middle" font-size="9" fill="#555">• 工具名匹配："Bash"</text>
+        <text x="135" y="80" text-anchor="middle" font-size="9" fill="#555">• 子命令匹配："Bash(git *)"</text>
+        <text x="135" y="93" text-anchor="middle" font-size="9" fill="#555">• MCP 服务器："mcp__server__*"</text>
+
+        <!-- Deny Rules -->
+        <rect x="270" y="30" width="240" height="80" rx="3" fill="#f8d7da" stroke="#dc3545"/>
+        <text x="390" y="50" text-anchor="middle" font-size="10" font-weight="bold" fill="#721c24">Always Deny Rules</text>
+        <text x="390" y="67" text-anchor="middle" font-size="9" fill="#555">• 危险命令黑名单</text>
+        <text x="390" y="80" text-anchor="middle" font-size="9" fill="#555">• 敏感路径访问限制</text>
+        <text x="390" y="93" text-anchor="middle" font-size="9" fill="#555">• 网络访问限制</text>
+
+        <!-- Ask Rules -->
+        <rect x="525" y="30" width="240" height="80" rx="3" fill="#fff3cd" stroke="#ffc107"/>
+        <text x="645" y="50" text-anchor="middle" font-size="10" font-weight="bold" fill="#856404">Always Ask Rules</text>
+        <text x="645" y="67" text-anchor="middle" font-size="9" fill="#555">• 需要用户确认的操作</text>
+        <text x="645" y="80" text-anchor="middle" font-size="9" fill="#555">• 分类器标记的可疑操作</text>
+        <text x="645" y="93" text-anchor="middle" font-size="9" fill="#555">• Hook 拦截的操作</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Right: Tool Orchestration -->
+  <g transform="translate(840, 380)">
+    <rect x="0" y="0" width="540" height="300" rx="10" fill="#fff" stroke="#667eea" stroke-width="2"/>
+    <rect x="0" y="0" width="540" height="35" rx="10" fill="#667eea"/>
+    <text x="270" y="23" text-anchor="middle" font-size="14" font-weight="bold" fill="white">工具编排 (Tool Orchestration)</text>
+
+    <!-- Orchestration Logic -->
+    <g transform="translate(15, 50)">
+      <rect x="0" y="0" width="510" height="235" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+
+      <!-- Partition -->
+      <text x="255" y="25" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">partitionToolCalls() - 工具分区</text>
+
+      <rect x="15" y="35" width="230" height="70" rx="3" fill="#d4edda" stroke="#28a745"/>
+      <text x="130" y="55" text-anchor="middle" font-size="10" font-weight="bold" fill="#155724">并发安全工具</text>
+      <text x="130" y="72" text-anchor="middle" font-size="9" fill="#555">isConcurrencySafe(input) = true</text>
+      <text x="130" y="87" text-anchor="middle" font-size="9" fill="#555">Read | Glob | Grep | WebFetch</text>
+      <text x="130" y="100" text-anchor="middle" font-size="9" fill="#155724" font-weight="bold">→ 并行执行 (all())</text>
+
+      <rect x="265" y="35" width="230" height="70" rx="3" fill="#f8d7da" stroke="#dc3545"/>
+      <text x="380" y="55" text-anchor="middle" font-size="10" font-weight="bold" fill="#721c24">非并发安全工具</text>
+      <text x="380" y="72" text-anchor="middle" font-size="9" fill="#555">isConcurrencySafe(input) = false</text>
+      <text x="380" y="87" text-anchor="middle" font-size="9" fill="#555">Bash | Edit | Write | Agent</text>
+      <text x="380" y="100" text-anchor="middle" font-size="9" fill="#721c24" font-weight="bold">→ 串行执行</text>
+
+      <!-- Concurrency Control -->
+      <rect x="15" y="120" width="480" height="100" rx="3" fill="#d1ecf1" stroke="#17a2b8"/>
+      <text x="255" y="140" text-anchor="middle" font-size="10" font-weight="bold" fill="#0c5460">并发控制 (runToolsConcurrently)</text>
+      <text x="255" y="160" text-anchor="middle" font-size="9" fill="#555">• getMaxToolUseConcurrency() = 10 (默认)</text>
+      <text x="255" y="175" text-anchor="middle" font-size="9" fill="#555">• all() 生成器 - 限制并发数</text>
+      <text x="255" y="190" text-anchor="middle" font-size="9" fill="#555">• contextModifier 排队应用</text>
+      <text x="255" y="205" text-anchor="middle" font-size="9" fill="#555">• setInProgressToolUseIDs 追踪</text>
+
+      <!-- Error Handling -->
+      <rect x="15" y="230" width="480" height="55" rx="3" fill="#fff3cd" stroke="#ffc107"/>
+      <text x="255" y="247" text-anchor="middle" font-size="10" font-weight="bold" fill="#856404">异常处理</text>
+      <text x="255" y="264" text-anchor="middle" font-size="9" fill="#555">工具异常 → 错误消息 → 继续下一轮 / 终止</text>
+      <text x="255" y="277" text-anchor="middle" font-size="9" fill="#555">markToolUseAsComplete() 清理进行中状态</text>
+    </g>
+  </g>
+
+  <!-- Bottom: Python MRE + Challenge -->
+  <g transform="translate(20, 700)">
+    <rect x="0" y="0" width="700" height="180" rx="10" fill="#2d2d2d" stroke="#555" stroke-width="2"/>
+    <rect x="0" y="0" width="700" height="30" rx="10" fill="#404040"/>
+    <text x="350" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#f8f8f2">Python MRE - 工具集成</text>
+
+    <text x="20" y="55" font-size="9" fill="#ff79c6">class ToolOrchestrator:</text>
+    <text x="35" y="70" font-size="9" fill="#f8f8f2">def __init__(self, tools): self.tools = {t.name: t}</text>
+    <text x="35" y="85" font-size="9" fill="#f8f8f2">async def can_use_tool(self, name, args, context):</text>
+    <text x="50" y="100" font-size="9" fill="#f8f8f2"># 1. 工具级权限检查</text>
+    <text x="50" y="115" font-size="9" fill="#f8f8f2">result = await tool.check_permissions(args, context)</text>
+    <text x="50" y="130" font-size="9" fill="#f8f8f2"># 2. 全局规则检查</text>
+    <text x="50" y="145" font-size="9" fill="#f8f8f2">for rule in self._permission_rules: ...</text>
+    <text x="35" y="160" font-size="9" fill="#f8f8f2">async def execute_multiple(self, calls, concurrent=True):</text>
+    <text x="50" y="175" font-size="9" fill="#f8f8f2">if concurrent: return await asyncio.gather(...)</text>
+  </g>
+
+  <!-- Challenge -->
+  <g transform="translate(740, 700)">
+    <rect x="0" y="0" width="640" height="180" rx="10" fill="#fff3cd" stroke="#ffc107" stroke-width="2"/>
+    <rect x="0" y="0" width="640" height="30" rx="10" fill="#ffc107"/>
+    <text x="320" y="20" text-anchor="middle" font-size="13" font-weight="bold" fill="#856404">🤔 挑战性工程问题</text>
+
+    <text x="320" y="55" text-anchor="middle" font-size="11" fill="#856404" font-weight="bold">问题：当前工具系统设计存在的安全隐患</text>
+    <text x="320" y="75" text-anchor="middle" font-size="9" fill="#555">1. 输入验证分散 - 每个工具自己实现 validateInput，标准不一致</text>
+    <text x="320" y="90" text-anchor="middle" font-size="9" fill="#555">2. 权限规则冲突 - 多条规则可能产生冲突的决策</text>
+    <text x="320" y="105" text-anchor="middle" font-size="9" fill="#555">3. 工具注入风险 - 动态加载的工具可能绕过来路检查</text>
+    <text x="320" y="120" text-anchor="middle" font-size="9" fill="#555">4. 沙箱逃逸 - Bash 工具的沙箱可能不是绝对安全</text>
+
+    <text x="320" y="145" text-anchor="middle" font-size="10" fill="#856404" font-weight="bold">思考：设计一个更安全的工具执行框架</text>
+    <text x="320" y="165" text-anchor="middle" font-size="9" fill="#555">要求：统一输入验证层 | 规则冲突解决 | 工具签名验证 | 多层沙箱执行</text>
+  </g>
+</svg>

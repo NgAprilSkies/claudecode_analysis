@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 950">
+  <defs>
+    <marker id="arrowB" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#666"/>
+    </marker>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="decisionGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="1400" height="60" fill="url(#titleGrad)"/>
+  <text x="700" y="38" text-anchor="middle" font-size="22" font-weight="bold" fill="white">
+    视角 B：任务规划 (Planning & Reasoning) - 决策路径与动态调整
+  </text>
+
+  <!-- Top: Decision Architecture -->
+  <g transform="translate(20, 80)">
+    <rect x="0" y="0" width="1360" height="140" rx="10" fill="#fff" stroke="#667eea" stroke-width="2"/>
+    <rect x="0" y="0" width="1360" height="35" rx="10" fill="#667eea"/>
+    <text x="680" y="23" text-anchor="middle" font-size="14" font-weight="bold" fill="white">决策层次架构 (Decision Architecture)</text>
+
+    <!-- Layer 0 -->
+    <g transform="translate(20, 50)">
+      <rect x="0" y="0" width="320" height="70" rx="5" fill="#e8f4fd" stroke="#4A90D9" stroke-width="1.5"/>
+      <text x="160" y="25" text-anchor="middle" font-size="12" font-weight="bold" fill="#2E6DA4">Layer 0: 用户输入解析</text>
+      <text x="160" y="45" text-anchor="middle" font-size="10" fill="#555">getCommands() | 命令识别</text>
+      <text x="160" y="62" text-anchor="middle" font-size="10" fill="#555">意图分类 | 参数解析</text>
+    </g>
+
+    <!-- Arrow -->
+    <line x1="340" y1="85" x2="350" y2="85" stroke="#666" stroke-width="2" marker-end="url(#arrowB)"/>
+
+    <!-- Layer 1 -->
+    <g transform="translate(360, 50)">
+      <rect x="0" y="0" width="320" height="70" rx="5" fill="#fef5e7" stroke="#F0AD4E" stroke-width="1.5"/>
+      <text x="160" y="25" text-anchor="middle" font-size="12" font-weight="bold" fill="#D58512">Layer 1: LLM 决策层</text>
+      <text x="160" y="45" text-anchor="middle" font-size="10" fill="#555">任务拆解 (LLM) | 工具选择</text>
+      <text x="160" y="62" text-anchor="middle" font-size="10" fill="#555">ToolSearch | 参数生成</text>
+    </g>
+
+    <!-- Arrow -->
+    <line x1="680" y1="85" x2="690" y2="85" stroke="#666" stroke-width="2" marker-end="url(#arrowB)"/>
+
+    <!-- Layer 2 -->
+    <g transform="translate(700, 50)">
+      <rect x="0" y="0" width="320" height="70" rx="5" fill="#e8f5e9" stroke="#5CB85C" stroke-width="1.5"/>
+      <text x="160" y="25" text-anchor="middle" font-size="12" font-weight="bold" fill="#398439">Layer 2: 验证层</text>
+      <text x="160" y="45" text-anchor="middle" font-size="10" fill="#555">validateInput() | 输入验证</text>
+      <text x="160" y="62" text-anchor="middle" font-size="10" fill="#555">checkPermissions() | 分类器</text>
+    </g>
+
+    <!-- Arrow -->
+    <line x1="1020" y1="85" x2="1030" y2="85" stroke="#666" stroke-width="2" marker-end="url(#arrowB)"/>
+
+    <!-- Layer 3 -->
+    <g transform="translate(1040, 50)">
+      <rect x="0" y="0" width="300" height="70" rx="5" fill="#fde8e8" stroke="#D9534F" stroke-width="1.5"/>
+      <text x="150" y="25" text-anchor="middle" font-size="12" font-weight="bold" fill="#C9302C">Layer 3: 执行层</text>
+      <text x="150" y="45" text-anchor="middle" font-size="10" fill="#555">并发安全→并行 | 非安全→串行</text>
+      <text x="150" y="62" text-anchor="middle" font-size="10" fill="#555">runTools() | 结果处理</text>
+    </g>
+  </g>
+
+  <!-- Left: Planning Flow -->
+  <g transform="translate(20, 240)">
+    <rect x="0" y="0" width="600" height="400" rx="10" fill="#fff" stroke="#28a745" stroke-width="2"/>
+    <rect x="0" y="0" width="600" height="35" rx="10" fill="#28a745"/>
+    <text x="300" y="23" text-anchor="middle" font-size="14" font-weight="bold" fill="white">任务拆解流程 (Planning Flow)</text>
+
+    <!-- Flow Chart -->
+    <g transform="translate(30, 50)">
+      <!-- Start -->
+      <rect x="100" y="0" width="340" height="40" rx="20" fill="#28a745" stroke="#1e7e34" stroke-width="2"/>
+      <text x="270" y="25" text-anchor="middle" font-size="12" font-weight="bold" fill="white">用户输入 / 消息</text>
+
+      <line x1="270" y1="40" x2="270" y2="55" stroke="#666" stroke-width="2" marker-end="url(#arrowB)"/>
+
+      <!-- LLM Call -->
+      <rect x="50" y="55" width="440" height="50" rx="5" fill="#e8f4fd" stroke="#4A90D9" stroke-width="2"/>
+      <text x="270" y="75" text-anchor="middle" font-size="12" font-weight="bold" fill="#2E6DA4">1. LLM 调用 (callLLM)</text>
+      <text x="270" y="95" text-anchor="middle" font-size="10" fill="#555">输入：messages + system_prompt | 输出：tool_calls[]</text>
+
+      <line x1="270" y1="105" x2="270" y2="120" stroke="#666" stroke-width="2" marker-end="url(#arrowB)"/>
+
+      <!-- Tool Partition -->
+      <rect x="50" y="120" width="440" height="50" rx="5" fill="#fef5e7" stroke="#F0AD4E" stroke-width="2"/>
+      <text x="270" y="140" text-anchor="middle" font-size="12" font-weight="bold" fill="#D58512">2. 工具分区 (partitionToolCalls)</text>
+      <text x="270" y="160" text-anchor="middle" font-size="10" fill="#555">isConcurrencySafe? → 并行批次 | 非安全→串行</text>
+
+      <line x1="270" y1="170" x2="270" y2="185" stroke="#666" stroke-width="2" marker-end="url(#arrowB)"/>
+
+      <!-- Validation -->
+      <rect x="50" y="185" width="440" height="50" rx="5" fill="#e8f5e9" stroke="#5CB85C" stroke-width="2"/>
+      <text x="270" y="205" text-anchor="middle" font-size="12" font-weight="bold" fill="#398439">3. 验证 (validateInput + checkPermissions)</text>
+      <text x="270" y="225" text-anchor="middle" font-size="10" fill="#555">Zod schema 验证 | 权限规则匹配 | 分类器决策</text>
+
+      <line x1="270" y1="235" x2="270" y2="250" stroke="#666" stroke-width="2" marker-end="url(#arrowB)"/>
+
+      <!-- Execution -->
+      <rect x="50" y="250" width="440" height="50" rx="5" fill="#fde8e8" stroke="#D9534F" stroke-width="2"/>
+      <text x="270" y="270" text-anchor="middle" font-size="12" font-weight="bold" fill="#C9302C">4. 执行 (runTools)</text>
+      <text x="270" y="290" text-anchor="middle" font-size="10" fill="#555">tool.call(input, context, canUseTool)</text>
+
+      <line x1="270" y1="300" x2="270" y2="315" stroke="#666" stroke-width="2" marker-end="url(#arrowB)"/>
+
+      <!-- Result -->
+      <rect x="100" y="315" width="340" height="35" rx="17.5" fill="#6c757d" stroke="#545b62" stroke-width="2"/>
+      <text x="270" y="337" text-anchor="middle" font-size="11" font-weight="bold" fill="white">结果 → 下一轮决策 / 返回</text>
+    </g>
+  </g>
+
+  <!-- Right: Decision Tree -->
+  <g transform="translate(650, 240)">
+    <rect x="0" y="0" width="730" height="200" rx="10" fill="#fff" stroke="#f5576c" stroke-width="2"/>
+    <rect x="0" y="0" width="730" height="35" rx="10" fill="url(#decisionGrad)"/>
+    <text x="365" y="23" text-anchor="middle" font-size="14" font-weight="bold" fill="white">决策路径 (Decision Paths)</text>
+
+    <!-- Decision Nodes -->
+    <g transform="translate(20, 50)">
+      <!-- Root -->
+      <polygon points="345,0 385,20 345,40 305,20" fill="#f5576c" stroke="#c9302c" stroke-width="2"/>
+      <text x="345" y="24" text-anchor="middle" font-size="10" font-weight="bold" fill="white">工具执行结果</text>
+
+      <!-- Success Path -->
+      <line x1="345" y1="40" x2="345" y2="60" stroke="#28a745" stroke-width="2"/>
+      <rect x="285" y="60" width="120" height="35" rx="5" fill="#d4edda" stroke="#28a745"/>
+      <text x="345" y="82" text-anchor="middle" font-size="10" font-weight="bold" fill="#155724">成功→继续</text>
+
+      <!-- Error Path -->
+      <line x1="305" y1="20" x2="260" y2="40" stroke="#dc3545" stroke-width="2"/>
+      <line x1="260" y1="40" x2="260" y2="60" stroke="#dc3545" stroke-width="2"/>
+      <rect x="200" y="60" width="120" height="35" rx="5" fill="#f8d7da" stroke="#dc3545"/>
+      <text x="260" y="82" text-anchor="middle" font-size="10" font-weight="bold" fill="#721c24">失败→错误处理</text>
+
+      <!-- Token Limit Path -->
+      <line x1="385" y1="20" x2="430" y2="40" stroke="#ffc107" stroke-width="2"/>
+      <line x1="430" y1="40" x2="430" y2="60" stroke="#ffc107" stroke-width="2"/>
+      <rect x="370" y="60" width="120" height="35" rx="5" fill="#fff3cd" stroke="#ffc107"/>
+      <text x="430" y="82" text-anchor="middle" font-size="10" font-weight="bold" fill="#856404">Token 超限→压缩</text>
+
+      <!-- Continue paths -->
+      <line x1="345" y1="95" x2="345" y2="115" stroke="#666" stroke-width="1.5" marker-end="url(#arrowB)"/>
+      <rect x="285" y="115" width="120" height="30" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="345" y="134" text-anchor="middle" font-size="9" fill="#555">添加结果→循环</text>
+
+      <line x1="260" y1="95" x2="260" y2="115" stroke="#666" stroke-width="1.5" marker-end="url(#arrowB)"/>
+      <rect x="200" y="115" width="120" height="30" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="260" y="134" text-anchor="middle" font-size="9" fill="#555">错误消息→返回</text>
+
+      <line x1="430" y1="95" x2="430" y2="115" stroke="#666" stroke-width="1.5" marker-end="url(#arrowB)"/>
+      <rect x="370" y="115" width="120" height="30" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="430" y="134" text-anchor="middle" font-size="9" fill="#555">压缩后→重试</text>
+
+      <!-- More paths -->
+      <rect x="510" y="60" width="100" height="35" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="560" y="82" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">用户中断</text>
+      <rect x="620" y="60" width="90" height="35" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="665" y="82" text-anchor="middle" font-size="9" font-weight="bold" fill="#333">Hook 暂停</text>
+      <rect x="510" y="100" width="100" height="30" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="560" y="119" text-anchor="middle" font-size="9" fill="#555">清理→终止</text>
+      <rect x="620" y="100" width="90" height="30" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="665" y="119" text-anchor="middle" font-size="9" fill="#555">等待→恢复</text>
+    </g>
+  </g>
+
+  <!-- Bottom Left: Dynamic Adjustment -->
+  <g transform="translate(20, 660)">
+    <rect x="0" y="0" width="600" height="270" rx="10" fill="#fff" stroke="#ffc107" stroke-width="2"/>
+    <rect x="0" y="0" width="600" height="35" rx="10" fill="#ffc107"/>
+    <text x="300" y="23" text-anchor="middle" font-size="14" font-weight="bold" fill="#856404">动态调整机制 (Dynamic Adjustment)</text>
+
+    <!-- Adjustment Types -->
+    <g transform="translate(20, 50)">
+      <rect x="0" y="0" width="270" height="90" rx="5" fill="#fff3cd" stroke="#ffc107" stroke-width="1.5"/>
+      <text x="135" y="25" text-anchor="middle" font-size="11" font-weight="bold" fill="#856404">Token 预算管理</text>
+      <text x="135" y="45" text-anchor="middle" font-size="10" fill="#555">• checkTokenBudget()</text>
+      <text x="135" y="62" text-anchor="middle" font-size="10" fill="#555">• 每轮检查剩余 token</text>
+      <text x="135" y="79" text-anchor="middle" font-size="10" fill="#555">• 超限触发压缩/终止</text>
+
+      <rect x="290" y="0" width="270" height="90" rx="5" fill="#d4edda" stroke="#28a745" stroke-width="1.5"/>
+      <text x="425" y="25" text-anchor="middle" font-size="11" font-weight="bold" fill="#155724">上下文压缩策略</text>
+      <text x="425" y="45" text-anchor="middle" font-size="10" fill="#555">• Snip: 快速删除消息</text>
+      <text x="425" y="62" text-anchor="middle" font-size="10" fill="#555">• Microcompact: 微压缩</text>
+      <text x="425" y="79" text-anchor="middle" font-size="10" fill="#555">• Autocompact: 自动压缩</text>
+
+      <rect x="0" y="100" width="270" height="70" rx="5" fill="#d1ecf1" stroke="#17a2b8" stroke-width="1.5"/>
+      <text x="135" y="125" text-anchor="middle" font-size="11" font-weight="bold" fill="#0c5460">最大输出 Token 恢复</text>
+      <text x="135" y="145" text-anchor="middle" font-size="10" fill="#555">• max_output_tokens 错误</text>
+      <text x="135" y="162" text-anchor="middle" font-size="10" fill="#555">• MAX_OUTPUT_TOKENS_RECOVERY_LIMIT = 3</text>
+
+      <rect x="290" y="100" width="270" height="70" rx="5" fill="#f8d7da" stroke="#dc3545" stroke-width="1.5"/>
+      <text x="425" y="125" text-anchor="middle" font-size="11" font-weight="bold" fill="#721c24">用户中断处理</text>
+      <text x="425" y="145" text-anchor="middle" font-size="10" fill="#555">• abortController.abort()</text>
+      <text x="425" y="162" text-anchor="middle" font-size="10" fill="#555">• 清理进行中工具 | 移除历史</text>
+    </g>
+  </g>
+
+  <!-- Bottom Right: Python MRE + Challenge -->
+  <g transform="translate(650, 460)">
+    <rect x="0" y="0" width="730" height="470" rx="10" fill="#2d2d2d" stroke="#555" stroke-width="2"/>
+    <rect x="0" y="0" width="730" height="35" rx="10" fill="#404040"/>
+    <text x="365" y="23" text-anchor="middle" font-size="14" font-weight="bold" fill="#f8f8f2">Python MRE - 任务规划 + 挑战问题</text>
+
+    <!-- Code -->
+    <text x="20" y="65" font-size="10" fill="#ff79c6">class DecisionEngine:</text>
+    <text x="40" y="80" font-size="10" fill="#f8f8f2">async def plan_and_execute(self, messages):</text>
+    <text x="60" y="95" font-size="10" fill="#f8f8f2">while turn &lt; max_turns:</text>
+    <text x="80" y="110" font-size="10" fill="#f8f8f2"># 1. LLM 决策</text>
+    <text x="80" y="125" font-size="10" fill="#f8f8f2">response = await self._call_llm(messages)</text>
+    <text x="80" y="140" font-size="10" fill="#6272a4"># 2. 执行工具调用</text>
+    <text x="80" y="155" font-size="10" fill="#f8f8f2">for tool_call in response.tool_calls:</text>
+    <text x="100" y="170" font-size="10" fill="#f8f8f2">result, decision = await self._execute_with_decision(...)</text>
+    <text x="100" y="185" font-size="10" fill="#f8f8f2"># 3. 根据决策调整路径</text>
+    <text x="100" y="200" font-size="10" fill="#f8f8f2">if decision.type == TERMINATE: return result</text>
+    <text x="100" y="215" font-size="10" fill="#f8f8f2">elif decision.type == COMPACT: messages = compact()</text>
+    <text x="100" y="230" font-size="10" fill="#f8f8f2">elif decision.type == RECOVER: retry()</text>
+
+    <text x="20" y="260" font-size="10" fill="#ff79c6">class Decision:</text>
+    <text x="40" y="275" font-size="10" fill="#f8f8f2">decision_type: DecisionType  # CONTINUE/TERMINATE/...</text>
+    <text x="40" y="290" font-size="10" fill="#f8f8f2">reason: str</text>
+    <text x="40" y="305" font-size="10" fill="#f8f8f2">data: Optional[dict]</text>
+
+    <!-- Challenge Question -->
+    <g transform="translate(20, 330)">
+      <rect x="0" y="0" width="690" height="120" rx="5" fill="#fff3cd" stroke="#ffc107" stroke-width="2"/>
+      <text x="345" y="25" text-anchor="middle" font-size="13" font-weight="bold" fill="#856404">🤔 挑战性工程问题</text>
+
+      <text x="345" y="50" text-anchor="middle" font-size="11" fill="#856404" font-weight="bold">问题：9 个 continue 站点导致决策逻辑分散，难以全局理解和维护</text>
+
+      <text x="345" y="75" text-anchor="middle" font-size="10" fill="#555">思考：设计更模块化、可扩展的决策系统架构</text>
+      <text x="345" y="95" text-anchor="middle" font-size="10" fill="#856404">候选方案：A) 状态机  B) 责任链  C) 策略模式  D) 规则引擎</text>
+
+      <text x="345" y="115" text-anchor="middle" font-size="10" fill="#555">要求：支持运行时动态注册决策处理器 | 优先级可配置 | 决策过程可追溯</text>
+    </g>
+  </g>
+
+  <!-- Evaluation Panel -->
+  <g transform="translate(650, 660)">
+    <rect x="0" y="0" width="350" height="270" rx="10" fill="#fff" stroke="#667eea" stroke-width="2"/>
+    <rect x="0" y="0" width="350" height="35" rx="10" fill="#667eea"/>
+    <text x="175" y="23" text-anchor="middle" font-size="14" font-weight="bold" fill="white">Harness Engineering 评价</text>
+
+    <g transform="translate(15, 50)">
+      <rect x="0" y="0" width="320" height="50" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="160" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">可扩展性 ⭐⭐⭐⭐</text>
+      <text x="160" y="38" text-anchor="middle" font-size="9" fill="#555">新增决策路径需修改核心循环</text>
+
+      <rect x="0" y="60" width="320" height="50" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="160" y="80" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">安全边界 ⭐⭐⭐⭐⭐</text>
+      <text x="160" y="98" text-anchor="middle" font-size="9" fill="#555">多层验证 | 分类器 | Hook 拦截</text>
+
+      <rect x="0" y="120" width="320" height="50" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="160" y="140" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">可观察性 ⭐⭐⭐⭐</text>
+      <text x="160" y="158" text-anchor="middle" font-size="9" fill="#555">9 个决策路径可追踪 | 日志完善</text>
+
+      <rect x="0" y="180" width="320" height="50" rx="5" fill="#f8f9fa" stroke="#dee2e6"/>
+      <text x="160" y="200" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">性能损耗 ⭐⭐⭐⭐</text>
+      <text x="160" y="218" text-anchor="middle" font-size="9" fill="#555">LLM 调用优化 | 并发工具执行</text>
+    </g>
+  </g>
+</svg>
